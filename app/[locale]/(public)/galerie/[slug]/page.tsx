@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
+import { setRequestLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { getGalleryBySlug, galleryCategories, galleryImagePath } from '@/lib/gallery-data';
 import { Lightbox } from '@/components/site/Lightbox';
 import { SiteClientEffects } from '@/components/site/SiteClientEffects';
@@ -10,8 +12,10 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return galleryCategories.map((g) => ({ slug: g.slug }));
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    galleryCategories.map((gallery) => ({ locale, slug: gallery.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -25,7 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function GalleryCategoryPage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const gallery = getGalleryBySlug(slug);
   if (!gallery) notFound();
 
