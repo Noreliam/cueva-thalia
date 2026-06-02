@@ -59,7 +59,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${cormorant.variable} ${inter.variable}`} style={{ scrollBehavior: 'smooth' }}>
-      <body>
+      <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
           <SiteClientEffects />
           <SiteHeader />

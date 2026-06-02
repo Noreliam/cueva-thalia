@@ -45,8 +45,10 @@ export async function HomePageContent({ locale }: { locale: string }) {
       <section className="hero">
         <div className="hero-bg" />
         <div className="hero-content fade-in">
-          <h1>{t('hero_h1')}</h1>
-          <p className="hero-subtitle">{t('hero_subtitle')}</p>
+          <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
+          <h1>Cueva Thalía</h1>
+          <p className="hero-subtitle">{t('hero_h1')}</p>
+          <p>{t('hero_subtitle')}</p>
           <HeroReviewRotator reviews={heroReviews} />
           <div className="hero-ctas">
             <Link href="/sejourner" className="btn btn-primary">
@@ -58,6 +60,14 @@ export async function HomePageContent({ locale }: { locale: string }) {
           </div>
         </div>
         <span className="hero-badge">{t('hero_badge')}</span>
+        <div className="scroll-indicator">
+          <span className="small-caps" style={{ color: 'inherit', fontSize: 10 }}>
+            Scroll
+          </span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </div>
       </section>
 
       <section id="parcours" className="trois-facons">

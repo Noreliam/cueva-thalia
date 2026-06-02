@@ -10,8 +10,8 @@
       --ct-roche: #8B7A64;
       --ct-ombre-chaude: rgba(90, 56, 37, 0.16);
       
-      --font-title: 'Cormorant Garamond', serif;
-      --font-body: 'Inter', sans-serif;
+      --font-title: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+      --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
       
       --header-height: 80px;
     }
@@ -51,7 +51,7 @@
       font-family: var(--font-body);
       background-color: var(--ct-blanc-casse);
       color: var(--ct-brun-chaud);
-      line-height: 1.6;
+      line-height: 1.75;
       font-size: clamp(16px, 1.2vw, 18px);
       overflow-x: hidden;
       position: relative;
@@ -89,6 +89,7 @@
       line-height: 1.1;
       color: var(--ct-brun-chaud);
       margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
 
     h1 {
@@ -426,6 +427,7 @@
     .hero h1 {
       color: #F5F0E6;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
@@ -435,15 +437,17 @@
       color: #F5F0E6;
       margin-bottom: 24px;
       font-weight: 300;
+      letter-spacing: -0.02em;
     }
 
-    .hero p {
+    .hero-content > p:not(.hero-subtitle):not(.hero-proof) {
       font-size: clamp(16px, 1.2vw, 18px);
       margin-bottom: 40px;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
       color: #F5F0E6;
+      line-height: 1.75;
     }
 
     .hero-ctas {
