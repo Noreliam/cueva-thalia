@@ -159,14 +159,12 @@ export async function HomePageContent({ locale }: { locale: string }) {
       <section className="piscine">
         <div className="container piscine-grid">
           <div className="piscine-image-wrapper">
-            <div className="organic-shape">
-              <MediaFrame
-                src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
-                alt={t('pool_title')}
-                aspectRatio="4 / 3"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
+            <MediaFrame
+              src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
+              alt={t('pool_title')}
+              aspectRatio="4 / 3"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
           </div>
           <div className="piscine-content">
             <h2>{t('pool_title')}</h2>

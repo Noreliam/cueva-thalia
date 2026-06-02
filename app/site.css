@@ -197,6 +197,10 @@
     }
 
     .media-frame__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
@@ -486,16 +490,14 @@
       margin-bottom: 24px;
     }
 
-    /* ANIMATIONS (FADE IN) */
+    /* ANIMATIONS (FADE IN) — contenu toujours visible, animation légère au scroll */
     .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      opacity: 1;
+      transform: translateY(24px);
+      transition: transform 0.8s ease-out;
     }
 
-    .fade-in.visible,
-    .hero-content.fade-in {
-      opacity: 1;
+    .fade-in.visible {
       transform: translateY(0);
     }
 
