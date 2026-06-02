@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'cueva-thalia-cookie-consent';
 
-type Consent = 'all' | 'none' | 'custom' | null;
+type StoredConsent = 'all' | 'none' | 'custom';
+type Consent = StoredConsent | null;
 
 type Copy = {
   title: string;
@@ -51,7 +52,7 @@ export default function CookieBanner({ copy }: { copy: Copy }) {
   const [analytics, setAnalytics] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Consent | null;
+    const stored = localStorage.getItem(STORAGE_KEY) as StoredConsent | null;
     if (stored === 'all') {
       setConsent('all');
       loadGa4();
@@ -62,7 +63,7 @@ export default function CookieBanner({ copy }: { copy: Copy }) {
     }
   }, []);
 
-  const persist = (value: Consent, withAnalytics = false) => {
+  const persist = (value: StoredConsent, withAnalytics = false) => {
     localStorage.setItem(STORAGE_KEY, value);
     setConsent(value);
     if (withAnalytics) loadGa4();
