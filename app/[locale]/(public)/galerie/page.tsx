@@ -24,9 +24,14 @@ export default async function GaleriePage({ params }: { params: Promise<{ locale
 
   return (
     <div className="seo-page">
-      <section className="gallery-hero gallery-hero--compact">
-        <div className="gallery-hero-bg" style={{ background: 'var(--ct-sable)' }} />
-        <div className="gallery-hero-content gallery-hero-content--light">
+      <section className="gallery-hero">
+        <div
+          className="gallery-hero-bg"
+          style={{
+            backgroundImage: `linear-gradient(rgba(90, 56, 37, 0.32), rgba(90, 56, 37, 0.32)), url('/photos/optimized/630dae8f-0713-4823-a054-72cb3135f3ac.jpg')`,
+          }}
+        />
+        <div className="gallery-hero-content">
           <h1>{t('title')}</h1>
           <p className="editorial-text page-hero-lead">{t('intro')}</p>
           <Link href="/" className="btn btn-outline">

@@ -57,7 +57,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       <section className="hero">
         <div className="hero-bg" aria-hidden="true">
           <Image
-            src="/photos/optimized/630dae8f-0713-4823-a054-72cb3135f3ac.jpg"
+            src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
             alt=""
             fill
             priority
@@ -70,21 +70,22 @@ export async function HomePageContent({ locale }: { locale: string }) {
         <div className="hero-content fade-in">
           <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
           <h1>Cueva Thalía</h1>
-          <p className="hero-subtitle">{t('hero_subtitle')}</p>
-          <p className="hero-lead">{t('hero_short')}</p>
+          <p className="hero-tagline">{t('hero_tagline')}</p>
+          <p className="hero-lead">{t('hero_lead')}</p>
           <div className="hero-ctas">
             <Link href="/sejourner" className="btn btn-primary">
               {t('hero_cta_primary')}
             </Link>
-            <a
-              href={`https://wa.me/${WHATSAPP}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary hero-whatsapp-cta"
-            >
+            <a href="#parcours" className="link-subtle hero-secondary-cta">
               {t('hero_cta_secondary')}
             </a>
           </div>
+        </div>
+        <div className="scroll-indicator" aria-hidden="true">
+          <span className="small-caps">Scroll</span>
+          <svg viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
         </div>
       </section>
 
@@ -135,6 +136,23 @@ export async function HomePageContent({ locale }: { locale: string }) {
               aspectRatio="3 / 4"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="promesses">
+        <div className="container">
+          <div className="promesses-grid">
+            {[
+              { title: t('promise1_title'), text: t('promise1_text') },
+              { title: t('promise2_title'), text: t('promise2_text') },
+              { title: t('promise3_title'), text: t('promise3_text') },
+            ].map((item) => (
+              <div className="promesse-card fade-in" key={item.title}>
+                <h3>{item.title}</h3>
+                <p className="editorial-text">{item.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -54,22 +54,6 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
           <div className="fade-in">
             <p className="editorial-text">{t('body_text')}</p>
 
-            <div className="info-highlight-box">
-              <h3>{t('groups_title')}</h3>
-              <p className="info-block-line">{t('groups_line1')}</p>
-              <p className="info-block-line">{t('groups_line2')}</p>
-              <p className="info-block-line">{t('groups_line3')}</p>
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ marginTop: 20, display: 'inline-block' }}
-              >
-                {t('cta_whatsapp')}
-              </a>
-            </div>
-
             <h2 style={{ marginTop: 48 }}>{t('usages_title')}</h2>
             <div className="tags-container" style={{ marginTop: 24 }}>
               {[t('usage_1'), t('usage_2'), t('usage_3'), t('usage_4')].map((tag) => (
@@ -86,6 +70,22 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
                 aspectRatio="16 / 10"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
+            </div>
+
+            <div className="info-highlight-box info-highlight-box--secondary">
+              <h3>{t('groups_title')}</h3>
+              <p className="info-block-line">{t('groups_line1')}</p>
+              <p className="info-block-line">{t('groups_line2')}</p>
+              <p className="info-block-line">{t('groups_line3')}</p>
+              <a
+                href={`https://wa.me/${whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+                style={{ marginTop: 20, display: 'inline-block' }}
+              >
+                {t('cta_whatsapp')}
+              </a>
             </div>
           </div>
 
