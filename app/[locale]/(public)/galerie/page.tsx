@@ -1,25 +1,35 @@
-import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import { galleryCategories, galleryImagePath } from '@/lib/gallery-data';
+import { GalleryWithFilters } from '@/components/gallery/GalleryWithFilters';
+import { galleryUsageFilters } from '@/lib/gallery-data';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Galerie | Cueva Thalía',
-  description: 'Explorez la cueva en images : intérieur, piscine chauffée, jardin, chambre, cuisine et détails.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Galerie' });
+  return {
+    title: `${t('title')} | Cueva Thalía`,
+    description: t('intro'),
+  };
+}
 
-export default function GaleriePage() {
+export default async function GaleriePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Galerie');
+
+  const filters = galleryUsageFilters.map((id) => ({
+    id,
+    label: t(`filter_${id}` as 'filter_sejour'),
+  }));
+
   return (
     <div className="seo-page">
-      <section className="gallery-hero" style={{ minHeight: '50vh' }}>
+      <section className="gallery-hero gallery-hero--compact">
         <div className="gallery-hero-bg" style={{ background: 'var(--ct-sable)' }} />
-        <div className="gallery-hero-content" style={{ color: 'var(--ct-brun-chaud)' }}>
-          <h1 style={{ color: 'var(--ct-brun-chaud)' }}>Galerie</h1>
-          <p className="editorial-text" style={{ maxWidth: 600, margin: '0 auto 24px' }}>
-            Six univers pour découvrir la cueva : l&apos;intérieur, la piscine, la chambre, le jardin, la cuisine et les
-            détails qui font l&apos;atmosphère du lieu.
-          </p>
-          <Link href="/" className="btn btn-outline" style={{ borderColor: 'var(--ct-brun-chaud)', color: 'var(--ct-brun-chaud)' }}>
+        <div className="gallery-hero-content gallery-hero-content--light">
+          <h1>{t('title')}</h1>
+          <p className="editorial-text page-hero-lead">{t('intro')}</p>
+          <Link href="/" className="btn btn-outline">
             Retour à l&apos;accueil
           </Link>
         </div>
@@ -27,27 +37,7 @@ export default function GaleriePage() {
 
       <section className="galerie">
         <div className="container">
-          <div className="gallery-grid">
-            {galleryCategories.map((cat) => (
-              <Link key={cat.slug} href={`/galerie/${cat.slug}`} className="gallery-preview-link">
-                <div
-                  className="gallery-preview-image"
-                  style={{ ['--h' as string]: cat.previewHeight } as React.CSSProperties}
-                >
-                  <div className="gallery-preview-image__clip">
-                    <Image
-                      src={galleryImagePath(cat.folder, cat.cover)}
-                      alt={cat.title}
-                      width={600}
-                      height={450}
-                      loading="lazy"
-                    />
-                  </div>
-                  <span className="gallery-label">{cat.title}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <GalleryWithFilters filters={filters} allLabel={t('filter_all')} />
         </div>
       </section>
     </div>
