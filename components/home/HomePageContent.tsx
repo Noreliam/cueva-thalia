@@ -157,6 +157,35 @@ export async function HomePageContent({ locale }: { locale: string }) {
         </div>
       </section>
 
+      <section className="piscine">
+        <div className="container piscine-grid">
+          <div className="piscine-image-wrapper fade-in">
+            <div className="organic-shape">
+              <MediaFrame
+                src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
+                alt={t('pool_title')}
+                aspectRatio="4 / 3"
+                sizes="(min-width: 1024px) 50vw, 100vw"
+              />
+            </div>
+          </div>
+          <div className="piscine-content fade-in">
+            <h2>{t('pool_title')}</h2>
+            <p className="editorial-text">{t('pool_text')}</p>
+            <div className="piscine-features">
+              {[t('pool_feat1'), t('pool_feat2'), t('pool_feat3'), t('pool_feat4')].map((label) => (
+                <div className="feature-item" key={label}>
+                  <svg className="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="avis">
         <div className="container">
           <h2 className="fade-in section-title-center">{t('reviews_title')}</h2>
@@ -188,6 +217,36 @@ export async function HomePageContent({ locale }: { locale: string }) {
         </div>
       </section>
 
+      <section className="localisation home-localisation">
+        <div className="container loc-layout">
+          <div className="fade-in">
+            <h2>{t('location_title')}</h2>
+            <p className="editorial-text">{t('location_intro')}</p>
+            <ul className="distances-list">
+              {(['1', '2', '3', '4', '5', '6', '7'] as const).map((n) => (
+                <li className="distance-item" key={n}>
+                  <span>{t(`loc_${n}_place`)}</span>
+                  <span className="small-caps">{t(`loc_${n}_time`)}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://maps.app.goo.gl/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-link"
+              style={{ display: 'inline-block', marginTop: 24 }}
+            >
+              {t('location_link')}
+            </a>
+          </div>
+          <div className="map-stylisee fade-in" aria-hidden="true">
+            <span className="map-stylisee-label">{t('location_map_label')}</span>
+            <span className="marker" style={{ top: '45%', left: '52%' }} />
+          </div>
+        </div>
+      </section>
+
       <section className="galerie home-galerie">
         <div className="container">
           <h2 className="fade-in section-title-center">{t('gallery_title')}</h2>
@@ -207,20 +266,32 @@ export async function HomePageContent({ locale }: { locale: string }) {
       </section>
 
       <section className="cta-final">
+        <div className="cta-final-bg" aria-hidden="true">
+          <Image
+            src="/photos/optimized/7ea5a8c2-b48b-4a12-b7be-034ca90b0d8e.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="cta-final-bg-image"
+          />
+        </div>
+        <div className="cta-final-overlay" aria-hidden="true" />
         <div className="container cta-final-inner">
           <h2>{t('cta_title')}</h2>
-          <p className="editorial-text">{t('cta_subtitle')}</p>
-          <Link href="/sejourner" className="btn btn-brown">
-            {t('cta_button')}
-          </Link>
-          <a
-            href={`https://wa.me/${WHATSAPP}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="card-link cta-final-whatsapp"
-          >
-            {t('cta_whatsapp')}
-          </a>
+          <p className="cta-final-subtitle">{t('cta_subtitle')}</p>
+          <div className="cta-final-actions">
+            <Link href="/sejourner" className="btn btn-primary">
+              {t('cta_button')}
+            </Link>
+            <a
+              href={`https://wa.me/${WHATSAPP}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-subtle cta-final-whatsapp"
+            >
+              {t('cta_whatsapp')}
+            </a>
+          </div>
         </div>
       </section>
     </>

@@ -68,7 +68,7 @@ export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad"
         strategy="afterInteractive"
       />
-      <div ref={containerRef} className="mt-2" aria-label="Vérification anti-spam" />
+      <div ref={containerRef} className="form-turnstile" aria-label="Vérification anti-spam" />
     </>
   );
 }

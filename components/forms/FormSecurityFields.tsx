@@ -21,7 +21,7 @@ export function FormSecurityFields({ honeypotProps, onTokenChange }: FormSecurit
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
-        className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+        className="form-honeypot"
         {...honeypotProps}
       />
       <TurnstileField onTokenChange={onTokenChange} />

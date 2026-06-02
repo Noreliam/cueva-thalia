@@ -50,7 +50,7 @@ export default async function GuidePage({ params }: Props) {
   return (
     <div className="seo-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <article className="container" style={{ maxWidth: 720, paddingTop: 120, paddingBottom: 120 }}>
+      <article className="seo-page-content">
         <h1>{guide.h1[loc]}</h1>
         <p className="editorial-text">[À RÉDIGER — contenu placeholder en attente de rédaction par Manon]</p>
         <p className="editorial-text" style={{ marginTop: 24 }}>

@@ -52,49 +52,43 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="p-8 bg-ct-vert/10 border border-ct-vert/30 rounded-lg text-center text-ct-brun-chaud">
-        <p className="font-medium text-lg">{t('success')}</p>
+      <div className="confirmation-message">
+        <p>{t('success')}</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6 max-w-2xl mx-auto p-8 bg-white/50 backdrop-blur-sm rounded-xl border border-ct-dune/20 shadow-sm">
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label className="text-sm font-medium uppercase tracking-wider">{t('name')}</label>
-          <input {...register('name')} className="w-full p-3 bg-transparent border-b border-ct-dune/50 focus:border-ct-terracotta outline-none transition-colors" />
-          {errors.name && <span className="text-xs text-red-500">Requis</span>}
+    <form onSubmit={handleSubmit(onSubmit)} className="site-form">
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="contact-name">{t('name')}</label>
+          <input id="contact-name" {...register('name')} autoComplete="name" />
+          {errors.name && <span className="form-error">Requis</span>}
         </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium uppercase tracking-wider">{t('email')}</label>
-          <input type="email" {...register('email')} className="w-full p-3 bg-transparent border-b border-ct-dune/50 focus:border-ct-terracotta outline-none transition-colors" />
-          {errors.email && <span className="text-xs text-red-500">Email invalide</span>}
+        <div className="form-group">
+          <label htmlFor="contact-email">{t('email')}</label>
+          <input id="contact-email" type="email" {...register('email')} autoComplete="email" />
+          {errors.email && <span className="form-error">Email invalide</span>}
         </div>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium uppercase tracking-wider">{t('phone')} (Optionnel)</label>
-        <input {...register('phone')} className="w-full p-3 bg-transparent border-b border-ct-dune/50 focus:border-ct-terracotta outline-none transition-colors" />
+      <div className="form-group">
+        <label htmlFor="contact-phone">{t('phone')} (optionnel)</label>
+        <input id="contact-phone" type="tel" {...register('phone')} autoComplete="tel" />
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm font-medium uppercase tracking-wider">{t('message')}</label>
-        <textarea {...register('message')} rows={4} className="w-full p-3 bg-transparent border-b border-ct-dune/50 focus:border-ct-terracotta outline-none transition-colors resize-none" />
-        {errors.message && <span className="text-xs text-red-500">Message trop court</span>}
+      <div className="form-group">
+        <label htmlFor="contact-message">{t('message')}</label>
+        <textarea id="contact-message" rows={4} {...register('message')} />
+        {errors.message && <span className="form-error">Message trop court</span>}
       </div>
 
       <FormSecurityFields onTokenChange={setTurnstileToken} honeypotProps={{ value: hp, onChange: (e) => setHp(e.target.value) }} />
 
-      {status === 'error' && (
-        <div className="text-red-500 text-sm text-center">{t('error')}</div>
-      )}
+      {status === 'error' && <p className="form-alert">{t('error')}</p>}
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="w-full bg-ct-brun-chaud text-white p-4 uppercase tracking-widest text-sm font-medium hover:bg-ct-terracotta transition-colors disabled:opacity-50"
-      >
+      <button type="submit" className="btn btn-primary" disabled={status === 'loading'}>
         {status === 'loading' ? t('sending') : t('submit')}
       </button>
     </form>

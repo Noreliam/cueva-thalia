@@ -12,30 +12,30 @@ export default async function ReserverPage({ params }: { params: Promise<{ local
   const t = await getTranslations({ locale, namespace: 'Navigation' });
   return (
     <div className="seo-page">
-      <section className="contact" style={{ paddingTop: 100 }}>
+      <section className="page-intro">
         <div className="container">
-          <h1 style={{ textAlign: 'center' }}>{t('reserver')}</h1>
-          <p className="editorial-text" style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto 48px' }}>
+          <h1>{t('reserver')}</h1>
+          <p className="editorial-text" style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto 32px' }}>
             Choisissez votre expérience à Cueva Thalía.
           </p>
           <div className="contact-methods">
-            <Link href="/sejourner" className="contact-card">
+            <Link href="/sejourner" className="contact-card contact-card--light">
               <h3>{t('sejourner')}</h3>
               <p>Réserver votre séjour avec piscine privatisée.</p>
               <span className="card-link">Découvrir →</span>
             </Link>
-            <Link href="/evenements-prives" className="contact-card">
+            <Link href="/evenements-prives" className="contact-card contact-card--light">
               <h3>{t('evenements')}</h3>
               <p>Demander un devis pour un événement intime.</p>
               <span className="card-link">Découvrir →</span>
             </Link>
-            <Link href="/workshops-retraites" className="contact-card">
+            <Link href="/workshops-retraites" className="contact-card contact-card--light">
               <h3>{t('workshops')}</h3>
               <p>Organiser une retraite ou un atelier bien-être.</p>
               <span className="card-link">Découvrir →</span>
             </Link>
           </div>
-          <p style={{ textAlign: 'center', marginTop: 64 }}>
+          <p style={{ textAlign: 'center', marginTop: 40 }}>
             <Link href="/" className="btn btn-secondary">← Retour à l&apos;accueil</Link>
           </p>
         </div>

@@ -61,16 +61,14 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
       <section className="trois-facons">
         <div className="container">
           <h2 className="section-title-center">{t('amenities_title')}</h2>
-          <div className="amenities-grid fade-in" style={{ marginTop: 48 }}>
+          <div className="amenities-grid fade-in" style={{ marginTop: 32 }}>
             {amenities.map((key) => (
               <div className="amenity-item" key={key}>
                 <span className="small-caps">{t(key)}</span>
               </div>
             ))}
           </div>
-          <h2 className="section-title-center" style={{ marginTop: 80 }}>
-            {t('included_title')}
-          </h2>
+          <h2 className="section-title-center seo-subsection">{t('included_title')}</h2>
           <div className="piscine-features included-list">
             {[t('included_pool'), t('included_hydro'), t('included_garden'), t('included_bbq'), t('included_fire')].map(
               (label) => (
@@ -83,12 +81,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               )
             )}
           </div>
-        </div>
-      </section>
-
-      <section className="piscine">
-        <div className="container">
-          <h2 className="section-title-center">{t('options_title')}</h2>
+          <h2 className="section-title-center seo-subsection">{t('options_title')}</h2>
           <div className="seo-options-grid">
             {[t('opt_romantic'), t('opt_surprise'), t('opt_massage'), t('opt_late_checkout')].map((opt) => (
               <div className="seo-option-card" key={opt}>
@@ -161,9 +154,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
 
       <section className="avis">
         <div className="container">
-          <h2 className="section-title-center" style={{ marginBottom: 48 }}>
-            {t('avis_title')}
-          </h2>
+          <h2 className="section-title-center">{t('avis_title')}</h2>
           <div className="avis-grid">
             {[
               { text: 'Les photos ne lui rendent vraiment pas justice.', author: 'Emma' },
@@ -178,8 +169,8 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      <section className="contact" style={{ paddingBottom: 120 }}>
-        <div className="container page-bottom-cta">
+      <section className="page-bottom-cta">
+        <div className="container">
           <p className="editorial-text">{t('gallery_cta')}</p>
           <div className="seo-bottom-links">
             <Link href="/galerie/piscine" className="card-link">
@@ -192,7 +183,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               Jardin
             </Link>
           </div>
-          <Link href="/" className="btn btn-secondary" style={{ marginTop: 40 }}>
+          <Link href="/" className="btn btn-secondary">
             ← Retour à l&apos;accueil
           </Link>
         </div>

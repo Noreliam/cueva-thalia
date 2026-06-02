@@ -50,65 +50,67 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
       </section>
 
       <section className="evenements">
-        <div className="container event-layout">
-          <div className="fade-in">
-            <p className="editorial-text">{t('body_text')}</p>
+        <div className="container page-body-inner fade-in">
+          <p className="editorial-text">{t('body_text')}</p>
 
-            <h2 style={{ marginTop: 48 }}>{t('usages_title')}</h2>
-            <div className="tags-container" style={{ marginTop: 24 }}>
-              {[t('usage_1'), t('usage_2'), t('usage_3'), t('usage_4')].map((tag) => (
-                <span className="tag" key={tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="editorial-image">
-              <MediaFrame
-                src="/photos/optimized/galleries/jardin/photocouverture3.jpg"
-                alt="Espace événement Cueva Thalía"
-                aspectRatio="16 / 10"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-
-            <div className="info-highlight-box info-highlight-box--secondary">
-              <h3>{t('groups_title')}</h3>
-              <p className="info-block-line">{t('groups_line1')}</p>
-              <p className="info-block-line">{t('groups_line2')}</p>
-              <p className="info-block-line">{t('groups_line3')}</p>
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ marginTop: 20, display: 'inline-block' }}
-              >
-                {t('cta_whatsapp')}
-              </a>
-            </div>
+          <h2 className="seo-subsection">{t('usages_title')}</h2>
+          <div className="tags-container">
+            {[t('usage_1'), t('usage_2'), t('usage_3'), t('usage_4')].map((tag) => (
+              <span className="tag" key={tag}>
+                {tag}
+              </span>
+            ))}
           </div>
 
-          <div id="formulaire" className="seo-form-wrap">
-            <h2>{t('form_title')}</h2>
-            <p className="small-caps" style={{ marginBottom: 24, color: 'var(--ct-terracotta)' }}>
-              {t('form_disclaimer')}
-            </p>
-            <div className="custom-form">
-              <EventForm />
-            </div>
+          <div className="editorial-image">
+            <MediaFrame
+              src="/photos/optimized/galleries/jardin/photocouverture3.jpg"
+              alt="Espace événement Cueva Thalía"
+              aspectRatio="16 / 10"
+              sizes="(min-width: 1024px) 720px, 100vw"
+            />
+          </div>
+
+          <div className="info-highlight-box info-highlight-box--secondary">
+            <h3>{t('groups_title')}</h3>
+            <p className="info-block-line">{t('groups_line1')}</p>
+            <p className="info-block-line">{t('groups_line2')}</p>
+            <p className="info-block-line">{t('groups_line3')}</p>
+            <a
+              href={`https://wa.me/${whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              style={{ marginTop: 20, display: 'inline-block' }}
+            >
+              {t('cta_whatsapp')}
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="contact" style={{ paddingBottom: 120 }}>
-        <div className="container page-bottom-cta">
+      <section className="page-form-section" id="formulaire">
+        <div className="container">
+          <div className="page-form-header">
+            <h2>{t('form_title')}</h2>
+            <p className="small-caps page-form-disclaimer">{t('form_disclaimer')}</p>
+          </div>
+          <div className="custom-form">
+            <EventForm />
+          </div>
+        </div>
+      </section>
+
+      <section className="page-bottom-cta">
+        <div className="container">
           <Link href="/galerie/jardin" className="card-link">
             Voir le jardin →
           </Link>
-          <Link href="/" className="btn btn-secondary" style={{ marginTop: 32, display: 'inline-block' }}>
-            ← Retour à l&apos;accueil
-          </Link>
+          <p style={{ marginTop: 24 }}>
+            <Link href="/" className="btn btn-secondary">
+              ← Retour à l&apos;accueil
+            </Link>
+          </p>
         </div>
       </section>
     </div>

@@ -36,57 +36,61 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
       </section>
 
       <section className="workshops">
-        <div className="container event-layout">
-          <div className="fade-in">
-            <h2>{t('formats_title')}</h2>
-            <div className="tags-container" style={{ marginTop: 24 }}>
-              {[t('format_1'), t('format_2'), t('format_3'), t('format_4')].map((tag) => (
-                <span className="tag" key={tag}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="editorial-image">
-              <MediaFrame
-                src="/photos/optimized/49b90bf0-ce3f-4a3e-8164-90993ce96cd7.jpg"
-                alt="Retraite et atelier Cueva Thalía"
-                aspectRatio="16 / 10"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-
-            <div className="info-highlight-box info-highlight-box--secondary">
-              <p className="info-block-line">{t('capacity_text')}</p>
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ marginTop: 20, display: 'inline-block' }}
-              >
-                {t('cta_whatsapp')}
-              </a>
-            </div>
+        <div className="container page-body-inner fade-in">
+          <h2>{t('formats_title')}</h2>
+          <div className="tags-container">
+            {[t('format_1'), t('format_2'), t('format_3'), t('format_4')].map((tag) => (
+              <span className="tag" key={tag}>
+                {tag}
+              </span>
+            ))}
           </div>
 
-          <div id="formulaire" className="seo-form-wrap">
-            <h2>{t('form_title')}</h2>
-            <div className="custom-form">
-              <WorkshopForm />
-            </div>
+          <div className="editorial-image">
+            <MediaFrame
+              src="/photos/optimized/49b90bf0-ce3f-4a3e-8164-90993ce96cd7.jpg"
+              alt="Retraite et atelier Cueva Thalía"
+              aspectRatio="16 / 10"
+              sizes="(min-width: 1024px) 720px, 100vw"
+            />
+          </div>
+
+          <div className="info-highlight-box info-highlight-box--secondary">
+            <p className="info-block-line">{t('capacity_text')}</p>
+            <a
+              href={`https://wa.me/${whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary"
+              style={{ marginTop: 20, display: 'inline-block' }}
+            >
+              {t('cta_whatsapp')}
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="contact" style={{ paddingBottom: 120 }}>
-        <div className="container page-bottom-cta">
+      <section className="page-form-section" id="formulaire">
+        <div className="container">
+          <div className="page-form-header">
+            <h2>{t('form_title')}</h2>
+          </div>
+          <div className="custom-form">
+            <WorkshopForm />
+          </div>
+        </div>
+      </section>
+
+      <section className="page-bottom-cta">
+        <div className="container">
           <Link href="/galerie/interieur" className="card-link">
             Voir l&apos;intérieur →
           </Link>
-          <Link href="/" className="btn btn-secondary" style={{ marginTop: 32, display: 'inline-block' }}>
-            ← Retour à l&apos;accueil
-          </Link>
+          <p style={{ marginTop: 24 }}>
+            <Link href="/" className="btn btn-secondary">
+              ← Retour à l&apos;accueil
+            </Link>
+          </p>
         </div>
       </section>
     </div>
