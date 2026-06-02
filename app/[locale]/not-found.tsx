@@ -1,9 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 
-export default async function NotFoundPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'NotFound' });
+export default async function NotFoundPage() {
+  const t = await getTranslations('NotFound');
 
   return (
     <section className="not-found-page">
