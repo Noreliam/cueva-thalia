@@ -20,6 +20,10 @@ NEXT_PUBLIC_TURNSTILE_SITE_KEY=<clé Cloudflare Turnstile>
 TURNSTILE_SECRET_KEY=<secret Cloudflare Turnstile>
 ```
 
+**Netlify — important :**
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` → variable **normale** (pas « secret ») : elle est publique dans le JS client
+- `TURNSTILE_SECRET_KEY` → variable **secrète** uniquement
+
 Clés de test Cloudflare (dev uniquement) :
 - Site : `1x00000000000000000000AA`
 - Secret : `1x0000000000000000000000000000000AA`
