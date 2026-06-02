@@ -90,9 +90,9 @@ export function HomePageContent() {
                 Pour un séjour à deux, en famille ou entre amis, jusqu&apos;à 4 personnes. Une parenthèse privée, avec
                 piscine intérieure chauffée et jardin.
               </p>
-              <Link href="/sejourner" className="card-link">
+              <a href="#sejour" className="card-link">
                 Découvrir le séjour
-              </Link>
+              </a>
             </div>
             <div className="card fade-in" style={{ transitionDelay: '100ms' }}>
               <svg className="card-icon" viewBox="0 0 24 24">
@@ -111,9 +111,9 @@ export function HomePageContent() {
                 Anniversaire, shooting, petit mariage ou moment privé. Chaque demande est étudiée pour préserver
                 l&apos;atmosphère du lieu.
               </p>
-              <Link href="/evenements-prives" className="card-link">
+              <a href="#evenements" className="card-link">
                 Imaginer un événement
-              </Link>
+              </a>
             </div>
             <div className="card fade-in" style={{ transitionDelay: '200ms' }}>
               <svg className="card-icon" viewBox="0 0 24 24">
@@ -134,9 +134,9 @@ export function HomePageContent() {
                 Yoga, méditation, breathwork, ateliers créatifs ou retraites intimistes. Un cadre enveloppant pour
                 créer, transmettre et ralentir.
               </p>
-              <Link href="/workshops-retraites" className="card-link">
+              <a href="#workshops" className="card-link">
                 Proposer un workshop
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -173,9 +173,6 @@ export function HomePageContent() {
                 )
               )}
             </div>
-            <Link href="/galerie/piscine" className="card-link" style={{ marginTop: 24, display: 'inline-block' }}>
-              Voir la galerie piscine →
-            </Link>
           </div>
         </div>
       </section>
@@ -188,9 +185,6 @@ export function HomePageContent() {
               Une retraite intimiste jusqu&apos;à 4 personnes. La réservation directe garantit le meilleur tarif et un
               contact privilégié.
             </p>
-            <Link href="/sejourner" className="card-link" style={{ marginTop: 16, display: 'inline-block' }}>
-              Page séjour complète →
-            </Link>
           </div>
           <div className="amenities-grid fade-in">
             {[
@@ -267,14 +261,11 @@ export function HomePageContent() {
                 </span>
               ))}
             </div>
-            <Link href="/evenements-prives" className="card-link" style={{ marginTop: 24, display: 'inline-block' }}>
-              En savoir plus sur les événements →
-            </Link>
           </div>
           <InlineForm
             formId="events-form"
             confirmationId="event-confirmation"
-            action="/api/forms/event"
+            htmlMode
             submitLabel="Envoyer ma demande"
             confirmationText="✓ Merci pour votre demande. Nous reviendrons rapidement avec une réponse personnelle."
           >
@@ -351,14 +342,11 @@ export function HomePageContent() {
                 style={{ width: '100%', maxHeight: 400, objectFit: 'cover' }}
               />
             </div>
-            <Link href="/workshops-retraites" className="card-link" style={{ marginTop: 24, display: 'inline-block' }}>
-              En savoir plus sur les workshops →
-            </Link>
           </div>
           <InlineForm
             formId="workshops-form"
             confirmationId="workshop-confirmation"
-            action="/api/forms/workshop"
+            htmlMode
             submitLabel="Envoyer le projet"
             confirmationText="✓ Merci pour votre projet. Nous vous recontacterons rapidement."
           >
@@ -537,9 +525,9 @@ export function HomePageContent() {
               </svg>
               <h3>Email</h3>
               <p>contact@cueva-thalia.com</p>
-              <Link href="/contact" className="btn btn-secondary">
+              <a href="mailto:contact@cueva-thalia.com" className="btn btn-secondary">
                 Envoyer un email
-              </Link>
+              </a>
             </div>
           </div>
         </div>

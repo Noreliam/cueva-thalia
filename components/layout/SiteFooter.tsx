@@ -1,3 +1,5 @@
+'use client';
+
 import { Link } from '@/i18n/routing';
 
 export default function SiteFooter() {
@@ -18,11 +20,11 @@ export default function SiteFooter() {
         <div>
           <h4>Navigation</h4>
           <ul>
-            <li><Link href="/sejourner">Séjourner</Link></li>
-            <li><Link href="/evenements-prives">Événements privés</Link></li>
-            <li><Link href="/workshops-retraites">Workshops & retraites</Link></li>
-            <li><Link href="/galerie">Galerie</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/#sejour">Séjourner</Link></li>
+            <li><Link href="/#evenements">Événements privés</Link></li>
+            <li><Link href="/#workshops">Workshops & retraites</Link></li>
+            <li><Link href="/#galerie">Galerie</Link></li>
+            <li><Link href="/#contact">Contact</Link></li>
             <li><Link href="/#sejour" style={{ color: 'var(--ct-terracotta)' }}>Réserver</Link></li>
           </ul>
         </div>

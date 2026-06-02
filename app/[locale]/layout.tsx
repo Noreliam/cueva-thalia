@@ -25,8 +25,12 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'Cueva Thalía',
-  description: "L'expérience d'un lieu hors du temps",
+  title: 'Cueva Thalía — Maison privée avec piscine chauffée à Tenerife',
+  description:
+    'Séjournez dans une cueva privée à Tenerife avec piscine intérieure chauffée, jardin privé et atmosphère immersive.',
+  icons: {
+    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23B85C38'/></svg>",
+  },
 };
 
 export default async function LocaleLayout({

@@ -43,7 +43,7 @@ export default async function GalleryCategoryPage({ params }: Props) {
         />
         <div className="gallery-hero-content">
           <h1>{gallery.title}</h1>
-          <Link href="/galerie" className="btn btn-outline">
+          <Link href="/#galerie" className="btn btn-outline">
             Retour à la galerie
           </Link>
         </div>

@@ -5,9 +5,11 @@ import { FormEvent, useState } from 'react';
 type InlineFormProps = {
   formId: string;
   confirmationId: string;
-  action: string;
+  action?: string;
   submitLabel: string;
   confirmationText: string;
+  /** Comportement identique au HTML statique (sans appel API). */
+  htmlMode?: boolean;
   children: React.ReactNode;
 };
 
@@ -17,15 +19,27 @@ export function InlineForm({
   action,
   submitLabel,
   confirmationText,
+  htmlMode = false,
   children,
 }: InlineFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const showConfirmation = () => {
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 5000);
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (!form.checkValidity()) return;
+
+    if (htmlMode || !action) {
+      form.reset();
+      showConfirmation();
+      return;
+    }
 
     setLoading(true);
     const data = Object.fromEntries(new FormData(form));
@@ -37,10 +51,9 @@ export function InlineForm({
         body: JSON.stringify(data),
       });
     } finally {
-      setSubmitted(true);
       form.reset();
+      showConfirmation();
       setLoading(false);
-      setTimeout(() => setSubmitted(false), 5000);
     }
   };
 
