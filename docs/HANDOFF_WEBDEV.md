@@ -12,7 +12,7 @@ Toute la partie "Front-end Public" est terminée.
 Les endpoints API (ex: `/api/forms/contact/route.ts`) sont actuellement en mode "placeholder" (Mock).
 - [ ] Remplacer les logiques existantes (`console.log`) par un appel vers **Supabase** (pour stocker la demande).
 - [ ] Brancher un service d'envoi d'e-mail (Resend, SendGrid, etc.) pour envoyer les notifications à `contact@cueva-thalia.com`.
-- [ ] Implémenter la vérification Cloudflare Turnstile côté serveur.
+- [ ] Implémenter la vérification Cloudflare Turnstile côté serveur. ✅ Fait — voir `lib/security/turnstile.ts` et `components/forms/TurnstileField.tsx`
 
 ## 3. Dashboard et Auth
 - [ ] Créer les routes protégées sous `/dashboard`.

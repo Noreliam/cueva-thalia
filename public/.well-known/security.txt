@@ -1,0 +1,4 @@
+Contact: mailto:contact@cueva-thalia.com
+Preferred-Languages: fr, es, en
+Canonical: https://cueva-thalia.com/.well-known/security.txt
+Policy: https://cueva-thalia.com/fr/politique-confidentialite

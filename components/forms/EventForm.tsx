@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
 
 const eventSchema = z.object({
   name: z.string().min(2),
@@ -21,26 +22,33 @@ type EventFormValues = z.infer<typeof eventSchema>;
 export default function EventForm() {
   const t = useTranslations('Forms');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [hp, setHp] = useState('');
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<EventFormValues>({
     resolver: zodResolver(eventSchema),
   });
 
   const onSubmit = async (data: EventFormValues) => {
+    if (hp.trim().length > 0) {
+      setStatus('success');
+      reset();
+      return;
+    }
+
     setStatus('loading');
     try {
       const res = await fetch('/api/forms/event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, _hp: hp, turnstileToken }),
       });
 
       if (!res.ok) throw new Error('API Error');
-      
+
       setStatus('success');
       reset();
-    } catch (err) {
-      console.error(err);
+    } catch {
       setStatus('error');
     }
   };
@@ -54,7 +62,7 @@ export default function EventForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-2xl mx-auto p-8 bg-white/50 backdrop-blur-sm rounded-xl border border-ct-dune/20 shadow-sm">
+    <form onSubmit={handleSubmit(onSubmit)} className="relative space-y-6 max-w-2xl mx-auto p-8 bg-white/50 backdrop-blur-sm rounded-xl border border-ct-dune/20 shadow-sm">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-sm font-medium uppercase tracking-wider">{t('name')}</label>
@@ -105,6 +113,8 @@ export default function EventForm() {
         {errors.message && <span className="text-xs text-red-500">Message trop court</span>}
       </div>
 
+      <FormSecurityFields onTokenChange={setTurnstileToken} honeypotProps={{ value: hp, onChange: (e) => setHp(e.target.value) }} />
+
       {status === 'error' && (
         <div className="text-red-500 text-sm text-center">{t('error')}</div>
       )}
@@ -116,9 +126,6 @@ export default function EventForm() {
       >
         {status === 'loading' ? t('sending') : t('submit')}
       </button>
-      
-      {/* Honeypot hidden input against spam */}
-      <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
     </form>
   );
 }
