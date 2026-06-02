@@ -1408,3 +1408,264 @@
       width: 5px;
       height: 5px;
     }
+
+    /* HOME V4 — sections complémentaires */
+    .hero-badge {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      z-index: 3;
+      background: rgba(90, 56, 37, 0.8);
+      color: var(--ct-blanc-casse);
+      padding: 10px 14px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-proof {
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      margin-bottom: 32px;
+      color: #F5F0E6;
+    }
+
+    .hero-proof--visible {
+      opacity: 0.85;
+    }
+
+    .hero-proof-stars {
+      color: var(--ct-sable);
+    }
+
+    .header--scrolled {
+      backdrop-filter: blur(12px);
+      background-color: rgba(232, 220, 196, 0.92);
+    }
+
+    .card--link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-capacity {
+      font-size: 13px;
+      color: var(--ct-roche);
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .promesses {
+      background-color: var(--ct-blanc-casse);
+      padding: 80px 0;
+    }
+
+    @media (min-width: 1024px) {
+      .promesses {
+        padding: 120px 0;
+      }
+    }
+
+    .promesses-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    @media (min-width: 1024px) {
+      .promesses-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 48px;
+      }
+    }
+
+    .promesse-card {
+      padding: 8px 0;
+    }
+
+    .reviews-score {
+      text-align: center;
+      font-family: var(--font-title);
+      font-size: clamp(28px, 4vw, 42px);
+      margin: 24px 0 48px;
+    }
+
+    .home-gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .home-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .home-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .home-gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .cta-final {
+      background-color: var(--ct-terracotta);
+      color: var(--ct-blanc-casse);
+      padding: 80px 0;
+    }
+
+    @media (min-width: 1024px) {
+      .cta-final {
+        padding: 120px 0;
+      }
+    }
+
+    .cta-final h2,
+    .cta-final .editorial-text {
+      color: var(--ct-blanc-casse);
+    }
+
+    .btn-brown {
+      background-color: var(--ct-brun-chaud);
+      color: var(--ct-blanc-casse);
+      border: none;
+    }
+
+    .cta-final-whatsapp {
+      color: var(--ct-blanc-casse);
+    }
+
+    .booking-gate {
+      background: var(--ct-blanc-casse);
+      padding: 32px;
+      border-radius: 6px;
+      border: 1px solid rgba(201, 184, 150, 0.4);
+    }
+
+    .booking-gate-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .booking-gate-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .booking-gate-select {
+      min-height: 48px;
+      padding: 0 12px;
+      border: 1px solid var(--ct-dune);
+      background: white;
+      flex: 1;
+    }
+
+    .booking-gate-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .booking-gate-back {
+      margin-top: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      background: rgba(245, 240, 230, 0.98);
+      border-top: 1px solid var(--ct-dune);
+      padding: 20px;
+    }
+
+    .cookie-banner-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .cookie-option {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .cookie-privacy {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .not-found-page {
+      background-color: var(--ct-sable);
+      min-height: 60vh;
+    }
+
+    .dashboard-page {
+      min-height: 100vh;
+      background: var(--ct-blanc-casse);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .dashboard-card {
+      display: block;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--ct-dune);
+      border-radius: 3px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .dashboard-card:hover {
+      border-color: var(--ct-terracotta);
+    }

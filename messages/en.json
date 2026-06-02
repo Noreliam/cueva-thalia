@@ -2,6 +2,53 @@
   "Index": {
     "title": "Cueva Thalía — The experience of a timeless place"
   },
+  "Home": {
+    "meta_title": "Cueva Thalía | Private Cave with Indoor Pool in Tenerife — Unique Cave Stay",
+    "meta_description": "Sleep inside a real volcanic cave in Tenerife. Private heated indoor pool with hydrotherapy. Completely yours — no shared spaces. San Miguel de Abona, 15 min from TFS.",
+    "hero_h1": "The cave the world doesn't know exists.",
+    "hero_subtitle": "A private volcanic cave in Tenerife. A heated indoor pool, entirely yours. No other guests. No shared spaces. Just the rock, the water, and the silence.",
+    "hero_cta_primary": "Check availability",
+    "hero_cta_secondary": "From €200 / night — Discover ↓",
+    "hero_badge": "One place · Entirely yours · Tenerife",
+    "pathways_title": "What brings you here?",
+    "pathway1_title": "Rest",
+    "pathway1_text": "Private escape, romantic or family. Up to 4 people, book directly online.",
+    "pathway1_capacity": "Up to 4 people",
+    "pathway2_title": "Celebrate",
+    "pathway2_text": "Birthdays, celebrations, photo shoots, small weddings and private hire. Possibility to welcome larger groups depending on the setup. Custom quote.",
+    "pathway2_capacity": "Large groups — on request",
+    "pathway3_title": "Reconnect",
+    "pathway3_text": "Yoga, meditation, creative workshops and wellness events. Up to 12 participants depending on the format.",
+    "pathway3_capacity": "Up to 12 participants",
+    "story_title": "The cave no one knew was there",
+    "story_p1": "When Manon bought this property in San Miguel de Abona, she had no idea what awaited her. The house was there. The garden was there. But beneath her feet, hidden for millennia in the volcanic rock of the Canaries, something else was sleeping.",
+    "story_p2": "Four and a half years later, she discovered it. By chance.",
+    "story_p3": "A natural cave, whole, untouched — like a gift the earth had kept secret. That unexpected discovery became Cueva Thalía.",
+    "promise1_title": "Rock all around",
+    "promise1_text": "Here, the rock doesn't decorate. It wraps. It isolates. It silences everything that doesn't deserve to be heard.",
+    "promise2_title": "The water is yours",
+    "promise2_text": "The water is warm. The jets work. Around you, the rock stays cold. That contrast exists nowhere else on the island.",
+    "promise3_title": "Everything stays close",
+    "promise3_text": "The airport is 15 minutes away. The sea 20. Mount Teide 45. And you have nothing to do — except stay.",
+    "reviews_title": "What they felt",
+    "reviews_score": "5 / 5",
+    "reviews_count": "4 verified reviews",
+    "reviews_link": "Read all reviews on Airbnb →",
+    "gallery_title": "Inside the cave",
+    "gallery_link": "View full gallery →",
+    "cta_title": "When would you like to come?",
+    "cta_subtitle": "One space. It can only be booked once at a time.",
+    "cta_button": "Check availability",
+    "cta_whatsapp": "Prefer to message us? → WhatsApp +34 657 077 910",
+    "cookie_title": "Cookies and privacy",
+    "cookie_text": "We use cookies to measure traffic and improve your experience. You choose what to accept.",
+    "cookie_accept": "Accept all",
+    "cookie_reject": "Reject all",
+    "cookie_customize": "Customize",
+    "cookie_save": "Save",
+    "cookie_analytics": "Audience measurement (Google Analytics)",
+    "cookie_privacy": "Privacy policy"
+  },
   "Navigation": {
     "home": "Home",
     "sejourner": "Stay",
@@ -11,7 +58,8 @@
     "histoire": "History",
     "contact": "Contact",
     "reserver": "Book",
-    "bon_cadeau": "Gift Card"
+    "bon_cadeau": "Gift Card",
+    "offrir": "Gift"
   },
   "Sejourner": {
     "title": "Stay",
@@ -58,7 +106,16 @@
     "faq_q4": "Why book direct?",
     "faq_a4": "No platform fees, personal contact and tailored options.",
     "avis_title": "What our guests say",
-    "gallery_cta": "Explore the spaces in photos"
+    "gallery_cta": "Explore the spaces in photos",
+    "booking_guests": "Number of guests",
+    "booking_continue": "Continue",
+    "booking_group_title": "Groups of 5 to 16 people",
+    "booking_group_text": "For groups of 5 to 16 people, contact us directly — the cave can host up to 16 people with additional mattresses.",
+    "booking_whatsapp": "Contact us on WhatsApp",
+    "booking_events_link": "View events →",
+    "booking_calendar_title": "Availability calendar",
+    "booking_calendar_desc": "Real-time date checking",
+    "booking_noscript": "Enable JavaScript to book online, or contact us directly."
   },
   "Evenements": {
     "title": "Private Events",
@@ -148,10 +205,27 @@
     "error": "An error occurred. Please try again."
   },
   "Footer": {
+    "tagline": "The cave that was waiting for you.",
+    "description": "Cueva Thalía — a private volcanic cave in south Tenerife. Rock, water, silence.",
+    "nav_title": "Navigation",
+    "contact_title": "Contact",
+    "guides": "Guides & inspiration",
+    "license": "Tourist licence n° [PLACEHOLDER]",
     "legal": "Legal Notice",
     "cgv": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "cancel": "Cancellation Policy",
     "rights": "All rights reserved."
+  },
+  "Guides": {
+    "link_sejourner": "Stay →",
+    "link_galerie": "Gallery →",
+    "cta_box": "Looking for somewhere to stay?",
+    "cta_button": "Check availability"
+  },
+  "NotFound": {
+    "title": "Page not found.",
+    "text": "The page you're looking for isn't here. Head back home to discover Cueva Thalía.",
+    "home": "Back to home"
   }
 }

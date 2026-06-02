@@ -2,6 +2,53 @@
   "Index": {
     "title": "Cueva Thalía — La experiencia de un lugar atemporal"
   },
+  "Home": {
+    "meta_title": "Cueva Thalía | Cueva Privada con Piscina Interior en Tenerife — San Miguel de Abona",
+    "meta_description": "Cueva volcánica privada en Tenerife con piscina interior climatizada e hidromasaje. Un único alojamiento, total privacidad. San Miguel de Abona, a 15 min del aeropuerto TFS.",
+    "hero_h1": "La cueva que el mundo no sabe que existe.",
+    "hero_subtitle": "Una cueva volcánica privada en Tenerife. Una piscina interior climatizada solo para ti. Ningún otro huésped. Ningún espacio compartido. Solo la roca, el agua y el silencio.",
+    "hero_cta_primary": "Ver disponibilidad",
+    "hero_cta_secondary": "Desde 200 € / noche — Descubrir ↓",
+    "hero_badge": "Un único espacio · Privacidad total · Tenerife",
+    "pathways_title": "¿Para qué vienes?",
+    "pathway1_title": "Descansar",
+    "pathway1_text": "Escapada privada, romántica o en familia. Hasta 4 personas en reserva directa.",
+    "pathway1_capacity": "Hasta 4 personas",
+    "pathway2_title": "Celebrar",
+    "pathway2_text": "Cumpleaños, celebraciones, shootings, bodas íntimas y privatizaciones. Posibilidad de recibir grupos grandes según configuración. Presupuesto personalizado.",
+    "pathway2_capacity": "Grupos grandes — bajo petición",
+    "pathway3_title": "Reunirse",
+    "pathway3_text": "Yoga, meditación, talleres creativos y eventos de bienestar. Hasta 12 participantes según el formato.",
+    "pathway3_capacity": "Hasta 12 participantes",
+    "story_title": "La cueva que nadie sabía que existía",
+    "story_p1": "Cuando Manon compró esta propiedad en San Miguel de Abona, no sabía lo que le esperaba. La casa estaba ahí. El jardín estaba ahí. Pero bajo sus pies, escondida desde hace milenios en la roca volcánica de Canarias, dormía algo más.",
+    "story_p2": "Cuatro años y medio después, la descubrió. Por casualidad.",
+    "story_p3": "Una cueva natural, entera, intacta — como un regalo que la tierra guardaba en secreto. Ese descubrimiento inesperado se convirtió en Cueva Thalía.",
+    "promise1_title": "La roca te rodea",
+    "promise1_text": "Aquí, la roca no decora. Envuelve. Aísla. Silencia todo lo que no merece ser escuchado.",
+    "promise2_title": "El agua es tuya",
+    "promise2_text": "El agua está caliente. Los jets trabajan. Alrededor, la roca permanece fría. Ese contraste no existe en ningún otro lugar de la isla.",
+    "promise3_title": "Todo queda cerca",
+    "promise3_text": "El aeropuerto está a 15 minutos. El mar a 20. El Teide a 45. Y tú no tienes nada que hacer — salvo quedarte.",
+    "reviews_title": "Lo que sintieron",
+    "reviews_score": "5 / 5",
+    "reviews_count": "4 opiniones verificadas",
+    "reviews_link": "Ver todos los comentarios en Airbnb →",
+    "gallery_title": "Dentro de la cueva",
+    "gallery_link": "Ver la galería completa →",
+    "cta_title": "¿Cuándo quieres venir?",
+    "cta_subtitle": "Un único espacio. Solo se reserva una vez a la vez.",
+    "cta_button": "Ver disponibilidad",
+    "cta_whatsapp": "¿Prefieres escribirnos? → WhatsApp +34 657 077 910",
+    "cookie_title": "Cookies y privacidad",
+    "cookie_text": "Usamos cookies para medir la audiencia y mejorar tu experiencia. Tú eliges qué aceptas.",
+    "cookie_accept": "Aceptar todo",
+    "cookie_reject": "Rechazar todo",
+    "cookie_customize": "Personalizar",
+    "cookie_save": "Guardar",
+    "cookie_analytics": "Medición de audiencia (Google Analytics)",
+    "cookie_privacy": "Política de privacidad"
+  },
   "Navigation": {
     "home": "Inicio",
     "sejourner": "Alojarse",
@@ -11,7 +58,8 @@
     "histoire": "Historia",
     "contact": "Contacto",
     "reserver": "Reservar",
-    "bon_cadeau": "Tarjeta Regalo"
+    "bon_cadeau": "Tarjeta Regalo",
+    "offrir": "Regalar"
   },
   "Sejourner": {
     "title": "Alojarse",
@@ -58,7 +106,16 @@
     "faq_q4": "¿Por qué reservar directamente?",
     "faq_a4": "Sin comisiones de plataformas, contacto humano y opciones personalizadas.",
     "avis_title": "Lo que dicen nuestros huéspedes",
-    "gallery_cta": "Explorar los espacios en imágenes"
+    "gallery_cta": "Explorar los espacios en imágenes",
+    "booking_guests": "Número de personas",
+    "booking_continue": "Continuar",
+    "booking_group_title": "Grupos de 5 a 16 personas",
+    "booking_group_text": "Para grupos de 5 a 16 personas, contáctanos directamente — la cueva puede acoger hasta 16 personas con colchonetas adicionales.",
+    "booking_whatsapp": "Contactar por WhatsApp",
+    "booking_events_link": "Ver eventos →",
+    "booking_calendar_title": "Calendario de disponibilidad",
+    "booking_calendar_desc": "Comprobación de fechas en tiempo real",
+    "booking_noscript": "Activa JavaScript para reservar en línea, o contáctanos directamente."
   },
   "Evenements": {
     "title": "Eventos privados",
@@ -148,10 +205,27 @@
     "error": "Se produjo un error. Inténtelo de nuevo."
   },
   "Footer": {
+    "tagline": "La cueva que estaba esperando.",
+    "description": "Cueva Thalía — una cueva volcánica privada en el sur de Tenerife. Roca, agua, silencio.",
+    "nav_title": "Navegación",
+    "contact_title": "Contacto",
+    "guides": "Guías e inspiración",
+    "license": "Licencia turística n° [PLACEHOLDER]",
     "legal": "Aviso Legal",
     "cgv": "Condiciones Generales",
     "privacy": "Política de Privacidad",
     "cancel": "Política de Cancelación",
     "rights": "Todos los derechos reservados."
+  },
+  "Guides": {
+    "link_sejourner": "Alojarse →",
+    "link_galerie": "Galería →",
+    "cta_box": "¿Buscas dónde alojarte?",
+    "cta_button": "Ver disponibilidad"
+  },
+  "NotFound": {
+    "title": "Esta página no existe.",
+    "text": "La página que buscas no está aquí. Vuelve al inicio para descubrir Cueva Thalía.",
+    "home": "Volver al inicio"
   }
 }

@@ -22,7 +22,7 @@ export default function proxy(request: NextRequest) {
   }
 
   if (pathname.startsWith('/dashboard')) {
-    return new NextResponse(null, { status: 404 });
+    return applySecurityHeaders(NextResponse.next());
   }
 
   if (pathname === '/robots.txt' || pathname === '/sitemap.xml') {

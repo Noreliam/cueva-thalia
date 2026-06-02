@@ -2,6 +2,53 @@
   "Index": {
     "title": "Cueva Thalía — L'expérience d'un lieu hors du temps"
   },
+  "Home": {
+    "meta_title": "Cueva Thalía | Grotte Privée avec Piscine Intérieure à Tenerife — Hébergement Insolite",
+    "meta_description": "Dormez dans une vraie grotte volcanique à Tenerife. Piscine intérieure privée chauffée, hydromassage, silence absolu. Un seul lieu. San Miguel de Abona, 15 min de l'aéroport Sud.",
+    "hero_h1": "La grotte que le monde ne sait pas qu'elle existe.",
+    "hero_subtitle": "Une grotte volcanique privée à Tenerife. Une piscine intérieure chauffée à vous seul. Aucun autre client. Aucun espace partagé. Juste la roche, l'eau, et le silence.",
+    "hero_cta_primary": "Vérifier les disponibilités",
+    "hero_cta_secondary": "À partir de 200 € / nuit — Découvrir ↓",
+    "hero_badge": "Un seul lieu · Privé · Tenerife",
+    "pathways_title": "Pourquoi venez-vous ?",
+    "pathway1_title": "Se reposer",
+    "pathway1_text": "Escapade privée, romantique ou en famille. Jusqu'à 4 personnes en réservation directe.",
+    "pathway1_capacity": "Jusqu'à 4 personnes",
+    "pathway2_title": "Célébrer",
+    "pathway2_text": "Anniversaires, célébrations, shootings, petits mariages et privatisations. Possibilité de recevoir des groupes importants selon configuration. Devis personnalisé.",
+    "pathway2_capacity": "Grands groupes — sur demande",
+    "pathway3_title": "Se retrouver",
+    "pathway3_text": "Yoga, méditation, ateliers créatifs et événements bien-être. Jusqu'à 12 participants selon le format.",
+    "pathway3_capacity": "Jusqu'à 12 participants",
+    "story_title": "La grotte que personne ne savait voir",
+    "story_p1": "Quand Manon a acheté cette propriété à San Miguel de Abona, elle ne savait pas ce qui l'attendait. La maison était là. Le jardin était là. Mais sous ses pieds, cachée depuis des millénaires dans la roche volcanique des Canaries, dormait quelque chose d'autre.",
+    "story_p2": "Quatre ans et demi plus tard, elle l'a découverte. Par hasard.",
+    "story_p3": "Une grotte naturelle, entière, intacte — comme un cadeau que la terre gardait en secret. Cette découverte inattendue est devenue Cueva Thalía.",
+    "promise1_title": "La roche vous entoure",
+    "promise1_text": "Ici, la roche ne décore pas. Elle enveloppe. Elle isole. Elle fait taire tout ce qui ne mérite pas d'être entendu.",
+    "promise2_title": "L'eau est à vous",
+    "promise2_text": "L'eau est chaude. Les jets travaillent. Autour de vous, la roche reste froide. Ce contraste n'existe nulle part ailleurs sur l'île.",
+    "promise3_title": "Tout reste proche",
+    "promise3_text": "L'aéroport est à 15 minutes. La mer à 20. Le Teide à 45. Et vous, vous n'avez rien à faire — sinon rester.",
+    "reviews_title": "Ce qu'ils ont ressenti",
+    "reviews_score": "5 / 5",
+    "reviews_count": "4 avis vérifiés",
+    "reviews_link": "Voir tous les avis sur Airbnb →",
+    "gallery_title": "Dans la grotte",
+    "gallery_link": "Voir toute la galerie →",
+    "cta_title": "Quand voulez-vous venir ?",
+    "cta_subtitle": "Un seul espace. Il ne peut être réservé qu'une fois à la fois.",
+    "cta_button": "Voir les disponibilités",
+    "cta_whatsapp": "Préférez-vous nous écrire ? → WhatsApp +34 657 077 910",
+    "cookie_title": "Cookies et confidentialité",
+    "cookie_text": "Nous utilisons des cookies pour mesurer l'audience et améliorer votre expérience. Vous choisissez ce que vous acceptez.",
+    "cookie_accept": "Accepter tout",
+    "cookie_reject": "Refuser tout",
+    "cookie_customize": "Personnaliser",
+    "cookie_save": "Enregistrer",
+    "cookie_analytics": "Mesure d'audience (Google Analytics)",
+    "cookie_privacy": "Politique de confidentialité"
+  },
   "Navigation": {
     "home": "Accueil",
     "sejourner": "Séjourner",
@@ -11,7 +58,8 @@
     "histoire": "Histoire",
     "contact": "Contact",
     "reserver": "Réserver",
-    "bon_cadeau": "Bon Cadeau"
+    "bon_cadeau": "Bon Cadeau",
+    "offrir": "Offrir"
   },
   "Sejourner": {
     "title": "Séjourner",
@@ -58,7 +106,16 @@
     "faq_q4": "Pourquoi réserver en direct ?",
     "faq_a4": "La réservation directe évite les commissions des plateformes, permet un contact humain avant votre arrivée et donne accès aux options personnalisées (décoration, massage, horaires flexibles).",
     "avis_title": "Ce qu'en disent nos hôtes",
-    "gallery_cta": "Explorer les espaces en images"
+    "gallery_cta": "Explorer les espaces en images",
+    "booking_guests": "Nombre de personnes",
+    "booking_continue": "Continuer",
+    "booking_group_title": "Groupes de 5 à 16 personnes",
+    "booking_group_text": "Pour les groupes de 5 à 16 personnes, contactez-nous directement — la cueva peut accueillir jusqu'à 16 personnes avec les couchages supplémentaires.",
+    "booking_whatsapp": "Nous contacter sur WhatsApp",
+    "booking_events_link": "Voir les événements →",
+    "booking_calendar_title": "Calendrier de disponibilités",
+    "booking_calendar_desc": "Vérification des dates en temps réel",
+    "booking_noscript": "Activez JavaScript pour réserver en ligne, ou contactez-nous directement."
   },
   "Evenements": {
     "title": "Événements privés",
@@ -147,7 +204,24 @@
     "success": "Merci, nous vous répondons sous 48 h.",
     "error": "Une erreur est survenue. Veuillez réessayer."
   },
+  "Guides": {
+    "link_sejourner": "Séjourner →",
+    "link_galerie": "Galerie →",
+    "cta_box": "Vous cherchez où séjourner ?",
+    "cta_button": "Voir les disponibilités"
+  },
+  "NotFound": {
+    "title": "Cette page n'existe pas.",
+    "text": "La page que vous cherchez n'est pas ici. Retournez à l'accueil pour découvrir Cueva Thalía.",
+    "home": "Retour à l'accueil"
+  },
   "Footer": {
+    "tagline": "La grotte qui vous attendait.",
+    "description": "Cueva Thalía — une cueva volcanique privée au sud de Tenerife. Roche, eau, silence.",
+    "nav_title": "Navigation",
+    "contact_title": "Contact",
+    "guides": "Guides & inspirations",
+    "license": "Licence touristique n° [PLACEHOLDER]",
     "legal": "Mentions légales",
     "cgv": "Conditions générales",
     "privacy": "Politique de confidentialité",

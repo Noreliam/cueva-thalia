@@ -1,36 +1,39 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
+import { siteNavItems } from '@/lib/site-nav';
+import { useTranslations } from 'next-intl';
 
 export default function SiteFooter() {
+  const t = useTranslations('Footer');
+  const nav = useTranslations('Navigation');
+
   return (
     <footer className="footer">
       <div className="container footer-grid">
         <div>
           <span className="footer-logo">Cueva Thalía</span>
           <p style={{ marginBottom: 16 }} className="small-caps">
-            L&apos;expérience d&apos;un lieu hors du temps
+            {t('tagline')}
           </p>
-          <p>
-            Cueva Thalía est une maison troglodyte privée au sud de Tenerife. Un espace entièrement vôtre pour
-            séjourner, célébrer ou se retrouver.
-          </p>
+          <p>{t('description')}</p>
         </div>
 
         <div>
-          <h4>Navigation</h4>
+          <h4>{t('nav_title')}</h4>
           <ul>
-            <li><Link href="/#sejour">Séjourner</Link></li>
-            <li><Link href="/#evenements">Événements privés</Link></li>
-            <li><Link href="/#workshops">Workshops & retraites</Link></li>
-            <li><Link href="/#galerie">Galerie</Link></li>
-            <li><Link href="/#contact">Contact</Link></li>
-            <li><Link href="/#sejour" style={{ color: 'var(--ct-terracotta)' }}>Réserver</Link></li>
+            {siteNavItems.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>
+                  {item.labelKey === 'offrir' ? `🎁 ${nav(item.labelKey)}` : nav(item.labelKey)}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h4>Contact</h4>
+          <h4>{t('contact_title')}</h4>
           <ul>
             <li>Calle Las Morales 70</li>
             <li>38620 San Miguel de Abona</li>
@@ -49,15 +52,20 @@ export default function SiteFooter() {
 
       <div className="footer-bottom">
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} Cueva Thalía. Tous droits réservés.</p>
+          <p>
+            &copy; 2025–{new Date().getFullYear()} Cueva Thalía — San Miguel de Abona, Tenerife
+          </p>
+          <p className="small-caps" style={{ marginTop: 8 }}>
+            {t('license')}
+          </p>
           <div className="footer-bottom-links">
-            <Link href="/mentions-legales">Mentions légales</Link>
+            <Link href="/mentions-legales">{t('legal')}</Link>
             <span>·</span>
-            <Link href="/politique-confidentialite">Politique de confidentialité</Link>
+            <Link href="/conditions-generales">{t('cgv')}</Link>
             <span>·</span>
-            <Link href="/conditions-generales">Conditions de réservation</Link>
+            <Link href="/politique-confidentialite">{t('privacy')}</Link>
             <span>·</span>
-            <Link href="/politique-annulation">Politique d&apos;annulation</Link>
+            <Link href="/guides/sejour-insolite-tenerife">{t('guides')}</Link>
           </div>
         </div>
       </div>

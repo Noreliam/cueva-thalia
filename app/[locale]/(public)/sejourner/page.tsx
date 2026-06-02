@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
-import SmoobuWidget from '@/components/SmoobuWidget';
+import SmoobuBookingGate from '@/components/SmoobuBookingGate';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Sejourner' });
@@ -108,11 +108,19 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               <p style={{ marginTop: 12, fontSize: 14, color: 'var(--ct-roche)' }}><em>{t('animals_note')}</em></p>
             </div>
             <div className="smoobu-placeholder">
-              <div className="placeholder-content">
-                <h3>Calendrier de disponibilités</h3>
-                <p style={{ marginBottom: 24 }}>Vérification des dates en temps réel</p>
-                <SmoobuWidget />
-              </div>
+              <SmoobuBookingGate
+                copy={{
+                  label: t('booking_guests'),
+                  continue: t('booking_continue'),
+                  groupTitle: t('booking_group_title'),
+                  groupText: t('booking_group_text'),
+                  whatsapp: t('booking_whatsapp'),
+                  eventsLink: t('booking_events_link'),
+                  calendarTitle: t('booking_calendar_title'),
+                  calendarDesc: t('booking_calendar_desc'),
+                  noscript: t('booking_noscript'),
+                }}
+              />
             </div>
           </div>
         </div>

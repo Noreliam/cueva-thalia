@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
-import { isHomePath, siteNavItems } from '@/lib/site-nav';
-import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { siteNavItems } from '@/lib/site-nav';
+import { useTranslations } from 'next-intl';
 
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const onHome = isHomePath(pathname);
-
-  useScrollSpy(onHome);
+  const t = useTranslations('Navigation');
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -19,16 +18,12 @@ export default function SiteHeader() {
     };
   }, [menuOpen]);
 
-  const NavLink = ({ hash, label, className }: { hash: string; label: string; className?: string }) =>
-    onHome ? (
-      <a href={hash} className={className}>
-        {label}
-      </a>
-    ) : (
-      <Link href={`/${hash}` as '/'} className={className}>
-        {label}
-      </Link>
-    );
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
@@ -36,7 +31,7 @@ export default function SiteHeader() {
         Aller au contenu principal
       </a>
 
-      <header className="header" id="header">
+      <header className={`header${scrolled ? ' header--scrolled' : ''}`} id="header">
         <div className="nav-container">
           <Link href="/" className="logo-container" aria-label="Accueil Cueva Thalía">
             <span className="logo-text">Cueva Thalía</span>
@@ -45,12 +40,16 @@ export default function SiteHeader() {
           <nav className="desktop-nav" aria-label="Menu principal">
             <ul>
               {siteNavItems.map((item) => (
-                <li key={item.hash}>
-                  <NavLink hash={item.hash} label={item.label} />
+                <li key={item.href}>
+                  <Link href={item.href} className={pathname === item.href ? 'nav-active' : undefined}>
+                    {item.labelKey === 'offrir' ? `🎁 ${t(item.labelKey)}` : t(item.labelKey)}
+                  </Link>
                 </li>
               ))}
               <li>
-                <NavLink hash="#sejour" label="Réserver" className="nav-cta" />
+                <Link href="/sejourner" className="nav-cta">
+                  {t('reserver')}
+                </Link>
               </li>
             </ul>
           </nav>
@@ -72,38 +71,21 @@ export default function SiteHeader() {
       <nav className={`mobile-menu${menuOpen ? ' active' : ''}`} id="mobile-menu" aria-hidden={!menuOpen}>
         <ul>
           {siteNavItems.map((item) => (
-            <li key={item.hash}>
-              {onHome ? (
-                <a href={item.hash} className="mobile-link" onClick={() => setMenuOpen(false)}>
-                  {item.label === 'Événements' ? 'Événements privés' : item.label}
-                </a>
-              ) : (
-                <Link href={`/${item.hash}` as '/'} className="mobile-link" onClick={() => setMenuOpen(false)}>
-                  {item.label === 'Événements' ? 'Événements privés' : item.label}
-                </Link>
-              )}
+            <li key={item.href}>
+              <Link href={item.href} className="mobile-link" onClick={() => setMenuOpen(false)}>
+                {item.labelKey === 'offrir' ? `🎁 ${t(item.labelKey)}` : t(item.labelKey)}
+              </Link>
             </li>
           ))}
           <li style={{ marginTop: 32 }}>
-            {onHome ? (
-              <a
-                href="#sejour"
-                className="btn btn-primary mobile-link"
-                style={{ color: 'white', fontFamily: 'var(--font-body)', fontSize: 16 }}
-                onClick={() => setMenuOpen(false)}
-              >
-                Réserver
-              </a>
-            ) : (
-              <Link
-                href="/#sejour"
-                className="btn btn-primary mobile-link"
-                style={{ color: 'white', fontFamily: 'var(--font-body)', fontSize: 16 }}
-                onClick={() => setMenuOpen(false)}
-              >
-                Réserver
-              </Link>
-            )}
+            <Link
+              href="/sejourner"
+              className="btn btn-primary mobile-link"
+              style={{ color: 'white', fontFamily: 'var(--font-body)', fontSize: 16 }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {t('reserver')}
+            </Link>
           </li>
         </ul>
       </nav>
