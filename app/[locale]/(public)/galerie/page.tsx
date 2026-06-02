@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function GaleriePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Galerie');
+  const t = await getTranslations({ locale, namespace: 'Galerie' });
 
   const filters = galleryUsageFilters.map((id) => ({
     id,
