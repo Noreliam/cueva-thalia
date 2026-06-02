@@ -5,7 +5,6 @@ import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { getGalleryBySlug, galleryCategories, galleryImagePath } from '@/lib/gallery-data';
 import { Lightbox } from '@/components/site/Lightbox';
-import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -38,7 +37,6 @@ export default async function GalleryCategoryPage({ params }: Props) {
 
   return (
     <div className="seo-page">
-      <SiteClientEffects />
       <section className="gallery-hero">
         <div
           className="gallery-hero-bg"

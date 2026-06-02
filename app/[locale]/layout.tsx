@@ -8,6 +8,7 @@ import '@/app/site.css';
 import SiteHeader from '@/components/layout/SiteHeader';
 import SiteFooter from '@/components/layout/SiteFooter';
 import SiteWhatsApp from '@/components/layout/SiteWhatsApp';
+import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -33,7 +34,8 @@ export const metadata = {
   description:
     'Séjournez dans une cueva privée à Tenerife avec piscine intérieure chauffée, jardin privé et atmosphère immersive.',
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23B85C38'/></svg>",
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 };
 
@@ -57,6 +59,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${cormorant.variable} ${inter.variable}`} style={{ scrollBehavior: 'smooth' }}>
       <body>
         <NextIntlClientProvider messages={messages}>
+          <SiteClientEffects />
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />

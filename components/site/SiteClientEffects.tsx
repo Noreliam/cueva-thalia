@@ -1,10 +1,12 @@
 'use client';
 
+import { useCustomCursor } from '@/hooks/useCustomCursor';
 import { useFadeIn } from '@/hooks/useFadeIn';
 import { useEffect } from 'react';
 
 export function SiteClientEffects() {
   useFadeIn();
+  useCustomCursor();
 
   useEffect(() => {
     document.querySelectorAll('.gallery-preview-link').forEach((link) => {

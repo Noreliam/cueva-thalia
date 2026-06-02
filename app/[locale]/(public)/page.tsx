@@ -1,5 +1,4 @@
 import { HomePageContent } from '@/components/home/HomePageContent';
-import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 import { lodgingBusinessJsonLd } from '@/lib/structured-data';
 import type { Metadata } from 'next';
 
@@ -21,7 +20,6 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(lodgingBusinessJsonLd) }}
       />
-      <SiteClientEffects />
       <HomePageContent />
     </>
   );

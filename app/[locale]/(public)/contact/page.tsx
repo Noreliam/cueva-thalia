@@ -1,8 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import ContactForm from '@/components/forms/ContactForm';
-import { SiteClientEffects } from '@/components/site/SiteClientEffects';
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Contact' });
@@ -27,8 +25,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <div className="seo-page">
-      <SiteClientEffects />
-
       <section className="gallery-hero" style={{ minHeight: '45vh' }}>
         <div
           className="gallery-hero-bg"

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { galleryCategories, galleryImagePath } from '@/lib/gallery-data';
-import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 export default function GaleriePage() {
   return (
     <div className="seo-page">
-      <SiteClientEffects />
       <section className="gallery-hero" style={{ minHeight: '50vh' }}>
         <div className="gallery-hero-bg" style={{ background: 'var(--ct-sable)' }} />
         <div className="gallery-hero-content" style={{ color: 'var(--ct-brun-chaud)' }}>

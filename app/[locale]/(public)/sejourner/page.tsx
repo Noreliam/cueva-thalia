@@ -2,8 +2,6 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import SmoobuWidget from '@/components/SmoobuWidget';
-import { SiteClientEffects } from '@/components/site/SiteClientEffects';
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Sejourner' });
@@ -22,8 +20,6 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
 
   return (
     <div className="seo-page">
-      <SiteClientEffects />
-
       <section className="gallery-hero">
         <div
           className="gallery-hero-bg"
