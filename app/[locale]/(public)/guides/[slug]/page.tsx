@@ -1,5 +1,5 @@
-import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/routing';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Link, routing } from '@/i18n/routing';
 import { getGuideBySlug, guidePages } from '@/lib/guides-data';
 import { buildPageMetadata } from '@/lib/seo';
 import { notFound } from 'next/navigation';
@@ -8,7 +8,9 @@ import type { Metadata } from 'next';
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
-  return guidePages.map((guide) => ({ slug: guide.slug }));
+  return routing.locales.flatMap((locale) =>
+    guidePages.map((guide) => ({ locale, slug: guide.slug }))
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function GuidePage({ params }: Props) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 
