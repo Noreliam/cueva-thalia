@@ -7,6 +7,7 @@ interface OrganicImageProps extends Omit<ImageProps, 'className'> {
   imageClassName?: string;
   radiusVariant?: 1 | 2 | 3;
   hoverZoom?: boolean;
+  fit?: 'cover' | 'contain';
 }
 
 export const OrganicImage: React.FC<OrganicImageProps> = ({
@@ -14,7 +15,9 @@ export const OrganicImage: React.FC<OrganicImageProps> = ({
   imageClassName,
   radiusVariant = 1,
   hoverZoom = true,
+  fit = 'cover',
   alt,
+  fill,
   ...props
 }) => {
   const radiusStyles = {
@@ -24,18 +27,21 @@ export const OrganicImage: React.FC<OrganicImageProps> = ({
   };
 
   return (
-    <div 
+    <div
       className={cn(
-        "relative overflow-hidden shadow-[var(--shadow-warm-md)]",
+        'media-frame relative overflow-hidden shadow-[var(--shadow-warm-md)]',
         radiusStyles[radiusVariant],
+        hoverZoom && 'media-frame--zoom',
         containerClassName
       )}
     >
       <Image
         alt={alt}
+        fill={fill ?? true}
         className={cn(
-          "object-cover transition-transform duration-[600ms] ease-out",
-          hoverZoom && "group-hover:scale-105 hover:scale-105",
+          'media-frame__img',
+          fit === 'contain' && 'media-frame__img--contain',
+          hoverZoom && 'transition-transform duration-[600ms] ease-out group-hover:scale-105 hover:scale-105',
           imageClassName
         )}
         {...props}

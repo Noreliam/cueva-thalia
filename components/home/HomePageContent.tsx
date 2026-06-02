@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import { fullReviews } from '@/lib/home-reviews';
 
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
@@ -25,9 +26,30 @@ export async function HomePageContent({ locale }: { locale: string }) {
   const loc = locale as 'fr' | 'es' | 'en';
 
   const pathways = [
-    { href: '/sejourner' as const, title: t('pathway1_title'), text: t('pathway1_text'), image: galleryPlaceholders[0].src },
-    { href: '/evenements' as const, title: t('pathway2_title'), text: t('pathway2_text'), image: galleryPlaceholders[2].src },
-    { href: '/workshops-retraites' as const, title: t('pathway3_title'), text: t('pathway3_text'), image: galleryPlaceholders[3].src },
+    {
+      href: '/sejourner' as const,
+      title: t('pathway1_title'),
+      text: t('pathway1_text'),
+      badge: t('pathway1_badge'),
+      cta: t('pathway1_cta'),
+      image: galleryPlaceholders[0].src,
+    },
+    {
+      href: '/evenements' as const,
+      title: t('pathway2_title'),
+      text: t('pathway2_text'),
+      badge: t('pathway2_badge'),
+      cta: t('pathway2_cta'),
+      image: galleryPlaceholders[2].src,
+    },
+    {
+      href: '/workshops-retraites' as const,
+      title: t('pathway3_title'),
+      text: t('pathway3_text'),
+      badge: t('pathway3_badge'),
+      cta: t('pathway3_cta'),
+      image: galleryPlaceholders[3].src,
+    },
   ];
 
   return (
@@ -64,7 +86,6 @@ export async function HomePageContent({ locale }: { locale: string }) {
             </a>
           </div>
         </div>
-        <span className="hero-badge">{t('hero_badge')}</span>
       </section>
 
       <section id="parcours" className="trois-facons">
@@ -78,16 +99,17 @@ export async function HomePageContent({ locale }: { locale: string }) {
                 key={pathway.href}
                 style={index ? { transitionDelay: `${index * 100}ms` } : undefined}
               >
-                <Image
+                <MediaFrame
                   src={pathway.image}
                   alt={pathway.title}
-                  className="card-image organic-shape"
-                  width={400}
-                  height={300}
-                  loading="lazy"
+                  className="card-image"
+                  aspectRatio="4 / 3"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 />
                 <h3>{pathway.title}</h3>
                 <p>{pathway.text}</p>
+                <span className="card-badge">{pathway.badge}</span>
+                <span className="card-link card-cta">{pathway.cta} →</span>
               </Link>
             ))}
           </div>
@@ -107,14 +129,11 @@ export async function HomePageContent({ locale }: { locale: string }) {
             </p>
           </div>
           <div className="experience-image-wrapper fade-in">
-            <Image
+            <MediaFrame
               src="/photos/optimized/f4544e3e-af84-4a15-aed0-df1c535af9ee.jpg"
               alt={t('story_title')}
-              className="organic-shape"
-              width={800}
-              height={700}
-              loading="lazy"
-              style={{ height: 700, width: '100%', objectFit: 'cover' }}
+              aspectRatio="3 / 4"
+              sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
         </div>
@@ -157,7 +176,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
           <div className="home-gallery-grid">
             {galleryPlaceholders.map((item) => (
               <div className="home-gallery-item fade-in" key={item.alt}>
-                <Image src={item.src} alt={item.alt} width={600} height={450} loading="lazy" className="organic-shape" />
+                <MediaFrame src={item.src} alt={item.alt} aspectRatio="4 / 3" />
               </div>
             ))}
           </div>

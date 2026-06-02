@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import { getGalleryBySlug, galleryCategories, galleryImagePath } from '@/lib/gallery-data';
 import { Lightbox } from '@/components/site/Lightbox';
 import type { Metadata } from 'next';
@@ -10,6 +10,8 @@ import type { Metadata } from 'next';
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
+
+const galleryAspectRatios = ['4 / 3', '3 / 4', '16 / 10', '1 / 1', '4 / 3', '3 / 4'] as const;
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -46,7 +48,7 @@ export default async function GalleryCategoryPage({ params }: Props) {
         />
         <div className="gallery-hero-content">
           <h1>{gallery.title}</h1>
-          <Link href="/#galerie" className="btn btn-outline">
+          <Link href="/galerie" className="btn btn-outline">
             Retour à la galerie
           </Link>
         </div>
@@ -57,13 +59,15 @@ export default async function GalleryCategoryPage({ params }: Props) {
           <div className="gallery-grid">
             {gallery.images.map((filename, index) => {
               const src = galleryImagePath(gallery.folder, filename);
-              const heights = ['300px', '450px', '280px', '350px', '400px', '320px'];
-              const h = heights[index % heights.length];
+              const aspectRatio = galleryAspectRatios[index % galleryAspectRatios.length];
               return (
                 <div className="gallery-item" data-src={src} key={filename}>
-                  <div className="gallery-item-image" style={{ ['--h' as string]: h } as React.CSSProperties}>
-                    <Image src={src} alt={gallery.title} width={600} height={450} loading="lazy" />
-                  </div>
+                  <MediaFrame
+                    src={src}
+                    alt={gallery.title}
+                    aspectRatio={aspectRatio}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  />
                 </div>
               );
             })}

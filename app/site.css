@@ -188,6 +188,56 @@
       overflow: hidden;
     }
 
+    /* Conteneurs photo — jamais d'étirement */
+    .media-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background-color: var(--ct-dune);
+    }
+
+    .media-frame__img {
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .media-frame__img--contain {
+      object-fit: contain;
+    }
+
+    .media-frame--fill {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: unset;
+      height: 100%;
+    }
+
+    .gallery-aspect-portrait {
+      aspect-ratio: 3 / 4;
+    }
+
+    .gallery-aspect-landscape {
+      aspect-ratio: 4 / 3;
+    }
+
+    .gallery-aspect-wide {
+      aspect-ratio: 16 / 10;
+    }
+
+    .gallery-aspect-square {
+      aspect-ratio: 1 / 1;
+    }
+
+    .media-frame--zoom:hover .media-frame__img,
+    .media-frame--zoom:focus-within .media-frame__img {
+      transform: scale(1.04);
+    }
+
+    .editorial-image {
+      margin-top: 40px;
+      width: 100%;
+    }
+
     .placeholder-texture {
       background: linear-gradient(135deg, var(--ct-sable), var(--ct-dune));
       display: flex;
@@ -561,18 +611,17 @@
 
     .experience-image-wrapper {
       position: relative;
-      height: 500px;
-    }
-    
-    @media (min-width: 1024px) {
-        .experience-image-wrapper { height: 700px; }
+      width: 100%;
     }
 
-    .experience-image-wrapper .organic-shape {
-      width: 100%;
-      height: 100%;
-      background: var(--ct-dune); /* Placeholder texture if image is missing */
-      /* TODO: Remplacer par une vraie image verticale */
+    .experience-image-wrapper .media-frame {
+      aspect-ratio: 4 / 5;
+    }
+
+    @media (min-width: 1024px) {
+      .experience-image-wrapper .media-frame {
+        aspect-ratio: 3 / 4;
+      }
     }
 
     /* TROIS FAÇONS DE VIVRE LA CUEVA */
@@ -628,21 +677,16 @@
 
     .card-image {
       width: 100%;
-      height: 200px;
       margin-bottom: 24px;
-      overflow: hidden;
-      border-radius: 8px;
     }
-    
-    .card-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
+
+    .card-image.media-frame,
+    .card .media-frame {
+      aspect-ratio: 4 / 3;
     }
-    
-    .card:hover .card-image img {
-        transform: scale(1.05);
+
+    .card:hover .media-frame__img {
+      transform: scale(1.04);
     }
 
     .card h3 {
@@ -690,16 +734,17 @@
 
     .piscine-image-wrapper {
       position: relative;
+      width: 100%;
     }
 
-    .piscine-image {
-      width: 100%;
-      height: 400px;
-      /* TODO: Remplacer par l'image de la piscine */
+    .piscine-image-wrapper .media-frame {
+      aspect-ratio: 16 / 10;
     }
 
     @media (min-width: 1024px) {
-      .piscine-image { height: 600px; }
+      .piscine-image-wrapper .media-frame {
+        aspect-ratio: 3 / 2;
+      }
     }
 
     .piscine-content {
@@ -966,25 +1011,22 @@
     .gallery-item-image {
       position: relative;
       width: 100%;
-      height: var(--h, 350px);
     }
 
     .gallery-preview-image__clip,
     .gallery-item-image__clip {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      inset: 0;
       border-radius: 58% 42% 52% 48% / 46% 58% 42% 54%;
       overflow: hidden;
     }
 
+    .gallery-preview-image__clip .media-frame,
     .gallery-preview-image__clip img,
+    .gallery-item-image__clip .media-frame,
     .gallery-item-image__clip img,
     .gallery-item-image > img {
-      display: block;
-      width: 100%;
-      height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
     }
 
     .gallery-item-image {
@@ -992,11 +1034,14 @@
       overflow: hidden;
     }
 
+    .gallery-preview-link.is-hovered .gallery-preview-image__clip .media-frame__img,
+    .gallery-preview-link:hover .gallery-preview-image__clip .media-frame__img,
     .gallery-preview-link.is-hovered .gallery-preview-image__clip img,
     .gallery-preview-link:hover .gallery-preview-image__clip img,
+    .gallery-item:hover .gallery-item-image .media-frame__img,
     .gallery-item:hover .gallery-item-image img,
     .gallery-item:hover .gallery-item-image__clip img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .gallery-label {
@@ -1579,11 +1624,20 @@
       color: inherit;
     }
 
-    .card-capacity {
-      font-size: 13px;
+    .card-capacity,
+    .card-badge {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--ct-roche);
       margin-top: auto;
       padding-top: 16px;
+    }
+
+    .card-cta {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 14px;
     }
 
     .promesses {
@@ -1640,10 +1694,12 @@
       }
     }
 
-    .home-gallery-item img {
+    .home-gallery-item {
       width: 100%;
-      height: 280px;
-      object-fit: cover;
+    }
+
+    .home-gallery-item .media-frame {
+      aspect-ratio: 4 / 3;
     }
 
     .cta-final {

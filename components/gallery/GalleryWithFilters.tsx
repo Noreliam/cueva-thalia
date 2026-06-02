@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { useState } from 'react';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import { galleryCategories, galleryImagePath, type GalleryUsageFilter } from '@/lib/gallery-data';
 
 type Props = {
@@ -47,15 +47,16 @@ export function GalleryWithFilters({ filters, allLabel }: Props) {
           <Link key={cat.slug} href={`/galerie/${cat.slug}`} className="gallery-preview-link">
             <div
               className="gallery-preview-image"
-              style={{ ['--h' as string]: cat.previewHeight } as React.CSSProperties}
+              style={{ aspectRatio: cat.previewAspectRatio }}
             >
               <div className="gallery-preview-image__clip">
-                <Image
+                <MediaFrame
                   src={galleryImagePath(cat.folder, cat.cover)}
                   alt={cat.title}
-                  width={600}
-                  height={450}
-                  loading="lazy"
+                  organic={false}
+                  fillParent
+                  className="gallery-preview-image__frame"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 />
               </div>
               <span className="gallery-label">{cat.title}</span>

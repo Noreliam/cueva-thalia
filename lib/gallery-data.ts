@@ -11,7 +11,7 @@ export type GalleryCategory = {
   folder: string;
   title: string;
   cover: string;
-  previewHeight: string;
+  previewAspectRatio: string;
   images: string[];
   usage: GalleryUsageFilter[];
 };
@@ -31,7 +31,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'linterieur',
     title: "L'intérieur",
     cover: 'photocouverture1.jpg',
-    previewHeight: '300px',
+    previewAspectRatio: '4 / 3',
     usage: ['sejour', 'retraites'],
     images: [
       '07323535-e635-47df-aaaa-bfbece8b1a51.jpg',
@@ -52,7 +52,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'piscine',
     title: 'La Piscine',
     cover: 'photocouverture2.jpg',
-    previewHeight: '450px',
+    previewAspectRatio: '3 / 4',
     usage: ['piscine', 'sejour'],
     images: [
       '0e63d984-5365-4a62-8c28-abcd64dd6ff2.jpg',
@@ -68,7 +68,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'chambre',
     title: 'La Chambre',
     cover: 'photocouverture6.jpg',
-    previewHeight: '280px',
+    previewAspectRatio: '4 / 3',
     usage: ['sejour', 'couchages'],
     images: [
       '00c6b3a1-cb5b-450f-8b26-2f18ee6060d9.jpg',
@@ -81,7 +81,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'jardin',
     title: 'Le Jardin',
     cover: 'photocouverture3.jpg',
-    previewHeight: '350px',
+    previewAspectRatio: '16 / 10',
     usage: ['exterieurs', 'evenements', 'retraites'],
     images: [
       '13ff2f8f-b029-4de9-bb0d-7a6e4bf3d78f.jpg',
@@ -97,7 +97,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'details',
     title: 'Les Détails',
     cover: 'photocouverture4.jpg',
-    previewHeight: '400px',
+    previewAspectRatio: '1 / 1',
     usage: ['sejour', 'evenements'],
     images: [
       '2a1e9953-da90-4daf-8484-459b906c097d.jpg',
@@ -114,7 +114,7 @@ export const galleryCategories: GalleryCategory[] = [
     folder: 'cuisine',
     title: 'La Cuisine',
     cover: 'photocouverture5.jpg',
-    previewHeight: '320px',
+    previewAspectRatio: '4 / 3',
     usage: ['sejour', 'couchages'],
     images: [
       '4ea91422-08b0-4825-bf6e-dbc4db725c49.jpg',

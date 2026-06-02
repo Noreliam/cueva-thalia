@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import EventForm from '@/components/forms/EventForm';
 import { buildPageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
@@ -79,14 +79,12 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
               ))}
             </div>
 
-            <div style={{ marginTop: 40 }}>
-              <Image
+            <div className="editorial-image">
+              <MediaFrame
                 src="/photos/optimized/galleries/jardin/photocouverture3.jpg"
                 alt="Espace événement Cueva Thalía"
-                width={800}
-                height={400}
-                className="organic-shape"
-                style={{ width: '100%', maxHeight: 420, objectFit: 'cover' }}
+                aspectRatio="16 / 10"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
           </div>

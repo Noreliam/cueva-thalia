@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import SmoobuBookingGate from '@/components/SmoobuBookingGate';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -48,13 +48,11 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
             </p>
           </div>
           <div className="experience-image-wrapper fade-in">
-            <Image
+            <MediaFrame
               src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
               alt="Piscine intérieure chauffée Cueva Thalía"
-              width={800}
-              height={600}
-              className="organic-shape"
-              style={{ height: 560, width: '100%', objectFit: 'cover' }}
+              aspectRatio="4 / 3"
+              sizes="(min-width: 1024px) 40vw, 100vw"
             />
           </div>
         </div>

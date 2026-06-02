@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import { MediaFrame } from '@/components/ui/MediaFrame';
 import WorkshopForm from '@/components/forms/WorkshopForm';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -56,14 +56,12 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
               ))}
             </div>
 
-            <div style={{ marginTop: 40 }}>
-              <Image
+            <div className="editorial-image">
+              <MediaFrame
                 src="/photos/optimized/49b90bf0-ce3f-4a3e-8164-90993ce96cd7.jpg"
                 alt="Retraite et atelier Cueva Thalía"
-                width={800}
-                height={400}
-                className="organic-shape"
-                style={{ width: '100%', maxHeight: 420, objectFit: 'cover' }}
+                aspectRatio="16 / 10"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
           </div>
