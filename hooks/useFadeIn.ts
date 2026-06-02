@@ -2,6 +2,12 @@
 
 import { useEffect } from 'react';
 
+function isInViewport(el: Element) {
+  const rect = el.getBoundingClientRect();
+  const viewHeight = window.innerHeight || document.documentElement.clientHeight;
+  return rect.top < viewHeight - 40 && rect.bottom > 40;
+}
+
 export function useFadeIn() {
   useEffect(() => {
     const fadeElements = document.querySelectorAll('.fade-in');
@@ -12,6 +18,12 @@ export function useFadeIn() {
       return;
     }
 
+    fadeElements.forEach((el) => {
+      if (isInViewport(el)) {
+        el.classList.add('visible');
+      }
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -21,10 +33,22 @@ export function useFadeIn() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
     );
 
-    fadeElements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    fadeElements.forEach((el) => {
+      if (!el.classList.contains('visible')) {
+        observer.observe(el);
+      }
+    });
+
+    const fallback = window.setTimeout(() => {
+      fadeElements.forEach((el) => el.classList.add('visible'));
+    }, 2000);
+
+    return () => {
+      window.clearTimeout(fallback);
+      observer.disconnect();
+    };
   }, []);
 }

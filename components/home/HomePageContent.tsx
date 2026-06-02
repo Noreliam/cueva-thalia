@@ -67,7 +67,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
           />
         </div>
         <div className="hero-overlay" aria-hidden="true" />
-        <div className="hero-content fade-in">
+        <div className="hero-content">
           <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
           <h1>Cueva Thalía</h1>
           <p className="hero-tagline">{t('hero_tagline')}</p>
@@ -91,14 +91,13 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section id="parcours" className="trois-facons">
         <div className="container">
-          <h2 className="fade-in section-title-center">{t('pathways_title')}</h2>
+          <h2 className="section-title-center">{t('pathways_title')}</h2>
           <div className="cards-grid">
-            {pathways.map((pathway, index) => (
+            {pathways.map((pathway) => (
               <Link
                 href={pathway.href}
-                className="card fade-in card--link"
+                className="card card--link"
                 key={pathway.href}
-                style={index ? { transitionDelay: `${index * 100}ms` } : undefined}
               >
                 <MediaFrame
                   src={pathway.image}
@@ -119,7 +118,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section className="experience">
         <div className="container experience-grid">
-          <div className="experience-text fade-in">
+          <div className="experience-text">
             <h2>{t('story_title')}</h2>
             <p className="editorial-text">{t('story_p1')}</p>
             <p className="editorial-text" style={{ marginTop: 16 }}>
@@ -129,7 +128,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               {t('story_p3')}
             </p>
           </div>
-          <div className="experience-image-wrapper fade-in">
+          <div className="experience-image-wrapper">
             <MediaFrame
               src="/photos/optimized/f4544e3e-af84-4a15-aed0-df1c535af9ee.jpg"
               alt={t('story_title')}
@@ -148,7 +147,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               { title: t('promise2_title'), text: t('promise2_text') },
               { title: t('promise3_title'), text: t('promise3_text') },
             ].map((item) => (
-              <div className="promesse-card fade-in" key={item.title}>
+              <div className="promesse-card" key={item.title}>
                 <h3>{item.title}</h3>
                 <p className="editorial-text">{item.text}</p>
               </div>
@@ -159,7 +158,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section className="piscine">
         <div className="container piscine-grid">
-          <div className="piscine-image-wrapper fade-in">
+          <div className="piscine-image-wrapper">
             <div className="organic-shape">
               <MediaFrame
                 src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
@@ -169,7 +168,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               />
             </div>
           </div>
-          <div className="piscine-content fade-in">
+          <div className="piscine-content">
             <h2>{t('pool_title')}</h2>
             <p className="editorial-text">{t('pool_text')}</p>
             <div className="piscine-features">
@@ -188,16 +187,15 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section className="avis">
         <div className="container">
-          <h2 className="fade-in section-title-center">{t('reviews_title')}</h2>
-          <p className="reviews-score fade-in">
+          <h2 className="section-title-center">{t('reviews_title')}</h2>
+          <p className="reviews-score">
             <span aria-hidden="true">★★★★★</span> {t('reviews_score')} ({t('reviews_count')})
           </p>
           <div className="avis-grid">
-            {fullReviews.map((review, index) => (
+            {fullReviews.map((review) => (
               <div
-                className="avis-card fade-in"
+                className="avis-card"
                 key={review.author}
-                style={index ? { transitionDelay: `${index * 100}ms` } : undefined}
               >
                 <div className="stars">
                   {[...Array(5)].map((_, i) => (
@@ -219,7 +217,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section className="localisation home-localisation">
         <div className="container loc-layout">
-          <div className="fade-in">
+          <div>
             <h2>{t('location_title')}</h2>
             <p className="editorial-text">{t('location_intro')}</p>
             <ul className="distances-list">
@@ -240,7 +238,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               {t('location_link')}
             </a>
           </div>
-          <div className="map-stylisee fade-in" aria-hidden="true">
+          <div className="map-stylisee" aria-hidden="true">
             <span className="map-stylisee-label">{t('location_map_label')}</span>
             <span className="marker" style={{ top: '45%', left: '52%' }} />
           </div>
@@ -249,10 +247,10 @@ export async function HomePageContent({ locale }: { locale: string }) {
 
       <section className="galerie home-galerie">
         <div className="container">
-          <h2 className="fade-in section-title-center">{t('gallery_title')}</h2>
+          <h2 className="section-title-center">{t('gallery_title')}</h2>
           <div className="home-gallery-grid">
             {galleryPlaceholders.map((item) => (
-              <div className="home-gallery-item fade-in" key={item.alt}>
+              <div className="home-gallery-item" key={item.alt}>
                 <MediaFrame src={item.src} alt={item.alt} aspectRatio="4 / 3" />
               </div>
             ))}
