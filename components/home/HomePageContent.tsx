@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import { HeroReviewRotator } from '@/components/home/HeroReviewRotator';
 import { fullReviews } from '@/lib/home-reviews';
 
 const Star = () => (
@@ -23,10 +22,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Home' });
   const loc = locale as 'fr' | 'es' | 'en';
 
-  const heroReviews = fullReviews.map((review) => ({
-    author: review.author,
-    text: review.text[loc] ?? review.text.fr,
-  }));
+  const heroEssentials = [t('hero_essential_1'), t('hero_essential_2'), t('hero_essential_3')] as const;
 
   const pathways = [
     { href: '/sejourner' as const, title: t('pathway1_title'), text: t('pathway1_text'), capacity: t('pathway1_capacity'), image: galleryPlaceholders[0].src },
@@ -43,31 +39,38 @@ export async function HomePageContent({ locale }: { locale: string }) {
   return (
     <>
       <section className="hero">
-        <div className="hero-bg" />
+        <div className="hero-bg" aria-hidden="true">
+          <Image
+            src="/photos/optimized/630dae8f-0713-4823-a054-72cb3135f3ac.jpg"
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="hero-bg-image"
+          />
+        </div>
+        <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-content fade-in">
           <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
           <h1>Cueva Thalía</h1>
           <p className="hero-subtitle">{t('hero_h1')}</p>
-          <p>{t('hero_subtitle')}</p>
-          <HeroReviewRotator reviews={heroReviews} />
+          <ul className="hero-essentials" aria-label={t('hero_essentials_label')}>
+            {heroEssentials.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="hero-lead">{t('hero_subtitle')}</p>
           <div className="hero-ctas">
             <Link href="/sejourner" className="btn btn-primary">
               {t('hero_cta_primary')}
             </Link>
-            <a href="#parcours" className="link-subtle">
+            <a href="#parcours" className="link-subtle hero-secondary-cta">
               {t('hero_cta_secondary')}
             </a>
           </div>
         </div>
         <span className="hero-badge">{t('hero_badge')}</span>
-        <div className="scroll-indicator">
-          <span className="small-caps" style={{ color: 'inherit', fontSize: 10 }}>
-            Scroll
-          </span>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </div>
       </section>
 
       <section id="parcours" className="trois-facons">
