@@ -5,6 +5,10 @@ import { applySecurityHeaders } from '@/lib/security/headers';
 
 const intlMiddleware = createMiddleware(routing);
 
+/** /fr/favicon.svg renvoyait une page HTML 404 → erreur XML dans le navigateur */
+const LOCALE_STATIC_ASSET =
+  /^\/(es|fr|en)\/(favicon\.ico|favicon\.svg|apple-touch-icon\.png|brand\/favicon-64\.png)$/;
+
 const BLOCKED_PATHS = [
   /^\/\.env/i,
   /^\/\.git/i,
@@ -19,6 +23,22 @@ export default function proxy(request: NextRequest) {
 
   if (BLOCKED_PATHS.some((pattern) => pattern.test(pathname))) {
     return new NextResponse(null, { status: 404 });
+  }
+
+  const localeAsset = pathname.match(LOCALE_STATIC_ASSET);
+  if (localeAsset) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${localeAsset[2]}`;
+    return applySecurityHeaders(NextResponse.rewrite(url));
+  }
+
+  if (
+    pathname === '/favicon.ico' ||
+    pathname === '/favicon.svg' ||
+    pathname === '/apple-touch-icon.png' ||
+    pathname === '/brand/favicon-64.png'
+  ) {
+    return applySecurityHeaders(NextResponse.next());
   }
 
   if (pathname.startsWith('/dashboard')) {

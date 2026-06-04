@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
+import { siteIcons } from '@/lib/brand/site-icons';
 import '@/app/site.css';
+
+export const metadata: Metadata = {
+  icons: siteIcons,
+};
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (

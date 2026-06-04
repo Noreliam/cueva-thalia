@@ -1,21 +1,25 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import SmoobuBookingGate from '@/components/SmoobuBookingGate';
+import { SejournerBookingSection } from '@/components/booking/SejournerBookingSection';
 import { BackHomeLink } from '@/components/layout/BackHomeLink';
 import { fullReviews } from '@/lib/home-reviews';
 
 const SEJOURNER_HERO_IMAGE = '/photos/optimized/sejourner-hero.jpg';
 
-const amenities = ['amenity_bed', 'amenity_sofa', 'amenity_kitchen', 'amenity_bath', 'amenity_garden'] as const;
+const amenities = ['amenity_bed', 'amenity_sofa', 'amenity_kitchen', 'amenity_bath', 'amenity_garden', 'amenity_wifi'] as const;
 const includedKeys = [
   'included_pool',
   'included_hydro',
   'included_garden',
   'included_bbq',
   'included_fire',
+  'included_linens',
+  'included_wifi',
+  'included_kitchen_basics',
+  'included_tv',
 ] as const;
 const optionKeys = ['opt_romantic', 'opt_surprise', 'opt_massage', 'opt_late_checkout'] as const;
-const faqKeys = ['1', '2', '3', '4'] as const;
+const faqKeys = ['1', '2', '3', '4', '5', '6', '7'] as const;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,6 +72,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
                       <li key={key}>{t(key)}</li>
                     ))}
                   </ul>
+                  <p className="editorial-text page-full-hero-amenities-note">{t('animals_note')}</p>
                 </div>
 
                 <div className="page-full-hero-block">
@@ -100,47 +105,34 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
 
       <section className="sejourner" id="reservation">
         <div className="container">
-          <div className="booking-layout fade-in">
-            <div className="tarifs-card">
-              <h3>{t('capacity_title')}</h3>
-              <p className="info-block-line">{t('capacity_standard')}</p>
-              <p className="info-block-line">{t('capacity_group')}</p>
-              <p className="info-block-line">{t('capacity_contact')}</p>
-
-              <h3 style={{ marginTop: 40 }}>{t('rates_title')}</h3>
-              <p className="info-block-line">{t('rate_line1')}</p>
-              <p className="info-block-line">{t('rate_line2')}</p>
-              <p className="info-block-line">{t('rate_line3')}</p>
-              <p className="info-block-line">{t('rate_line4')}</p>
-              <p className="small-caps info-block-meta">{t('checkin_checkout')}</p>
-              <p className="info-block-meta">{t('deposit')}</p>
-
-              <a
-                href={`https://wa.me/${whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ marginTop: 24, display: 'inline-block' }}
-              >
-                {t('cta_whatsapp_quote')}
-              </a>
-            </div>
-            <div className="smoobu-placeholder">
-              <SmoobuBookingGate
-                copy={{
-                  label: t('booking_guests'),
-                  continue: t('booking_continue'),
-                  groupTitle: t('booking_group_title'),
-                  groupText: t('booking_group_text'),
-                  whatsapp: t('booking_whatsapp'),
-                  eventsLink: t('booking_events_link'),
-                  calendarTitle: t('booking_calendar_title'),
-                  calendarDesc: t('booking_calendar_desc'),
-                  noscript: t('booking_noscript'),
-                }}
-              />
-            </div>
-          </div>
+          <SejournerBookingSection
+            copy={{
+              reservationTitle: t('reservation_title'),
+              reservationLead: t('reservation_lead'),
+              capacityTitle: t('capacity_title'),
+              capacityStandard: t('capacity_standard'),
+              capacityDetailsSummary: t('capacity_details_summary'),
+              capacityDetailsBody: t('capacity_details_body'),
+              ratesTitle: t('rates_title'),
+              rateWeekdayLabel: t('rate_weekday_label'),
+              rateWeekendLabel: t('rate_weekend_label'),
+              ratePerNight: t('rate_per_night'),
+              ratesFootnote: t('rates_footnote'),
+              checkinCheckout: t('checkin_checkout'),
+              deposit: t('deposit'),
+              ctaWhatsappQuote: t('cta_whatsapp_quote'),
+              bookingGuests: t('booking_guests'),
+              bookingContinue: t('booking_continue'),
+              bookingGroupTitle: t('booking_group_title'),
+              bookingGroupText: t('booking_group_text'),
+              bookingWhatsapp: t('booking_whatsapp'),
+              bookingEventsLink: t('booking_events_link'),
+              bookingCalendarTitle: t('booking_calendar_title'),
+              bookingCalendarDesc: t('booking_calendar_desc'),
+              bookingNoscript: t('booking_noscript'),
+              whatsappHref: `https://wa.me/${whatsapp}`,
+            }}
+          />
         </div>
       </section>
 

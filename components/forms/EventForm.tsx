@@ -90,6 +90,7 @@ export default function EventForm() {
             <option value="anniversaire">{t('event_type_birthday')}</option>
             <option value="shooting">{t('event_type_shooting')}</option>
             <option value="mariage">{t('event_type_wedding')}</option>
+            <option value="bapteme">{t('event_type_baptism')}</option>
             <option value="autre">{t('event_type_other')}</option>
           </select>
           {errors.eventType && <span className="form-error">{t('error_required')}</span>}

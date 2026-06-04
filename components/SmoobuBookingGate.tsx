@@ -24,9 +24,10 @@ export default function SmoobuBookingGate({ copy }: { copy: Copy }) {
   if (!confirmed) {
     return (
       <div className="booking-gate">
-        <h3>{copy.label}</h3>
         <div className="booking-gate-row">
-          <label htmlFor="guest-count">{copy.label}</label>
+          <label htmlFor="guest-count" className="booking-gate-label">
+            {copy.label}
+          </label>
           <select
             id="guest-count"
             value={selected}
@@ -54,7 +55,7 @@ export default function SmoobuBookingGate({ copy }: { copy: Copy }) {
     );
   }
 
-  if (selected >= 15) {
+  if (selected > 4) {
     return (
       <div className="booking-gate booking-gate--group">
         <h3>{copy.groupTitle}</h3>

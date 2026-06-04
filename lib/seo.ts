@@ -3,6 +3,20 @@ import { routing } from '@/i18n/routing';
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://cueva-thalia.com').replace(/\/$/, '');
 
+/** Image used in WhatsApp, iMessage, Facebook, etc. (must be a public absolute URL). */
+export const SITE_OG_IMAGE_PATH = '/photos/optimized/og-share.jpg';
+
+const OG_LOCALE: Record<string, string> = {
+  es: 'es_ES',
+  fr: 'fr_FR',
+  en: 'en_US',
+};
+
+function siteOgImage(alt: string) {
+  const url = `${SITE_URL}${SITE_OG_IMAGE_PATH}`;
+  return [{ url, width: 1200, height: 630, alt }];
+}
+
 export function localizedPath(path: string, locale: string): string {
   const normalized = path.startsWith('/') ? path : `/${path}`;
   if (locale === routing.defaultLocale) {
@@ -41,7 +55,10 @@ export function buildPageMetadata({
   robots?: Metadata['robots'];
 }): Metadata {
   const url = absoluteUrl(path, locale);
+  const ogAlt = title.split('|')[0]?.trim() || 'Cueva Thalía';
+  const images = siteOgImage(ogAlt);
   return {
+    metadataBase: new URL(SITE_URL),
     title,
     description,
     robots,
@@ -52,11 +69,14 @@ export function buildPageMetadata({
       url,
       type: 'website',
       siteName: 'Cueva Thalía',
+      locale: OG_LOCALE[locale] ?? OG_LOCALE.es,
+      images,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: images.map((img) => img.url),
     },
     other: {
       'geo.region': 'ES-TF',

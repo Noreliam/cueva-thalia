@@ -44,6 +44,7 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
                 </span>
               ))}
             </div>
+            <p className="info-block-line info-block-line--muted">{t('formats_more')}</p>
 
             <div className="page-full-hero-meta">
               <p className="info-block-line">{t('capacity_text')}</p>

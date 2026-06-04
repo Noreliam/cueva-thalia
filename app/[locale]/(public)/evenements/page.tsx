@@ -60,6 +60,8 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
                 </span>
               ))}
             </div>
+            <p className="info-block-line">{t('formats_note')}</p>
+            <p className="info-block-line info-block-line--muted">{t('formats_more')}</p>
 
             <div className="page-full-hero-meta">
               <h3>{t('groups_title')}</h3>

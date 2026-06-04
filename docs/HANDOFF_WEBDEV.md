@@ -20,7 +20,9 @@ Les endpoints API (ex: `/api/forms/contact/route.ts`) sont actuellement en mode 
 
 ## 4. Paiement et Acompte (Logique métier)
 - [ ] Implémenter la logique des acomptes (si nécessaire hors de Smoobu).
-- [ ] Lier Stripe si une interface personnalisée est créée.
+- [x] Stripe Checkout bon cadeau — voir `docs/STRIPE.md`
+- [ ] PDF bon cadeau + e-mail après webhook (`lib/gift-voucher/fulfill.ts`)
+- [ ] Supabase table `bons_cadeaux` + validation code à la réservation
 
 ## 5. Contenus Légaux et Textes
 - [ ] Remplir les pages `/mentions-legales`, `/conditions-generales`, `/politique-annulation` et `/politique-confidentialite`. (Rechercher `{{À COMPLÉTER avec Manon + gestor}}` dans le code).
@@ -35,4 +37,8 @@ NEXT_PUBLIC_SMOOBU_WIDGET_ID="VOTRE_ID_SMOOBU"
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN="cueva-thalia.com"
 CONTACT_EMAIL="contact@cueva-thalia.com"
 TURNSTILE_SITE_KEY="VOTRE_CLE_CLOUD_FLARE"
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
 ```
+
+Détails Stripe : `docs/STRIPE.md` et `.env.example`.

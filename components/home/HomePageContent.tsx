@@ -95,6 +95,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       <section id="parcours" className="trois-facons">
         <div className="container">
           <h2 className="section-title-center">{t('pathways_title')}</h2>
+          <p className="editorial-text section-lead-center">{t('intro_text')}</p>
           <div className="cards-grid">
             {pathways.map((pathway) => (
               <Link
@@ -174,7 +175,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
             <h2>{t('pool_title')}</h2>
             <p className="editorial-text">{t('pool_text')}</p>
             <div className="piscine-features">
-              {[t('pool_feat1'), t('pool_feat2'), t('pool_feat3'), t('pool_feat4')].map((label) => (
+              {[t('pool_feat1'), t('pool_feat2'), t('pool_feat3'), t('pool_feat4'), t('pool_feat5')].map((label) => (
                 <div className="feature-item" key={label}>
                   <svg className="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M20 6L9 17l-5-5" />

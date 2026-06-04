@@ -2,6 +2,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { siteIcons } from '@/lib/brand/site-icons';
+import { buildPageMetadata } from '@/lib/seo';
 import { Cormorant_Garamond, Inter } from 'next/font/google';
 import '@/app/globals.css';
 import '@/app/site.css';
@@ -36,20 +38,16 @@ export const viewport = {
   viewportFit: 'cover',
 };
 
-const siteIcons = {
-  icon: [
-    { url: '/favicon.ico', sizes: '32x32' },
-    { url: '/favicon.svg', type: 'image/svg+xml' },
-  ],
-  apple: '/apple-touch-icon.png',
-} as const;
-
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Home' });
   return {
-    title: t('meta_title'),
-    description: t('meta_description'),
+    ...buildPageMetadata({
+      locale,
+      path: '/',
+      title: t('meta_title'),
+      description: t('meta_description'),
+    }),
     icons: siteIcons,
   };
 }

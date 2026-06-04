@@ -906,6 +906,16 @@
       align-items: center;
     }
 
+    .section-lead-center {
+      max-width: 42rem;
+      margin: 1rem auto 0;
+      text-align: center;
+    }
+
+    .trois-facons .cards-grid {
+      margin-top: clamp(40px, 6vw, 56px);
+    }
+
     .experience-story-bg {
       position: absolute;
       inset: 0;
@@ -1252,15 +1262,126 @@
     .booking-layout {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 32px;
-      margin-top: 32px;
+      gap: clamp(24px, 4vw, 40px);
+      margin-top: 0;
       align-items: start;
     }
 
     @media (min-width: 1024px) {
       .booking-layout {
-        grid-template-columns: 1fr minmax(280px, 400px);
+        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 360px);
+        gap: clamp(32px, 4vw, 48px);
       }
+    }
+
+    .booking-panel {
+      background-color: var(--ct-blanc-casse);
+      border-radius: 8px;
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: 0 30px 70px -30px var(--ct-ombre-chaude);
+      border: 1px solid rgba(90, 56, 37, 0.08);
+      min-height: min(420px, 70vh);
+    }
+
+    .booking-panel-header {
+      margin-bottom: clamp(20px, 3vw, 28px);
+    }
+
+    .booking-panel-title {
+      font-size: clamp(26px, 3.2vw, 38px);
+      margin: 0 0 8px;
+      color: var(--ct-brun-chaud);
+    }
+
+    .booking-panel-lead {
+      margin: 0;
+      color: var(--ct-roche);
+      line-height: 1.6;
+      max-width: 38rem;
+    }
+
+    .tarifs-aside {
+      background-color: var(--ct-sable);
+      padding: clamp(20px, 3vw, 28px);
+      border-radius: 8px;
+      align-self: start;
+    }
+
+    .tarifs-aside h3 {
+      font-size: clamp(18px, 2vw, 22px);
+      margin: 0 0 12px;
+      color: var(--ct-brun-chaud);
+    }
+
+    .tarifs-aside h3 + h3,
+    .tarifs-aside-rates + h3 {
+      margin-top: 24px;
+    }
+
+    .tarifs-aside-rates {
+      margin-bottom: 8px;
+    }
+
+    .tarifs-aside-rates .tarif-row {
+      padding: 12px 0;
+    }
+
+    .tarif-row-unit {
+      font-size: 0.9em;
+      color: var(--ct-roche);
+    }
+
+    .tarifs-aside-note,
+    .tarifs-aside-line {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--ct-roche);
+    }
+
+    .tarifs-aside-details {
+      margin: 8px 0 0;
+      font-size: 0.92rem;
+      color: var(--ct-roche);
+    }
+
+    .tarifs-aside-details summary {
+      cursor: pointer;
+      font-family: var(--font-title);
+      color: var(--ct-brun-chaud);
+      list-style: none;
+    }
+
+    .tarifs-aside-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tarifs-aside-details summary::after {
+      content: ' +';
+      opacity: 0.6;
+    }
+
+    .tarifs-aside-details[open] summary::after {
+      content: ' −';
+    }
+
+    .tarifs-aside-details p {
+      margin: 10px 0 0;
+      line-height: 1.55;
+    }
+
+    .tarifs-aside-meta {
+      margin: 16px 0 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ct-roche);
+    }
+
+    .tarifs-aside-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.92rem;
     }
 
     .tarifs-card {
@@ -1281,18 +1402,16 @@
     }
 
     .smoobu-placeholder {
-      background-color: var(--ct-blanc-casse);
-      border: 1px dashed var(--ct-dune);
-      border-radius: 8px;
-      padding: 20px 24px;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
       width: 100%;
-      max-width: 400px;
+      max-width: none;
     }
 
-    @media (min-width: 1024px) {
-      .smoobu-placeholder {
-        justify-self: end;
-      }
+    .booking-panel .smoobu-widget-container {
+      min-height: 520px;
     }
 
     /* ÉVÉNEMENTS & WORKSHOPS */
@@ -2081,6 +2200,23 @@
       color: var(--ct-roche);
     }
 
+    .page-full-hero-body .info-block-line--muted {
+      margin-top: 0;
+      margin-bottom: 28px;
+      opacity: 0.82;
+      font-style: italic;
+    }
+
+    .page-full-hero-amenities-note {
+      margin-top: 1rem;
+      font-size: clamp(14px, 1vw, 15px);
+      line-height: 1.65;
+    }
+
+    .page-full-hero--sejourner .page-full-hero-amenities-note {
+      color: rgba(245, 240, 230, 0.88);
+    }
+
     .info-block-meta {
       margin-top: 16px;
       color: var(--ct-roche);
@@ -2601,32 +2737,74 @@
     }
 
     .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 40px;
       margin-bottom: 60px;
+      font-size: clamp(12px, 1.2vw, 14px);
+    }
+
+    .footer-brand {
+      order: 1;
+      max-width: 360px;
+    }
+
+    .footer-contact {
+      order: 2;
+    }
+
+    .footer-nav {
+      order: 3;
     }
 
     @media (min-width: 768px) {
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: clamp(32px, 5vw, 80px);
+        row-gap: 40px;
+        align-items: start;
+      }
 
-    @media (min-width: 1024px) {
-      .footer-grid { grid-template-columns: 2fr 1fr 1fr; gap: 80px;}
+      .footer-contact,
+      .footer-brand,
+      .footer-nav {
+        order: unset;
+      }
+
+      .footer-contact {
+        justify-self: start;
+        text-align: left;
+      }
+
+      .footer-brand {
+        justify-self: center;
+        text-align: center;
+        max-width: 340px;
+      }
+
+      .footer-nav {
+        justify-self: end;
+        text-align: right;
+      }
     }
 
     .footer-logo {
       font-family: var(--font-title);
-      font-size: 32px;
+      font-size: 28px;
       color: var(--ct-blanc-casse);
       margin-bottom: 16px;
       display: block;
     }
 
+    .footer .small-caps {
+      font-size: clamp(7px, 1vw, 9px);
+    }
+
     .footer h4 {
       color: var(--ct-blanc-casse);
       font-family: var(--font-body);
-      font-size: 14px;
+      font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 24px;
@@ -2651,8 +2829,20 @@
     .footer-bottom {
       background-color: rgba(0,0,0,0.2);
       padding: 24px 0;
-      font-size: 12px;
+      font-size: 9px;
       text-align: center;
+    }
+
+    .footer-bottom-license {
+      margin: 0;
+    }
+
+    .footer-bottom .small-caps {
+      font-size: clamp(8px, 1vw, 10px);
+    }
+
+    .footer-bottom-copy {
+      margin: 16px 0 0;
     }
 
     .footer-bottom-links {
@@ -2695,6 +2885,10 @@
 
     .locale-switcher--footer {
       margin-top: 16px;
+    }
+
+    .footer .locale-switcher__link {
+      font-size: 8px;
     }
 
     .locale-switcher--header .locale-switcher__list {
@@ -3327,31 +3521,54 @@
       text-align: left;
     }
 
-    .smoobu-placeholder .booking-gate h3 {
-      margin: 0 0 12px;
+    .booking-gate-label {
+      font-family: var(--font-title);
       font-size: clamp(18px, 2vw, 22px);
+      color: var(--ct-brun-chaud);
+      flex: 0 0 auto;
     }
 
     .booking-gate-row {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 16px;
     }
 
     @media (min-width: 640px) {
       .booking-gate-row {
         flex-direction: row;
-        align-items: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+      }
+
+      .booking-gate-select {
+        flex: 1 1 120px;
+        min-width: 120px;
+      }
+
+      .booking-gate-row .btn-primary {
+        flex: 1 1 160px;
+        min-height: 48px;
       }
     }
 
     .booking-gate-select {
-      min-height: 48px;
-      padding: 0 12px;
-      border: 1px solid var(--ct-dune);
+      min-height: 52px;
+      padding: 0 14px;
+      border: 1px solid rgba(90, 56, 37, 0.18);
+      border-radius: 4px;
       background: white;
-      flex: 1;
+      font-size: 1rem;
+      color: var(--ct-brun-chaud);
+    }
+
+    .booking-gate--widget {
+      margin-top: 8px;
+    }
+
+    .booking-gate--widget .placeholder-content h3 {
+      font-size: clamp(20px, 2.2vw, 24px);
+      margin-bottom: 8px;
     }
 
     .booking-gate-actions {

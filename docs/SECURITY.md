@@ -18,6 +18,11 @@ Mesures implémentées dans le code et actions restantes côté infrastructure.
 NEXT_PUBLIC_SITE_URL=https://cueva-thalia.com
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=<clé Cloudflare Turnstile>
 TURNSTILE_SECRET_KEY=<secret Cloudflare Turnstile>
+STRIPE_SECRET_KEY=<sk_test_ ou sk_live_ — secret Netlify uniquement>
+STRIPE_WEBHOOK_SECRET=<whsec_ — secret Netlify uniquement>
+```
+
+Voir `docs/STRIPE.md` pour le webhook et la rotation des clés.
 ```
 
 **Netlify — important :**

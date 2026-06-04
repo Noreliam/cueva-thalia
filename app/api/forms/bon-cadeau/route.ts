@@ -24,7 +24,8 @@ export async function POST(request: Request) {
         giftType: parsed.giftType,
         recipientName: parsed.recipientName,
       });
-      // TODO webdev: brancher Supabase + e-mail transactionnel + webhook dashboard
+      // Les commandes payantes passent par /api/stripe/checkout + webhook.
+      // Conserver ce endpoint pour suivi manuel / tests sans paiement si besoin.
     },
   });
 }

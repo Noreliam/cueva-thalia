@@ -12,28 +12,7 @@ export default function SiteFooter() {
   return (
     <footer className="footer">
       <div className="container footer-grid">
-        <div>
-          <span className="footer-logo">Cueva Thalía</span>
-          <p style={{ marginBottom: 16 }} className="small-caps">
-            {t('tagline')}
-          </p>
-          <p>{t('description')}</p>
-        </div>
-
-        <div>
-          <h4>{t('nav_title')}</h4>
-          <ul>
-            {siteNavItems.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>
-                  {item.labelKey === 'offrir' ? `🎁 ${nav(item.labelKey)}` : nav(item.labelKey)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
+        <div className="footer-contact">
           <h4>{t('contact_title')}</h4>
           <ul>
             <li>Calle Las Morales 70</li>
@@ -49,16 +28,32 @@ export default function SiteFooter() {
             </li>
           </ul>
         </div>
+
+        <div className="footer-brand">
+          <span className="footer-logo">Cueva Thalía</span>
+          <p style={{ marginBottom: 16 }} className="small-caps">
+            {t('tagline')}
+          </p>
+          <p>{t('description')}</p>
+        </div>
+
+        <div className="footer-nav">
+          <h4>{t('nav_title')}</h4>
+          <ul>
+            {siteNavItems.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>
+                  {item.labelKey === 'offrir' ? `🎁 ${nav(item.labelKey)}` : nav(item.labelKey)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="footer-bottom">
         <div className="container">
-          <p>
-            &copy; 2025–{new Date().getFullYear()} Cueva Thalía — San Miguel de Abona, Tenerife
-          </p>
-          <p className="small-caps" style={{ marginTop: 8 }}>
-            {t('license')}
-          </p>
+          <p className="small-caps footer-bottom-license">{t('license')}</p>
           <div className="footer-bottom-links">
             <Link href="/mentions-legales">{t('legal')}</Link>
             <span>·</span>
@@ -69,6 +64,9 @@ export default function SiteFooter() {
             <Link href="/guides/sejour-insolite-tenerife">{t('guides')}</Link>
           </div>
           <LocaleSwitcher className="locale-switcher locale-switcher--footer" />
+          <p className="footer-bottom-copy">
+            &copy; 2025–{new Date().getFullYear()} Cueva Thalía — San Miguel de Abona, Tenerife
+          </p>
         </div>
       </div>
     </footer>
