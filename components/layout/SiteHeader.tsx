@@ -53,7 +53,10 @@ export default function SiteHeader() {
                 </Link>
               </li>
               <li>
-                <LocaleSwitcher className="locale-switcher locale-switcher--header" />
+                <LocaleSwitcher
+              className="locale-switcher locale-switcher--header"
+              onLocaleChange={() => setMenuOpen(false)}
+            />
               </li>
             </ul>
           </nav>
@@ -92,7 +95,10 @@ export default function SiteHeader() {
             </Link>
           </li>
           <li style={{ marginTop: 24 }}>
-            <LocaleSwitcher className="locale-switcher locale-switcher--mobile" />
+            <LocaleSwitcher
+              className="locale-switcher locale-switcher--mobile"
+              onLocaleChange={() => setMenuOpen(false)}
+            />
           </li>
         </ul>
       </nav>

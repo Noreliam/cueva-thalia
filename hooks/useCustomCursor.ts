@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 const INTERACTIVE =
-  'a, button, .btn, input, textarea, select, label[for], [role="button"], .gallery-item, .gallery-preview-item, .gallery-preview-link, .nav-cta, .whatsapp-button, .lightbox-close, .mobile-burger';
+  'a, button, .btn, input, textarea, select, label[for], [role="button"], .gallery-item, .gallery-preview-item, .gallery-preview-link, .nav-cta, .locale-switcher__link, .whatsapp-button, .lightbox-close, .mobile-burger';
 
 export function useCustomCursor() {
   useEffect(() => {
