@@ -64,40 +64,40 @@ export default function GiftCardForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="site-form">
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="gift-name">{t('name')} (vous)</label>
+          <label htmlFor="gift-name">{t('gift_name_you')}</label>
           <input id="gift-name" {...register('name')} autoComplete="name" />
-          {errors.name && <span className="form-error">Requis</span>}
+          {errors.name && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="gift-email">{t('email')}</label>
           <input id="gift-email" type="email" {...register('email')} autoComplete="email" />
-          {errors.email && <span className="form-error">Email invalide</span>}
+          {errors.email && <span className="form-error">{t('error_email')}</span>}
         </div>
       </div>
 
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="gift-type">Format du bon</label>
+          <label htmlFor="gift-type">{t('gift_type_label')}</label>
           <select id="gift-type" {...register('giftType')} defaultValue="">
             <option value="" disabled>
-              Sélectionnez…
+              {t('select_placeholder')}
             </option>
-            <option value="1_nuit">1 Nuit (Semaine)</option>
-            <option value="1_nuit_we">1 Nuit (Week-end)</option>
-            <option value="2_nuits">2 Nuits</option>
-            <option value="custom">Montant personnalisé</option>
+            <option value="1_nuit">{t('gift_type_1_night_week')}</option>
+            <option value="1_nuit_we">{t('gift_type_1_night_weekend')}</option>
+            <option value="2_nuits">{t('gift_type_2_nights')}</option>
+            <option value="custom">{t('gift_type_custom')}</option>
           </select>
-          {errors.giftType && <span className="form-error">Requis</span>}
+          {errors.giftType && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="gift-recipient">Nom du destinataire</label>
+          <label htmlFor="gift-recipient">{t('gift_recipient_label')}</label>
           <input id="gift-recipient" {...register('recipientName')} />
-          {errors.recipientName && <span className="form-error">Requis</span>}
+          {errors.recipientName && <span className="form-error">{t('error_required')}</span>}
         </div>
       </div>
 
       <div className="form-group">
-        <label htmlFor="gift-message">Petit mot pour le destinataire (optionnel)</label>
+        <label htmlFor="gift-message">{t('gift_message_label')}</label>
         <textarea id="gift-message" rows={3} {...register('message')} />
       </div>
 

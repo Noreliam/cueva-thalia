@@ -1,42 +1,44 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Navigation' });
-  return { title: `${t('reserver')} | Cueva Thalía` };
+  const navT = await getTranslations({ locale, namespace: 'Navigation' });
+  return { title: `${navT('reserver')} | Cueva Thalía` };
 }
 
 export default async function ReserverPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Navigation' });
+  const navT = await getTranslations({ locale, namespace: 'Navigation' });
+  const t = await getTranslations({ locale, namespace: 'Reserver' });
   return (
     <div className="seo-page">
       <section className="page-intro">
         <div className="container">
-          <h1>{t('reserver')}</h1>
+          <h1>{navT('reserver')}</h1>
           <p className="editorial-text" style={{ textAlign: 'center', maxWidth: 560, margin: '0 auto 32px' }}>
-            Choisissez votre expérience à Cueva Thalía.
+            {t('intro')}
           </p>
           <div className="contact-methods">
             <Link href="/sejourner" className="contact-card contact-card--light">
-              <h3>{t('sejourner')}</h3>
-              <p>Réserver votre séjour avec piscine privatisée.</p>
-              <span className="card-link">Découvrir →</span>
+              <h3>{navT('sejourner')}</h3>
+              <p>{t('sejourner_desc')}</p>
+              <span className="card-link">{t('discover')}</span>
             </Link>
-            <Link href="/evenements-prives" className="contact-card contact-card--light">
-              <h3>{t('evenements')}</h3>
-              <p>Demander un devis pour un événement intime.</p>
-              <span className="card-link">Découvrir →</span>
+            <Link href="/evenements" className="contact-card contact-card--light">
+              <h3>{navT('evenements')}</h3>
+              <p>{t('evenements_desc')}</p>
+              <span className="card-link">{t('discover')}</span>
             </Link>
             <Link href="/workshops-retraites" className="contact-card contact-card--light">
-              <h3>{t('workshops')}</h3>
-              <p>Organiser une retraite ou un atelier bien-être.</p>
-              <span className="card-link">Découvrir →</span>
+              <h3>{navT('workshops')}</h3>
+              <p>{t('workshops_desc')}</p>
+              <span className="card-link">{t('discover')}</span>
             </Link>
           </div>
           <p style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/" className="btn btn-secondary">← Retour à l&apos;accueil</Link>
+            <BackHomeLink locale={locale} />
           </p>
         </div>
       </section>

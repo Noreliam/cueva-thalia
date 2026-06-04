@@ -35,6 +35,7 @@ export default async function GuidePage({ params }: Props) {
 
   const loc = locale as 'es' | 'fr' | 'en';
   const t = await getTranslations({ locale, namespace: 'Guides' });
+  const commonT = await getTranslations({ locale, namespace: 'Common' });
   const canonical = `https://cueva-thalia.com${locale === 'es' ? '' : `/${locale}`}/guides/${slug}`;
 
   const articleJsonLd = {
@@ -52,7 +53,7 @@ export default async function GuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="seo-page-content">
         <h1>{guide.h1[loc]}</h1>
-        <p className="editorial-text">[À RÉDIGER — contenu placeholder en attente de rédaction par Manon]</p>
+        <p className="editorial-text">{commonT('guide_placeholder')}</p>
         <p className="editorial-text" style={{ marginTop: 24 }}>
           {guide.descriptions[loc]}
         </p>

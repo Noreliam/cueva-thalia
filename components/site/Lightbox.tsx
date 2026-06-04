@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export function Lightbox() {
+  const t = useTranslations('Common');
   const [src, setSrc] = useState<string | null>(null);
   const [caption, setCaption] = useState<string | null>(null);
 
@@ -58,7 +60,7 @@ export function Lightbox() {
       }}
     >
       <div className="lightbox-content">
-        <button className="lightbox-close" aria-label="Fermer la galerie" onClick={close}>
+        <button className="lightbox-close" aria-label={t('close_lightbox')} onClick={close}>
           &times;
         </button>
         <Image src={src} alt={caption ?? ''} width={1200} height={800} style={{ width: '100%', height: 'auto' }} />

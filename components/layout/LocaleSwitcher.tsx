@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
 
@@ -19,6 +19,7 @@ export default function LocaleSwitcher({ className, onLocaleChange }: LocaleSwit
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations('Common');
 
   const switchLocale = (nextLocale: (typeof routing.locales)[number]) => {
     if (nextLocale === locale) return;
@@ -27,7 +28,7 @@ export default function LocaleSwitcher({ className, onLocaleChange }: LocaleSwit
   };
 
   return (
-    <nav className={className ?? 'locale-switcher'} aria-label="Choisir la langue">
+    <nav className={className ?? 'locale-switcher'} aria-label={t('choose_language')}>
       <ul className="locale-switcher__list">
         {routing.locales.map((loc) => (
           <li key={loc}>

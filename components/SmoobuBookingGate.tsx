@@ -54,7 +54,7 @@ export default function SmoobuBookingGate({ copy }: { copy: Copy }) {
     );
   }
 
-  if (selected >= 5) {
+  if (selected >= 15) {
     return (
       <div className="booking-gate booking-gate--group">
         <h3>{copy.groupTitle}</h3>

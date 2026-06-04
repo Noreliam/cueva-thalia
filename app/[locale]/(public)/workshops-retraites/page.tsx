@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import WorkshopForm from '@/components/forms/WorkshopForm';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 
 const WORKSHOPS_HERO_IMAGE = '/photos/optimized/workshops-retraites-hero.jpg';
 
@@ -73,12 +74,10 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
       <section className="page-bottom-cta">
         <div className="container">
           <Link href="/galerie/atelier" className="card-link">
-            Voir l&apos;intérieur →
+            {t('gallery_link_atelier')}
           </Link>
           <p style={{ marginTop: 24 }}>
-            <Link href="/" className="btn btn-secondary">
-              ← Retour à l&apos;accueil
-            </Link>
+            <BackHomeLink locale={locale} />
           </p>
         </div>
       </section>

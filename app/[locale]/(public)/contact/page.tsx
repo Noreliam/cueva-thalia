@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import ContactForm from '@/components/forms/ContactForm';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 import '@/components/contact/contact.css';
 
 const CONTACT_HERO_IMAGE = '/photos/optimized/contact-hero.jpg';
@@ -14,17 +15,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const distances = [
-  ['Aéroport Tenerife Sud', '15-20 min'],
-  ['El Médano', '15 min'],
-  ['Los Cristianos', '20 min'],
-  ['Playa de Las Américas', '20-25 min'],
-  ['Teide', '45 min - 1h'],
-];
+const contactDistanceKeys = ['1', '2', '4', '6'] as const;
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Contact' });
+  const homeT = await getTranslations({ locale, namespace: 'Home' });
+  const distances = [
+    ...contactDistanceKeys.map((n) => [homeT(`loc_${n}_place`), homeT(`loc_${n}_time`)] as const),
+    [t('loc_teide_place'), t('loc_teide_time')] as const,
+  ];
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
 
   return (
@@ -100,9 +100,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             <ContactForm />
           </div>
           <p className="contact-back">
-            <Link href="/" className="btn btn-secondary">
-              ← Retour à l&apos;accueil
-            </Link>
+            <BackHomeLink locale={locale} />
           </p>
         </div>
       </section>

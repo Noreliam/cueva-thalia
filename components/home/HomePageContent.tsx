@@ -17,17 +17,20 @@ const Star = () => (
   </svg>
 );
 
-const homeGalleryImages = [
-  { src: '/photos/optimized/home-galerie/01-sejour.jpg', alt: 'Séjour' },
-  { src: '/photos/optimized/home-galerie/02-piscine.jpg', alt: 'Piscine' },
-  { src: '/photos/optimized/home-galerie/03-jardin.jpg', alt: 'Extérieurs' },
-  { src: '/photos/optimized/home-galerie/04-details.jpg', alt: 'Ambiance' },
-  { src: '/photos/optimized/home-galerie/05-cuisine.jpg', alt: 'Cuisine' },
-  { src: '/photos/optimized/home-galerie/06-chambre.jpg', alt: 'Couchages' },
+const homeGalleryImageKeys = [
+  { src: '/photos/optimized/home-galerie/01-sejour.jpg', altKey: 'gallery_alt_sejour' },
+  { src: '/photos/optimized/home-galerie/02-piscine.jpg', altKey: 'gallery_alt_piscine' },
+  { src: '/photos/optimized/home-galerie/03-jardin.jpg', altKey: 'gallery_alt_jardin' },
+  { src: '/photos/optimized/home-galerie/04-details.jpg', altKey: 'gallery_alt_details' },
+  { src: '/photos/optimized/home-galerie/05-cuisine.jpg', altKey: 'gallery_alt_cuisine' },
+  { src: '/photos/optimized/home-galerie/06-chambre.jpg', altKey: 'gallery_alt_chambre' },
 ] as const;
+
+const AIRBNB_REVIEWS_URL = process.env.NEXT_PUBLIC_AIRBNB_REVIEWS_URL ?? '#';
 
 export async function HomePageContent({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Home' });
+  const c = await getTranslations({ locale, namespace: 'Common' });
   const loc = locale as 'fr' | 'es' | 'en';
 
   const pathways = [
@@ -68,7 +71,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
         </div>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
-          <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
+          <span className="small-caps hero-label">{c('location_badge')}</span>
           <h1>Cueva Thalía</h1>
           <p className="hero-tagline">{t('hero_tagline')}</p>
           <p className="hero-lead">{t('hero_lead')}</p>
@@ -207,7 +210,12 @@ export async function HomePageContent({ locale }: { locale: string }) {
             ))}
           </div>
           <p style={{ textAlign: 'center', marginTop: 40 }}>
-            <a href="#" className="card-link">
+            <a
+              href={AIRBNB_REVIEWS_URL}
+              className="card-link"
+              target={AIRBNB_REVIEWS_URL.startsWith('http') ? '_blank' : undefined}
+              rel={AIRBNB_REVIEWS_URL.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
               {t('reviews_link')}
             </a>
           </p>
@@ -254,11 +262,11 @@ export async function HomePageContent({ locale }: { locale: string }) {
         <div className="container">
           <h2 className="section-title-center">{t('gallery_title')}</h2>
           <div className="home-gallery-grid">
-            {homeGalleryImages.map((item) => (
+            {homeGalleryImageKeys.map((item) => (
               <div className="home-gallery-item" key={item.src}>
                 <MediaFrame
                   src={item.src}
-                  alt={item.alt}
+                  alt={t(item.altKey)}
                   aspectRatio="4 / 3"
                 />
               </div>

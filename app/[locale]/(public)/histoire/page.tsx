@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/routing';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -21,7 +21,7 @@ export default async function HistoirePage({ params }: { params: Promise<{ local
           « {t('content_p3')} »
         </p>
         <p style={{ textAlign: 'center', marginTop: 48 }}>
-          <Link href="/" className="btn btn-secondary">← Retour à l&apos;accueil</Link>
+          <BackHomeLink locale={locale} />
         </p>
       </div>
     </div>

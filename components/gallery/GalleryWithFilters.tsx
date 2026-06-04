@@ -3,18 +3,28 @@
 import { Link } from '@/i18n/routing';
 import { useState } from 'react';
 import { MediaFrame } from '@/components/ui/MediaFrame';
-import { galleryCategories, galleryImagePath, type GalleryUsageFilter } from '@/lib/gallery-data';
+import { galleryImagePath, type GalleryUsageFilter } from '@/lib/gallery-data';
+
+export type GalleryPreviewCategory = {
+  slug: string;
+  folder: string;
+  cover: string;
+  previewAspectRatio: string;
+  usage: GalleryUsageFilter[];
+  title: string;
+};
 
 type Props = {
   filters: { id: GalleryUsageFilter; label: string }[];
   allLabel: string;
+  categories: GalleryPreviewCategory[];
 };
 
-export function GalleryWithFilters({ filters, allLabel }: Props) {
+export function GalleryWithFilters({ filters, allLabel, categories }: Props) {
   const [active, setActive] = useState<GalleryUsageFilter | 'all'>('all');
 
   const visible =
-    active === 'all' ? galleryCategories : galleryCategories.filter((cat) => cat.usage.includes(active));
+    active === 'all' ? categories : categories.filter((cat) => cat.usage.includes(active));
 
   return (
     <>

@@ -15,6 +15,7 @@ export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('Navigation');
+  const c = useTranslations('Common');
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -57,12 +58,12 @@ export default function SiteHeader() {
   return (
     <>
       <a className="skip-link" href="#main">
-        Aller au contenu principal
+        {c('skip_to_main')}
       </a>
 
       <header className={headerClass} id="header">
         <div className="nav-container">
-          <Link href="/" className="logo-container" aria-label="Accueil Cueva Thalía">
+          <Link href="/" className="logo-container" aria-label={c('home_aria')}>
             <span className="logo-text">Cueva Thalía</span>
           </Link>
 
@@ -96,7 +97,7 @@ export default function SiteHeader() {
             className="mobile-burger"
             id="burger-btn"
             aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={menuOpen ? c('menu_close') : c('menu_open')}
             onClick={() => setMenuOpen((open) => !open)}
           >
             <span />

@@ -4,7 +4,7 @@
   },
   "Home": {
     "meta_title": "Cueva Thalía | Private troglodyte home with indoor pool — Tenerife",
-    "meta_description": "Private troglodyte home in Tenerife with heated indoor pool. Stay, event or retreat. Direct booking up to 4 guests. San Miguel de Abona.",
+    "meta_description": "Private troglodyte home in Tenerife with heated indoor pool. Stay, event or retreat. Direct booking up to 14 guests. San Miguel de Abona.",
     "hero_tagline": "The experience of a timeless place",
     "hero_lead": "A troglodyte home carved into the rock. A pause in the south of Tenerife.",
     "hero_cta_primary": "Check availability",
@@ -76,7 +76,25 @@
     "cookie_customize": "Customize",
     "cookie_save": "Save",
     "cookie_analytics": "Audience measurement (Google Analytics)",
-    "cookie_privacy": "Privacy policy"
+    "cookie_privacy": "Privacy policy",
+    "gallery_alt_sejour": "Stay",
+    "gallery_alt_piscine": "Pool",
+    "gallery_alt_jardin": "Outdoors",
+    "gallery_alt_details": "Atmosphere",
+    "gallery_alt_cuisine": "Kitchen",
+    "gallery_alt_chambre": "Bedding"
+  },
+  "Common": {
+    "skip_to_main": "Skip to main content",
+    "menu_open": "Open menu",
+    "menu_close": "Close menu",
+    "home_aria": "Cueva Thalía home",
+    "back_home": "← Back to home",
+    "choose_language": "Choose language",
+    "location_badge": "Tenerife · San Miguel de Abona",
+    "close_lightbox": "Close gallery",
+    "legal_placeholder": "{{To be completed with Manon + gestor}}",
+    "guide_placeholder": "[To be written — content pending from Manon]"
   },
   "Navigation": {
     "home": "Home",
@@ -95,9 +113,9 @@
     "hero_title": "Stay in the cave",
     "hero_subtitle": "Sleep inside the rock. Wake up to warm water. Slow down, in complete privacy.",
     "cta_check_availability": "Check availability",
-    "capacity_standard": "Standard setup: up to 4 guests.",
+    "capacity_standard": "Standard setup: up to 14 guests with direct booking.",
     "capacity_group": "Group setup: up to 16 guests with additional mattresses.",
-    "capacity_contact": "Any request for more than 4 guests is handled via WhatsApp or email.",
+    "capacity_contact": "Any request for more than 14 guests is handled via WhatsApp or email.",
     "rate_line1": "€200 / night Sunday to Thursday.",
     "rate_line2": "€250 / night Friday, Saturday, Sunday and public holidays.",
     "rate_line3": "Progressive rates available for multiple nights.",
@@ -107,7 +125,6 @@
     "included_pool": "Private heated indoor pool",
     "included_hydro": "Hydromassage",
     "included_garden": "Private garden",
-    "included_view": "View",
     "included_bbq": "BBQ",
     "included_fire": "Fire pit",
     "capacity_title": "Capacity",
@@ -116,7 +133,7 @@
     "checkin_checkout": "Check-in: 16:00 · Check-out: 13:00",
     "options_title": "Additional options",
     "opt_romantic": "Romantic decoration",
-    "opt_surprise": "Birthday surprise",
+    "opt_surprise": "Champagne, flowers or pastry on arrival",
     "opt_massage": "Massage & wellness",
     "opt_late_checkout": "Late check-out / early check-in (subject to availability)",
     "faq_title": "Frequently Asked Questions",
@@ -132,7 +149,7 @@
     "faq_q1": "Is the place fully private?",
     "faq_a1": "Yes. The cave, heated pool, garden and outdoor areas are exclusively yours.",
     "faq_q2": "How many guests can stay?",
-    "faq_a2": "Up to 4: one queen bedroom and a double sofa bed.",
+    "faq_a2": "Up to 14 guests with direct booking. Queen bedroom, double sofa bed and additional bedding depending on your setup.",
     "faq_q3": "What is the pool temperature?",
     "faq_a3": "Between 34 and 40°C depending on season. Indoor pool, usable year-round.",
     "faq_q4": "Why book direct?",
@@ -141,8 +158,8 @@
     "gallery_cta": "Explore the spaces in photos",
     "booking_guests": "Number of guests",
     "booking_continue": "Continue",
-    "booking_group_title": "Groups of 5 to 16 people",
-    "booking_group_text": "For groups of 5 to 16 people, contact us directly — the cave can host up to 16 people with additional mattresses.",
+    "booking_group_title": "Groups of 15 to 16 people",
+    "booking_group_text": "For groups of 15 to 16 people, contact us directly — the cave can host up to 16 people with additional mattresses.",
     "booking_whatsapp": "Contact us on WhatsApp",
     "booking_events_link": "View events →",
     "booking_calendar_title": "Availability calendar",
@@ -166,14 +183,15 @@
     "form_title": "Imagine your event",
     "form_disclaimer": "Custom quote within 48h",
     "cta_whatsapp": "Contact via WhatsApp",
-    "seo_intro": "Cueva Thalía hosts intimate events on request. Each project is reviewed to preserve the calm of the place.",
+    "seo_intro": "Hire a private troglodyte home with a heated indoor pool for your event in Tenerife.",
     "process_title": "How it works",
     "process_1_title": "1. You reach out",
     "process_1_desc": "Describe your project. Personal reply within 48h.",
     "process_2_title": "2. We refine together",
     "process_2_desc": "We validate use, timing and needs.",
     "process_3_title": "3. You live the moment",
-    "process_3_desc": "The place is prepared for your celebration."
+    "process_3_desc": "The place is prepared for your celebration.",
+    "gallery_link_jardin": "See the garden →"
   },
   "Workshops": {
     "title": "Retreats & Workshops",
@@ -194,7 +212,15 @@
     "process_2_title": "2. Validation",
     "process_2_desc": "We adapt the format to the spaces.",
     "process_3_title": "3. Welcome",
-    "process_3_desc": "A private, sensory place for your participants."
+    "process_3_desc": "A private, sensory place for your participants.",
+    "gallery_link_atelier": "See the studio →"
+  },
+  "Reserver": {
+    "intro": "Choose your Cueva Thalía experience.",
+    "sejourner_desc": "Book your stay with a private pool.",
+    "evenements_desc": "Request a quote for an intimate event.",
+    "workshops_desc": "Organise a retreat or wellness workshop.",
+    "discover": "Discover →"
   },
   "Galerie": {
     "title": "Gallery",
@@ -207,7 +233,17 @@
     "filter_jardin": "Garden",
     "filter_chambre": "Bedroom",
     "filter_details": "Details",
-    "chambre_group_bedding": "For group stays, extra bedding is available in the cave: twelve floor mattresses, cosy nests beneath the rock vault."
+    "chambre_group_bedding": "For group stays, extra bedding is available in the cave: twelve floor mattresses, cosy nests beneath the rock vault.",
+    "back_to_gallery": "Back to gallery",
+    "meta_title_suffix": "Gallery · Cueva Thalía",
+    "meta_description": "Discover {category} at Cueva Thalía, a private troglodyte home in Tenerife.",
+    "category_sejour": "The Stay",
+    "category_cuisine": "The Kitchen",
+    "category_atelier": "The Studio",
+    "category_piscine": "The Pool",
+    "category_jardin": "The Garden",
+    "category_chambre": "The Bedroom",
+    "category_details": "The Details"
   },
   "Contact": {
     "title": "Contact",
@@ -218,7 +254,9 @@
     "response_title": "Response times",
     "response_desc": "WhatsApp: quick reply · Email: within 48h · Stay: real-time calendar on the Stay page.",
     "location_title": "Access & surroundings",
-    "booking_cta": "Check availability (stay)"
+    "booking_cta": "Check availability (stay)",
+    "loc_teide_place": "Mount Teide",
+    "loc_teide_time": "45 min - 1 hr"
   },
   "Histoire": {
     "title": "Our History",
@@ -236,12 +274,13 @@
     "validity": "Valid for a stay, a private event or a retreat.",
     "form_title": "Order a gift voucher",
     "close_modal": "Close form",
-    "back_home": "Back to home"
+    "back_home": "← Back to home"
   },
   "Forms": {
     "name": "Name",
     "email": "Email address",
     "phone": "Phone number",
+    "phone_optional": "Phone (optional)",
     "date": "Desired date",
     "guests": "Number of guests",
     "message": "Message",
@@ -249,7 +288,30 @@
     "submit": "Submit",
     "sending": "Sending...",
     "success": "Thank you, we will reply within 48 hours.",
-    "error": "An error occurred. Please try again."
+    "error": "An error occurred. Please try again.",
+    "error_required": "Required",
+    "error_email": "Invalid email address",
+    "error_message_short": "Message too short",
+    "select_placeholder": "Select…",
+    "date_placeholder_event": "e.g. 15 August 2026",
+    "date_placeholder_workshop": "e.g. June 2026",
+    "event_type_birthday": "Birthday / Celebration",
+    "event_type_shooting": "Photo shoot / Private hire",
+    "event_type_wedding": "Small wedding",
+    "event_type_other": "Other",
+    "workshop_type_label": "Retreat type",
+    "workshop_type_yoga": "Yoga / Meditation",
+    "workshop_type_breathwork": "Breathwork / Sound therapy",
+    "workshop_type_coaching": "Coaching / Creative",
+    "workshop_type_other": "Other",
+    "gift_name_you": "Your name",
+    "gift_type_label": "Voucher format",
+    "gift_type_1_night_week": "1 night (weekday)",
+    "gift_type_1_night_weekend": "1 night (weekend)",
+    "gift_type_2_nights": "2 nights",
+    "gift_type_custom": "Custom amount",
+    "gift_recipient_label": "Recipient's name",
+    "gift_message_label": "Message for the recipient (optional)"
   },
   "WhatsAppFloat": {
     "label": "Message on WhatsApp",
@@ -267,6 +329,13 @@
     "privacy": "Privacy Policy",
     "cancel": "Cancellation Policy",
     "rights": "All rights reserved."
+  },
+  "Articles": {
+    "journal": "Journal",
+    "placeholder_slug": "Article for slug: {slug}",
+    "placeholder_todo": "Content coming soon (CMS or Markdown files).",
+    "intro_heading": "Introduction",
+    "intro_body": "The cave is an exceptional place in Tenerife, ideal for recharging. The rest of the content will be defined later."
   },
   "Guides": {
     "link_sejourner": "Stay →",

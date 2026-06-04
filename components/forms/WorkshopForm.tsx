@@ -67,12 +67,12 @@ export default function WorkshopForm() {
         <div className="form-group">
           <label htmlFor="workshop-name">{t('name')}</label>
           <input id="workshop-name" {...register('name')} autoComplete="name" />
-          {errors.name && <span className="form-error">Requis</span>}
+          {errors.name && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="workshop-email">{t('email')}</label>
           <input id="workshop-email" type="email" {...register('email')} autoComplete="email" />
-          {errors.email && <span className="form-error">Email invalide</span>}
+          {errors.email && <span className="form-error">{t('error_email')}</span>}
         </div>
       </div>
 
@@ -82,37 +82,41 @@ export default function WorkshopForm() {
           <input id="workshop-phone" type="tel" {...register('phone')} autoComplete="tel" />
         </div>
         <div className="form-group">
-          <label htmlFor="workshop-type">Type de retraite</label>
+          <label htmlFor="workshop-type">{t('workshop_type_label')}</label>
           <select id="workshop-type" {...register('workshopType')} defaultValue="">
             <option value="" disabled>
-              Sélectionnez…
+              {t('select_placeholder')}
             </option>
-            <option value="yoga">Yoga / Méditation</option>
-            <option value="breathwork">Breathwork / Sonothérapie</option>
-            <option value="coaching">Coaching / Créatif</option>
-            <option value="autre">Autre</option>
+            <option value="yoga">{t('workshop_type_yoga')}</option>
+            <option value="breathwork">{t('workshop_type_breathwork')}</option>
+            <option value="coaching">{t('workshop_type_coaching')}</option>
+            <option value="autre">{t('workshop_type_other')}</option>
           </select>
-          {errors.workshopType && <span className="form-error">Requis</span>}
+          {errors.workshopType && <span className="form-error">{t('error_required')}</span>}
         </div>
       </div>
 
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="workshop-date">{t('date')}</label>
-          <input id="workshop-date" {...register('date')} placeholder="Ex. juin 2026" />
-          {errors.date && <span className="form-error">Requis</span>}
+          <input
+            id="workshop-date"
+            {...register('date')}
+            placeholder={t('date_placeholder_workshop')}
+          />
+          {errors.date && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="workshop-guests">{t('guests')}</label>
           <input id="workshop-guests" type="number" min={1} {...register('guests')} />
-          {errors.guests && <span className="form-error">Requis</span>}
+          {errors.guests && <span className="form-error">{t('error_required')}</span>}
         </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="workshop-message">{t('message')}</label>
         <textarea id="workshop-message" rows={4} {...register('message')} />
-        {errors.message && <span className="form-error">Message trop court</span>}
+        {errors.message && <span className="form-error">{t('error_message_short')}</span>}
       </div>
 
       <FormSecurityFields onTokenChange={setTurnstileToken} honeypotProps={{ value: hp, onChange: (e) => setHp(e.target.value) }} />

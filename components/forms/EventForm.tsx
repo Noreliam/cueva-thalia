@@ -67,12 +67,12 @@ export default function EventForm() {
         <div className="form-group">
           <label htmlFor="event-name">{t('name')}</label>
           <input id="event-name" {...register('name')} autoComplete="name" />
-          {errors.name && <span className="form-error">Requis</span>}
+          {errors.name && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="event-email">{t('email')}</label>
           <input id="event-email" type="email" {...register('email')} autoComplete="email" />
-          {errors.email && <span className="form-error">Email invalide</span>}
+          {errors.email && <span className="form-error">{t('error_email')}</span>}
         </div>
       </div>
 
@@ -85,34 +85,38 @@ export default function EventForm() {
           <label htmlFor="event-type">{t('event_type')}</label>
           <select id="event-type" {...register('eventType')} defaultValue="">
             <option value="" disabled>
-              Sélectionnez…
+              {t('select_placeholder')}
             </option>
-            <option value="anniversaire">Anniversaire / Célébration</option>
-            <option value="shooting">Shooting / Privatisation</option>
-            <option value="mariage">Petit Mariage</option>
-            <option value="autre">Autre</option>
+            <option value="anniversaire">{t('event_type_birthday')}</option>
+            <option value="shooting">{t('event_type_shooting')}</option>
+            <option value="mariage">{t('event_type_wedding')}</option>
+            <option value="autre">{t('event_type_other')}</option>
           </select>
-          {errors.eventType && <span className="form-error">Requis</span>}
+          {errors.eventType && <span className="form-error">{t('error_required')}</span>}
         </div>
       </div>
 
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="event-date">{t('date')}</label>
-          <input id="event-date" {...register('date')} placeholder="Ex. 15 août 2026" />
-          {errors.date && <span className="form-error">Requis</span>}
+          <input
+            id="event-date"
+            {...register('date')}
+            placeholder={t('date_placeholder_event')}
+          />
+          {errors.date && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="event-guests">{t('guests')}</label>
           <input id="event-guests" type="number" min={1} {...register('guests')} />
-          {errors.guests && <span className="form-error">Requis</span>}
+          {errors.guests && <span className="form-error">{t('error_required')}</span>}
         </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="event-message">{t('message')}</label>
         <textarea id="event-message" rows={4} {...register('message')} />
-        {errors.message && <span className="form-error">Message trop court</span>}
+        {errors.message && <span className="form-error">{t('error_message_short')}</span>}
       </div>
 
       <FormSecurityFields onTokenChange={setTurnstileToken} honeypotProps={{ value: hp, onChange: (e) => setHp(e.target.value) }} />

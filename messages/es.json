@@ -4,7 +4,7 @@
   },
   "Home": {
     "meta_title": "Cueva Thalía | Casa troglodita privada con piscina interior — Tenerife",
-    "meta_description": "Casa troglodita privada en Tenerife con piscina interior climatizada. Estancia, evento o retiro. Reserva directa hasta 4 personas. San Miguel de Abona.",
+    "meta_description": "Casa troglodita privada en Tenerife con piscina interior climatizada. Estancia, evento o retiro. Reserva directa hasta 14 personas. San Miguel de Abona.",
     "hero_tagline": "La experiencia de un lugar atemporal",
     "hero_lead": "Una casa troglodita labrada en la roca. Una pausa en el sur de Tenerife.",
     "hero_cta_primary": "Ver disponibilidad",
@@ -33,7 +33,7 @@
     "promise3_title": "La ubicación ideal",
     "promise3_text": "Entre el océano, el Teide y los pueblos más bonitos del sur de Tenerife, todo está cerca. Excepto el estrés.",
     "pool_title": "Agua caliente, todo el año",
-    "pool_text": "Un oasis excavada en la roca. El agua mantiene su calor todo el año. Aquí, la piscina interior es 100% privada y se mantiene climatizada entre 34°C y 40°C.",
+    "pool_text": "Un oasis excavado en la roca. El agua mantiene su calor todo el año. Aquí, la piscina interior es 100% privada y se mantiene climatizada entre 34°C y 40°C.",
     "pool_feat1": "Piscina 100% privada",
     "pool_feat2": "Hidromasaje",
     "pool_feat3": "Agua climatizada (34-40°C)",
@@ -70,13 +70,31 @@
     "cta_button": "Ver disponibilidad",
     "cta_whatsapp": "Escribir por WhatsApp",
     "cookie_title": "Cookies y privacidad",
-    "cookie_text": "Usamos cookies para medir la audiencia y mejorar tu experiencia. Tú eliges qué aceptas.",
+    "cookie_text": "Usamos cookies para medir la audiencia y mejorar su experiencia. Usted elige qué acepta.",
     "cookie_accept": "Aceptar todo",
     "cookie_reject": "Rechazar todo",
     "cookie_customize": "Personalizar",
     "cookie_save": "Guardar",
     "cookie_analytics": "Medición de audiencia (Google Analytics)",
-    "cookie_privacy": "Política de privacidad"
+    "cookie_privacy": "Política de privacidad",
+    "gallery_alt_sejour": "Estancia",
+    "gallery_alt_piscine": "Piscina",
+    "gallery_alt_jardin": "Exteriores",
+    "gallery_alt_details": "Ambiente",
+    "gallery_alt_cuisine": "Cocina",
+    "gallery_alt_chambre": "Colchonetas"
+  },
+  "Common": {
+    "skip_to_main": "Ir al contenido principal",
+    "menu_open": "Abrir menú",
+    "menu_close": "Cerrar menú",
+    "home_aria": "Inicio Cueva Thalía",
+    "back_home": "← Volver al inicio",
+    "choose_language": "Elegir idioma",
+    "location_badge": "Tenerife · San Miguel de Abona",
+    "close_lightbox": "Cerrar galería",
+    "legal_placeholder": "{{Por completar con Manon + gestor}}",
+    "guide_placeholder": "[Por redactar — contenido pendiente de Manon]"
   },
   "Navigation": {
     "home": "Inicio",
@@ -95,9 +113,9 @@
     "hero_title": "Alojarse en la cueva",
     "hero_subtitle": "Dormir en el corazón de la roca. Despertar frente al agua caliente. Ralentizar, en total intimidad.",
     "cta_check_availability": "Ver disponibilidad",
-    "capacity_standard": "Configuración estándar: hasta 4 personas.",
+    "capacity_standard": "Configuración estándar: hasta 14 personas con reserva directa.",
     "capacity_group": "Configuración grupo: hasta 16 personas con colchonetas adicionales.",
-    "capacity_contact": "Toda solicitud de más de 4 personas se hace por WhatsApp o email.",
+    "capacity_contact": "Toda solicitud de más de 14 personas se hace por WhatsApp o email.",
     "rate_line1": "200 € / noche de domingo a jueves.",
     "rate_line2": "250 € / noche viernes, sábado, domingo y festivos.",
     "rate_line3": "Tarifas progresivas posibles para varias noches.",
@@ -107,7 +125,6 @@
     "included_pool": "Piscina interior climatizada privada",
     "included_hydro": "Hidromasaje",
     "included_garden": "Jardín privado",
-    "included_view": "Vista",
     "included_bbq": "Barbacoa",
     "included_fire": "Zona de fuego",
     "capacity_title": "Capacidad",
@@ -132,7 +149,7 @@
     "faq_q1": "¿El lugar es totalmente privado?",
     "faq_a1": "Sí. La cueva, la piscina, el jardín y los exteriores son exclusivos para su reserva.",
     "faq_q2": "¿Cuántas personas pueden alojarse?",
-    "faq_a2": "Hasta 4 personas: dormitorio queen y sofá cama doble.",
+    "faq_a2": "Hasta 14 personas con reserva directa. Dormitorio queen, sofá cama doble y colchonetas adicionales según la configuración.",
     "faq_q3": "¿A qué temperatura está la piscina?",
     "faq_a3": "Entre 34 y 40 °C según la temporada. Piscina interior, usable todo el año.",
     "faq_q4": "¿Por qué reservar directamente?",
@@ -141,8 +158,8 @@
     "gallery_cta": "Explorar los espacios en imágenes",
     "booking_guests": "Número de personas",
     "booking_continue": "Continuar",
-    "booking_group_title": "Grupos de 5 a 16 personas",
-    "booking_group_text": "Para grupos de 5 a 16 personas, contáctanos directamente — la cueva puede acoger hasta 16 personas con colchonetas adicionales.",
+    "booking_group_title": "Grupos de 15 a 16 personas",
+    "booking_group_text": "Para grupos de 15 a 16 personas, contáctanos directamente — la cueva puede acoger hasta 16 personas con colchonetas adicionales.",
     "booking_whatsapp": "Contactar por WhatsApp",
     "booking_events_link": "Ver eventos →",
     "booking_calendar_title": "Calendario de disponibilidad",
@@ -172,8 +189,9 @@
     "process_1_desc": "Describa su proyecto. Respuesta en 48 h.",
     "process_2_title": "2. Afinamos juntos",
     "process_2_desc": "Validamos uso, horarios y necesidades.",
-    "process_3_title": "3. Vive el momento",
-    "process_3_desc": "El lugar se prepara para su celebración."
+    "process_3_title": "3. Viva el momento",
+    "process_3_desc": "El lugar se prepara para su celebración.",
+    "gallery_link_jardin": "Ver el jardín →"
   },
   "Workshops": {
     "title": "Retiros y Talleres",
@@ -194,7 +212,15 @@
     "process_2_title": "2. Validación",
     "process_2_desc": "Adaptamos el formato a los espacios.",
     "process_3_title": "3. Acogida",
-    "process_3_desc": "Un lugar privado y sensorial para sus participantes."
+    "process_3_desc": "Un lugar privado y sensorial para sus participantes.",
+    "gallery_link_atelier": "Ver el taller →"
+  },
+  "Reserver": {
+    "intro": "Elija su experiencia en Cueva Thalía.",
+    "sejourner_desc": "Reserve su estancia con piscina privada.",
+    "evenements_desc": "Solicite presupuesto para un evento íntimo.",
+    "workshops_desc": "Organice un retiro o taller de bienestar.",
+    "discover": "Descubrir →"
   },
   "Galerie": {
     "title": "Galería",
@@ -207,7 +233,17 @@
     "filter_jardin": "Jardín",
     "filter_chambre": "Dormitorio",
     "filter_details": "Detalles",
-    "chambre_group_bedding": "Para recibir grupos, hay colchonetas adicionales en la cueva: doce colchones en el suelo, nidos acogedores bajo la bóveda de roca."
+    "chambre_group_bedding": "Para recibir grupos, hay colchonetas adicionales en la cueva: doce colchones en el suelo, nidos acogedores bajo la bóveda de roca.",
+    "back_to_gallery": "Volver a la galería",
+    "meta_title_suffix": "Galería Cueva Thalía",
+    "meta_description": "Descubra {category} de Cueva Thalía, casa troglodita privada en Tenerife.",
+    "category_sejour": "La Estancia",
+    "category_cuisine": "La Cocina",
+    "category_atelier": "El Taller",
+    "category_piscine": "La Piscina",
+    "category_jardin": "El Jardín",
+    "category_chambre": "El Dormitorio",
+    "category_details": "Los Detalles"
   },
   "Contact": {
     "title": "Contacto",
@@ -218,7 +254,9 @@
     "response_title": "Plazos de respuesta",
     "response_desc": "WhatsApp: respuesta rápida · Email: 48 h · Reserva: calendario en tiempo real.",
     "location_title": "Acceso y alrededores",
-    "booking_cta": "Ver disponibilidad (alojamiento)"
+    "booking_cta": "Ver disponibilidad (alojamiento)",
+    "loc_teide_place": "Teide",
+    "loc_teide_time": "45 min - 1 h"
   },
   "Histoire": {
     "title": "Nuestra Historia",
@@ -236,12 +274,13 @@
     "validity": "Válido para una estancia, un evento privado o un retiro.",
     "form_title": "Solicitar bono regalo",
     "close_modal": "Cerrar formulario",
-    "back_home": "Volver al inicio"
+    "back_home": "← Volver al inicio"
   },
   "Forms": {
     "name": "Nombre",
     "email": "Correo electrónico",
     "phone": "Teléfono",
+    "phone_optional": "Teléfono (opcional)",
     "date": "Fecha deseada",
     "guests": "Número de personas",
     "message": "Mensaje",
@@ -249,7 +288,30 @@
     "submit": "Enviar",
     "sending": "Enviando...",
     "success": "Gracias, responderemos en 48 horas.",
-    "error": "Se produjo un error. Inténtelo de nuevo."
+    "error": "Se produjo un error. Inténtelo de nuevo.",
+    "error_required": "Obligatorio",
+    "error_email": "Correo electrónico no válido",
+    "error_message_short": "Mensaje demasiado corto",
+    "select_placeholder": "Seleccione…",
+    "date_placeholder_event": "Ej. 15 de agosto de 2026",
+    "date_placeholder_workshop": "Ej. junio de 2026",
+    "event_type_birthday": "Cumpleaños / Celebración",
+    "event_type_shooting": "Shooting / Privatización",
+    "event_type_wedding": "Boda íntima",
+    "event_type_other": "Otro",
+    "workshop_type_label": "Tipo de retiro",
+    "workshop_type_yoga": "Yoga / Meditación",
+    "workshop_type_breathwork": "Breathwork / Sonoterapia",
+    "workshop_type_coaching": "Coaching / Creativo",
+    "workshop_type_other": "Otro",
+    "gift_name_you": "Nombre (usted)",
+    "gift_type_label": "Formato del bono",
+    "gift_type_1_night_week": "1 noche (entre semana)",
+    "gift_type_1_night_weekend": "1 noche (fin de semana)",
+    "gift_type_2_nights": "2 noches",
+    "gift_type_custom": "Importe personalizado",
+    "gift_recipient_label": "Nombre del destinatario",
+    "gift_message_label": "Mensaje para el destinatario (opcional)"
   },
   "WhatsAppFloat": {
     "label": "Escribir por WhatsApp",
@@ -267,6 +329,13 @@
     "privacy": "Política de Privacidad",
     "cancel": "Política de Cancelación",
     "rights": "Todos los derechos reservados."
+  },
+  "Articles": {
+    "journal": "Diario",
+    "placeholder_slug": "Artículo para el slug: {slug}",
+    "placeholder_todo": "Contenido próximamente (CMS o archivos Markdown).",
+    "intro_heading": "Introducción",
+    "intro_body": "La cueva es un lugar excepcional en Tenerife, ideal para reponerse. El resto del contenido se definirá más adelante."
   },
   "Guides": {
     "link_sejourner": "Alojarse →",

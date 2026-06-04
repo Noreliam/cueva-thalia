@@ -36,18 +36,23 @@ export const viewport = {
   viewportFit: 'cover',
 };
 
-export const metadata = {
-  title: 'Cueva Thalía — Maison privée avec piscine chauffée à Tenerife',
-  description:
-    'Séjournez dans une cueva privée à Tenerife avec piscine intérieure chauffée, jardin privé et atmosphère immersive.',
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
-};
+const siteIcons = {
+  icon: [
+    { url: '/favicon.ico', sizes: '32x32' },
+    { url: '/favicon.svg', type: 'image/svg+xml' },
+  ],
+  apple: '/apple-touch-icon.png',
+} as const;
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
+  return {
+    title: t('meta_title'),
+    description: t('meta_description'),
+    icons: siteIcons,
+  };
+}
 
 export default async function LocaleLayout({
   children,

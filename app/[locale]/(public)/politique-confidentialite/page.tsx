@@ -1,16 +1,17 @@
 import { getTranslations } from 'next-intl/server';
-import { Link } from '@/i18n/routing';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 
-export default async function ConfidentialitePage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function PolitiqueConfidentialitePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'Footer' });
+  const footerT = await getTranslations({ locale, namespace: 'Footer' });
+  const commonT = await getTranslations({ locale, namespace: 'Common' });
   return (
     <div className="seo-page">
       <div className="legal-content">
-        <h1>{t('privacy')}</h1>
-        <p>{`{{À COMPLÉTER avec Manon + gestor}}`}</p>
+        <h1>{footerT('privacy')}</h1>
+        <p>{commonT('legal_placeholder')}</p>
         <p style={{ textAlign: 'center', marginTop: 48 }}>
-          <Link href="/" className="btn btn-secondary">← Retour à l&apos;accueil</Link>
+          <BackHomeLink locale={locale} />
         </p>
       </div>
     </div>

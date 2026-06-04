@@ -64,24 +64,24 @@ export default function ContactForm() {
         <div className="form-group">
           <label htmlFor="contact-name">{t('name')}</label>
           <input id="contact-name" {...register('name')} autoComplete="name" />
-          {errors.name && <span className="form-error">Requis</span>}
+          {errors.name && <span className="form-error">{t('error_required')}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="contact-email">{t('email')}</label>
           <input id="contact-email" type="email" {...register('email')} autoComplete="email" />
-          {errors.email && <span className="form-error">Email invalide</span>}
+          {errors.email && <span className="form-error">{t('error_email')}</span>}
         </div>
       </div>
 
       <div className="form-group">
-        <label htmlFor="contact-phone">{t('phone')} (optionnel)</label>
+        <label htmlFor="contact-phone">{t('phone_optional')}</label>
         <input id="contact-phone" type="tel" {...register('phone')} autoComplete="tel" />
       </div>
 
       <div className="form-group">
         <label htmlFor="contact-message">{t('message')}</label>
         <textarea id="contact-message" rows={4} {...register('message')} />
-        {errors.message && <span className="form-error">Message trop court</span>}
+        {errors.message && <span className="form-error">{t('error_message_short')}</span>}
       </div>
 
       <FormSecurityFields onTokenChange={setTurnstileToken} honeypotProps={{ value: hp, onChange: (e) => setHp(e.target.value) }} />

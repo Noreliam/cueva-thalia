@@ -1,6 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import SmoobuBookingGate from '@/components/SmoobuBookingGate';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
+import { fullReviews } from '@/lib/home-reviews';
 
 const SEJOURNER_HERO_IMAGE = '/photos/optimized/sejourner-hero.jpg';
 
@@ -27,6 +29,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function SejournerPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Sejourner' });
+  const g = await getTranslations({ locale, namespace: 'Galerie' });
+  const c = await getTranslations({ locale, namespace: 'Common' });
+  const loc = locale as 'fr' | 'es' | 'en';
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
 
   return (
@@ -40,7 +45,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
         />
         <div className="gallery-hero-content page-full-hero-content page-full-hero-content--wide">
           <header className="page-full-hero-head">
-            <span className="small-caps hero-label">Tenerife · San Miguel de Abona</span>
+            <span className="small-caps hero-label">{c('location_badge')}</span>
             <h1>{t('hero_title')}</h1>
             <p className="editorial-text page-hero-lead">{t('hero_subtitle')}</p>
             <a href="#reservation" className="btn btn-primary">
@@ -49,12 +54,12 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
           </header>
 
           <div className="page-full-hero-body">
-            <div className="page-full-hero-intro">
-              <p className="editorial-text">{t('seo_intro')}</p>
-              <p className="editorial-text">{t('private_reminder')}</p>
-            </div>
-
             <div className="page-full-hero-panel">
+              <div className="page-full-hero-panel-intro">
+                <p className="editorial-text">{t('seo_intro')}</p>
+                <p className="editorial-text">{t('private_reminder')}</p>
+              </div>
+
               <div className="page-full-hero-details">
                 <div className="page-full-hero-block">
                   <h2>{t('amenities_title')}</h2>
@@ -157,13 +162,10 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
         <div className="container">
           <h2 className="section-title-center">{t('avis_title')}</h2>
           <div className="avis-grid">
-            {[
-              { text: 'Les photos ne lui rendent vraiment pas justice.', author: 'Emma' },
-              { text: 'Un endroit magique avec sa piscine incroyable.', author: 'Caroline' },
-            ].map((r) => (
-              <div className="avis-card fade-in visible" key={r.author}>
-                <p className="avis-text">&ldquo;{r.text}&rdquo;</p>
-                <p className="small-caps avis-author">{r.author}</p>
+            {fullReviews.slice(0, 2).map((review) => (
+              <div className="avis-card fade-in visible" key={review.author}>
+                <p className="avis-text">&ldquo;{review.text[loc] ?? review.text.fr}&rdquo;</p>
+                <p className="small-caps avis-author">{review.author}</p>
               </div>
             ))}
           </div>
@@ -175,18 +177,16 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
           <p className="editorial-text">{t('gallery_cta')}</p>
           <div className="seo-bottom-links">
             <Link href="/galerie/piscine" className="card-link">
-              Piscine
+              {g('category_piscine')}
             </Link>
             <Link href="/galerie/chambre" className="card-link">
-              Chambre
+              {g('category_chambre')}
             </Link>
             <Link href="/galerie/jardin" className="card-link">
-              Jardin
+              {g('category_jardin')}
             </Link>
           </div>
-          <Link href="/" className="btn btn-secondary">
-            ← Retour à l&apos;accueil
-          </Link>
+          <BackHomeLink locale={locale} />
         </div>
       </section>
     </div>

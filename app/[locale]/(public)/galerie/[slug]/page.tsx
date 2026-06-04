@@ -20,12 +20,14 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const gallery = getGalleryBySlug(slug);
-  if (!gallery) return { title: 'Galerie | Cueva Thalía' };
+  if (!gallery) return { title: 'Cueva Thalía' };
+  const t = await getTranslations({ locale, namespace: 'Galerie' });
+  const categoryTitle = t(`category_${slug}` as 'category_sejour');
   return {
-    title: `${gallery.title} | Galerie Cueva Thalía`,
-    description: `Découvrez ${gallery.title} de Cueva Thalía, maison troglodyte privée à Tenerife.`,
+    title: `${categoryTitle} | ${t('meta_title_suffix')}`,
+    description: t('meta_description', { category: categoryTitle }),
   };
 }
 
@@ -36,6 +38,7 @@ export default async function GalleryCategoryPage({ params }: Props) {
   if (!gallery) notFound();
 
   const t = await getTranslations({ locale, namespace: 'Galerie' });
+  const categoryTitle = t(`category_${slug}` as 'category_sejour');
   const coverSrc = galleryImagePath(gallery.folder, gallery.cover);
 
   return (
@@ -48,9 +51,9 @@ export default async function GalleryCategoryPage({ params }: Props) {
           }}
         />
         <div className="gallery-hero-content">
-          <h1>{gallery.title}</h1>
+          <h1>{categoryTitle}</h1>
           <Link href="/galerie" className="btn btn-outline">
-            Retour à la galerie
+            {t('back_to_gallery')}
           </Link>
         </div>
       </section>
@@ -66,7 +69,7 @@ export default async function GalleryCategoryPage({ params }: Props) {
                 <figure className="gallery-item" data-src={src} data-caption={caption} key={image.filename}>
                   <MediaFrame
                     src={src}
-                    alt={caption ?? gallery.title}
+                    alt={caption ?? categoryTitle}
                     aspectRatio={aspectRatio}
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />

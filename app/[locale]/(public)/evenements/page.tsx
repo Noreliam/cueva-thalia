@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import EventForm from '@/components/forms/EventForm';
+import { BackHomeLink } from '@/components/layout/BackHomeLink';
 import { buildPageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -93,12 +94,10 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
       <section className="page-bottom-cta">
         <div className="container">
           <Link href="/galerie/jardin" className="card-link">
-            Voir le jardin →
+            {t('gallery_link_jardin')}
           </Link>
           <p style={{ marginTop: 24 }}>
-            <Link href="/" className="btn btn-secondary">
-              ← Retour à l&apos;accueil
-            </Link>
+            <BackHomeLink locale={locale} />
           </p>
         </div>
       </section>
