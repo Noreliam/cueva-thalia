@@ -10,6 +10,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
+  "media-src 'self' blob:",
   "connect-src 'self' https://challenges.cloudflare.com https://*.supabase.co",
   "frame-src 'self' https://challenges.cloudflare.com https://login.smoobu.com https://*.smoobu.com",
   "upgrade-insecure-requests",

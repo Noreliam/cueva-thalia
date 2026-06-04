@@ -25,7 +25,11 @@ export default function proxy(request: NextRequest) {
     return applySecurityHeaders(NextResponse.next());
   }
 
-  if (pathname === '/robots.txt' || pathname === '/sitemap.xml') {
+  if (
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname.startsWith('/videos/')
+  ) {
     const response = NextResponse.next();
     return applySecurityHeaders(response);
   }
@@ -45,6 +49,6 @@ export const config = {
     '/(es|fr|en)/:path*',
     '/api/:path*',
     '/dashboard/:path*',
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|mp4|webm|mov)$).*)',
   ],
 };

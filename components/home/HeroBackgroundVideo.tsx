@@ -14,14 +14,17 @@ export function HeroBackgroundVideo({ src }: HeroBackgroundVideoProps) {
     if (!video) return;
 
     let rafId = 0;
+    let reversing = false;
     const reverseStepSeconds = 1 / 30;
 
     const playForward = () => {
+      reversing = false;
       video.playbackRate = 1;
       void video.play().catch(() => {});
     };
 
     const reverseStep = () => {
+      reversing = true;
       if (video.currentTime <= reverseStepSeconds) {
         video.currentTime = 0;
         playForward();
@@ -32,20 +35,23 @@ export function HeroBackgroundVideo({ src }: HeroBackgroundVideoProps) {
     };
 
     const onEnded = () => {
+      if (reversing) return;
       video.pause();
       cancelAnimationFrame(rafId);
       reverseStep();
     };
 
-    const onLoaded = () => playForward();
+    const onCanPlay = () => {
+      if (!reversing && video.paused) playForward();
+    };
 
     video.addEventListener('ended', onEnded);
-    video.addEventListener('loadeddata', onLoaded);
-    if (video.readyState >= 2) playForward();
+    video.addEventListener('canplay', onCanPlay);
+    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) onCanPlay();
 
     return () => {
       video.removeEventListener('ended', onEnded);
-      video.removeEventListener('loadeddata', onLoaded);
+      video.removeEventListener('canplay', onCanPlay);
       cancelAnimationFrame(rafId);
     };
   }, [src]);
@@ -59,6 +65,7 @@ export function HeroBackgroundVideo({ src }: HeroBackgroundVideoProps) {
       playsInline
       autoPlay
       preload="auto"
+      poster="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
       aria-hidden="true"
     />
   );
