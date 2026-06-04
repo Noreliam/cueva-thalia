@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { bookingCheckoutSchema, type BookingCheckoutRequest } from '@/lib/booking/schema';
+import { bookingCheckoutSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
 
 interface BookingFormProps {
   onSuccess?: (bookingId: string, sessionId: string) => void;
@@ -19,7 +19,7 @@ export default function BookingForm({ onSuccess, locale = 'en' }: BookingFormPro
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<BookingCheckoutRequest>({
+  } = useForm<BookingCheckoutFormInput>({
     resolver: zodResolver(bookingCheckoutSchema),
     defaultValues: {
       locale,
@@ -31,7 +31,7 @@ export default function BookingForm({ onSuccess, locale = 'en' }: BookingFormPro
   const guestCount = watch('guestCount');
   const termsAccepted = watch('termsAccepted');
 
-  const onSubmit = async (data: BookingCheckoutRequest) => {
+  const onSubmit = async (data: BookingCheckoutFormInput) => {
     setIsLoading(true);
     setError(null);
 

@@ -52,6 +52,8 @@ export const bookingCheckoutSchema = z.object({
     .default('en'),
 
   // Security
+  _hp: z.string().optional(),
+
   turnstileToken: z
     .string()
     .min(1, 'CAPTCHA verification required'),
@@ -62,7 +64,8 @@ export const bookingCheckoutSchema = z.object({
     .refine((val) => val === true, 'Terms must be accepted'),
 });
 
-export type BookingCheckoutRequest = z.infer<typeof bookingCheckoutSchema>;
+export type BookingCheckoutFormInput = z.input<typeof bookingCheckoutSchema>;
+export type BookingCheckoutRequest = z.output<typeof bookingCheckoutSchema>;
 
 /**
  * Schema pour les dates de réservation seules (validation rapide)
