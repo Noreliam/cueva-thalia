@@ -695,7 +695,6 @@
       object-position: center 42%;
       filter: sepia(0.14) saturate(1.1) brightness(1.04) contrast(1.02);
       transform: scale(1.02);
-      transition: opacity 0.15s ease;
     }
 
     .hero-bg-video--reverse {

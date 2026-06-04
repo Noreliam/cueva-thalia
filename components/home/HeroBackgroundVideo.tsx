@@ -32,37 +32,58 @@ export function HeroBackgroundVideo({ forwardSrc, reverseSrc }: HeroBackgroundVi
     const reverse = reverseRef.current;
     if (!forward || !reverse) return;
 
-    const playForward = () => {
-      setActive('forward');
+    let started = false;
+
+    const isReady = (video: HTMLVideoElement) =>
+      video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA;
+
+    const playForward = async () => {
       forward.currentTime = 0;
-      void forward.play().catch(() => {});
-    };
-
-    const playReverse = () => {
-      setActive('reverse');
-      reverse.currentTime = 0;
-      void reverse.play().catch(() => {});
-    };
-
-    const onForwardEnded = () => playReverse();
-    const onReverseEnded = () => playForward();
-
-    forward.addEventListener('ended', onForwardEnded);
-    reverse.addEventListener('ended', onReverseEnded);
-
-    const tryStart = () => {
-      if (forward.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-        playForward();
+      try {
+        await forward.play();
+        setActive('forward');
+      } catch {
+        /* autoplay blocked */
       }
     };
 
+    const playReverse = async () => {
+      reverse.currentTime = 0;
+      try {
+        await reverse.play();
+        setActive('reverse');
+      } catch {
+        /* autoplay blocked */
+      }
+    };
+
+    const onForwardEnded = () => {
+      void playReverse();
+    };
+
+    const onReverseEnded = () => {
+      void playForward();
+    };
+
+    const tryStart = () => {
+      if (started) return;
+      if (!isReady(forward) || !isReady(reverse)) return;
+      started = true;
+      void playForward();
+    };
+
+    forward.addEventListener('ended', onForwardEnded);
+    reverse.addEventListener('ended', onReverseEnded);
     forward.addEventListener('loadeddata', tryStart);
-    if (forward.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) tryStart();
+    reverse.addEventListener('loadeddata', tryStart);
+
+    tryStart();
 
     return () => {
       forward.removeEventListener('ended', onForwardEnded);
       reverse.removeEventListener('ended', onReverseEnded);
       forward.removeEventListener('loadeddata', tryStart);
+      reverse.removeEventListener('loadeddata', tryStart);
     };
   }, [forwardSrc, reverseSrc, setActive]);
 
