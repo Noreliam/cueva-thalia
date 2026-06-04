@@ -3,6 +3,7 @@
 import { Link } from '@/i18n/routing';
 import { siteNavItems } from '@/lib/site-nav';
 import { useTranslations } from 'next-intl';
+import LocaleSwitcher from '@/components/layout/LocaleSwitcher';
 
 export default function SiteFooter() {
   const t = useTranslations('Footer');
@@ -67,6 +68,7 @@ export default function SiteFooter() {
             <span>·</span>
             <Link href="/guides/sejour-insolite-tenerife">{t('guides')}</Link>
           </div>
+          <LocaleSwitcher className="locale-switcher locale-switcher--footer" />
         </div>
       </div>
     </footer>

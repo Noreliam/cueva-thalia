@@ -686,7 +686,11 @@
       overflow: hidden;
     }
 
-    .hero-bg-image {
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: center 42%;
       filter: sepia(0.14) saturate(1.1) brightness(1.04) contrast(1.02);
@@ -1897,6 +1901,55 @@
       justify-content: center;
       gap: 16px;
       margin-top: 12px;
+    }
+
+    .locale-switcher__list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .locale-switcher__link {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: inherit;
+      opacity: 0.65;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .locale-switcher__link:hover,
+    .locale-switcher__link.is-active {
+      opacity: 1;
+      color: var(--ct-terracotta);
+    }
+
+    .locale-switcher--footer {
+      margin-top: 16px;
+    }
+
+    .locale-switcher--header .locale-switcher__list {
+      justify-content: flex-start;
+      margin-left: 8px;
+    }
+
+    .locale-switcher--header .locale-switcher__link {
+      font-size: 10px;
+    }
+
+    .locale-switcher--mobile {
+      display: flex;
+      justify-content: center;
+    }
+
+    .locale-switcher--mobile .locale-switcher__link {
+      font-size: 14px;
+      letter-spacing: 0.16em;
     }
 
     /* BOUTON WHATSAPP */

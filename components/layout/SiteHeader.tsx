@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { siteNavItems } from '@/lib/site-nav';
 import { useTranslations } from 'next-intl';
+import LocaleSwitcher from '@/components/layout/LocaleSwitcher';
 
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -51,6 +52,9 @@ export default function SiteHeader() {
                   {t('reserver')}
                 </Link>
               </li>
+              <li>
+                <LocaleSwitcher className="locale-switcher locale-switcher--header" />
+              </li>
             </ul>
           </nav>
 
@@ -86,6 +90,9 @@ export default function SiteHeader() {
             >
               {t('reserver')}
             </Link>
+          </li>
+          <li style={{ marginTop: 24 }}>
+            <LocaleSwitcher className="locale-switcher locale-switcher--mobile" />
           </li>
         </ul>
       </nav>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
+import { HeroBackgroundVideo } from '@/components/home/HeroBackgroundVideo';
 import { MediaFrame } from '@/components/ui/MediaFrame';
 import { fullReviews } from '@/lib/home-reviews';
 
@@ -56,15 +57,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
     <>
       <section className="hero">
         <div className="hero-bg" aria-hidden="true">
-          <Image
-            src="/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg"
-            alt=""
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            className="hero-bg-image"
-          />
+          <HeroBackgroundVideo src="/videos/hero.mp4" />
         </div>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
