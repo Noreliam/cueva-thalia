@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url';
 import ffmpegPath from 'ffmpeg-static';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const input = path.join(root, 'public/videos/hero.mp4');
-const output = path.join(root, 'public/videos/hero-reverse.mp4');
+const input = path.join(root, 'public/videos/hero-preserve.mp4');
+const output = path.join(root, 'public/videos/hero-preserve-reverse.mp4');
 
 if (!fs.existsSync(input)) {
-  console.error('Missing public/videos/hero.mp4');
+  console.error('Missing public/videos/hero-preserve.mp4');
   process.exit(1);
 }
 
