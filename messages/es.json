@@ -26,12 +26,12 @@
     "story_p1": "Cuando Manon compró esta casa en San Miguel de Abona, una cueva natural dormía bajo el jardín — invisible, intacta.",
     "story_p2": "Cuatro años y medio después, la descubrió por casualidad.",
     "story_p3": "Cueva Thalía nació de ese momento: un lugar íntimo y privado, donde la roca, el agua caliente y el silencio se convierten en experiencia.",
-    "promise1_title": "La roca te rodea",
-    "promise1_text": "Aquí, la roca no decora. Envuelve. Aísla. Silencia todo lo que no merece ser escuchado.",
-    "promise2_title": "El agua es tuya",
-    "promise2_text": "El agua está caliente. Los jets trabajan. Alrededor, la roca permanece fría. Ese contraste no existe en ningún otro lugar de la isla.",
-    "promise3_title": "Todo queda cerca",
-    "promise3_text": "El aeropuerto está a 15 minutos. El mar a 20. El Teide a 45. Y tú no tienes nada que hacer — salvo quedarte.",
+    "promise1_title": "Solo para ustedes",
+    "promise1_text": "Un lugar completamente privado para cada estancia. Aquí, la calma, el espacio y la intimidad no se comparten.",
+    "promise2_title": "Un confort natural",
+    "promise2_text": "Gracias a su integración en la roca volcánica, la cueva conserva una temperatura suave y agradable en todas las estaciones.",
+    "promise3_title": "La ubicación ideal",
+    "promise3_text": "Entre el océano, el Teide y los pueblos más bonitos del sur de Tenerife, todo está cerca. Excepto el estrés.",
     "pool_title": "Agua caliente, todo el año",
     "pool_text": "Un oasis excavada en la roca. El agua mantiene su calor todo el año. Aquí, la piscina interior es 100% privada y se mantiene climatizada entre 34°C y 40°C.",
     "pool_feat1": "Piscina 100% privada",
@@ -240,6 +240,10 @@
     "sending": "Enviando...",
     "success": "Gracias, responderemos en 48 horas.",
     "error": "Se produjo un error. Inténtelo de nuevo."
+  },
+  "WhatsAppFloat": {
+    "label": "Escribir por WhatsApp",
+    "aria": "Contactar con Cueva Thalía por WhatsApp"
   },
   "Footer": {
     "tagline": "Casa troglodita privada en Tenerife",

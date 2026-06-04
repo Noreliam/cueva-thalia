@@ -6,6 +6,7 @@
     "dev": "next dev",
     "videos:hero": "node scripts/generate-hero-reverse.mjs",
     "videos:hero:clean": "node scripts/clean-hero-video.mjs",
+    "favicon": "node scripts/generate-favicon.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

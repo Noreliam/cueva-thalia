@@ -1,5 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Cueva Thalía">
-  <rect width="32" height="32" rx="8" fill="#F5F0E6"/>
-  <path fill="#B85C38" d="M6 24c0-8 4.2-14 10-16 5.8 2 10 8 10 16H6z"/>
-  <ellipse cx="16" cy="22" rx="5" ry="2.5" fill="#4A9B9B" opacity="0.85"/>
+  <defs>
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0" result="gn"/>
+      <feBlend in="SourceGraphic" in2="gn" mode="multiply" result="out"/>
+    </filter>
+  </defs>
+  <rect width="32" height="32" rx="3" fill="#F5F0E6"/>
+  <rect x="1" y="1" width="30" height="30" rx="2" fill="none" stroke="#C9B896" stroke-width="0.6" opacity="0.5"/>
+  <text
+    filter="url(#grain)"
+    x="16"
+    y="21.5"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="15"
+    font-weight="600"
+    fill="#B85C38"
+    letter-spacing="-1.2"
+  >CT</text>
 </svg>

@@ -26,12 +26,12 @@
     "story_p1": "When Manon bought this house in San Miguel de Abona, a natural cave lay sleeping beneath the garden — invisible, untouched.",
     "story_p2": "Four and a half years later, she discovered it by chance.",
     "story_p3": "Cueva Thalía was born from that moment: an intimate, private place where rock, warm water and silence become an experience.",
-    "promise1_title": "Rock all around",
-    "promise1_text": "Here, the rock doesn't decorate. It wraps. It isolates. It silences everything that doesn't deserve to be heard.",
-    "promise2_title": "The water is yours",
-    "promise2_text": "The water is warm. The jets work. Around you, the rock stays cold. That contrast exists nowhere else on the island.",
-    "promise3_title": "Everything stays close",
-    "promise3_text": "The airport is 15 minutes away. The sea 20. Mount Teide 45. And you have nothing to do — except stay.",
+    "promise1_title": "Just for you",
+    "promise1_text": "A fully private place for every stay. Here, calm, space and intimacy are never shared.",
+    "promise2_title": "Natural comfort",
+    "promise2_text": "Built into the volcanic rock, the cave keeps a gentle, pleasant temperature in every season.",
+    "promise3_title": "The ideal location",
+    "promise3_text": "Between the ocean, Mount Teide and the finest villages in southern Tenerife, everything is close. Except stress.",
     "pool_title": "Warm water, all year round",
     "pool_text": "An oasis carved into the stone. The water stays warm all year. Here, the indoor pool is 100% private and permanently heated between 34°C and 40°C.",
     "pool_feat1": "100% private pool",
@@ -240,6 +240,10 @@
     "sending": "Sending...",
     "success": "Thank you, we will reply within 48 hours.",
     "error": "An error occurred. Please try again."
+  },
+  "WhatsAppFloat": {
+    "label": "Message on WhatsApp",
+    "aria": "Contact Cueva Thalía on WhatsApp"
   },
   "Footer": {
     "tagline": "Private troglodyte home in Tenerife",

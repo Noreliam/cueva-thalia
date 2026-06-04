@@ -26,12 +26,12 @@
     "story_p1": "Quand Manon a acheté cette maison à San Miguel de Abona, une grotte naturelle dormait encore sous le jardin — invisible, intacte.",
     "story_p2": "Quatre ans et demi plus tard, elle la découvre par hasard.",
     "story_p3": "Cueva Thalía est née de ce moment : un lieu intime et privé, où la roche, l'eau chaude et le silence deviennent une expérience.",
-    "promise1_title": "La roche vous entoure",
-    "promise1_text": "Ici, la roche ne décore pas. Elle enveloppe. Elle isole. Elle fait taire tout ce qui ne mérite pas d'être entendu.",
-    "promise2_title": "L'eau est à vous",
-    "promise2_text": "L'eau est chaude. Les jets travaillent. Autour de vous, la roche reste froide. Ce contraste n'existe nulle part ailleurs sur l'île.",
-    "promise3_title": "Tout reste proche",
-    "promise3_text": "L'aéroport est à 15 minutes. La mer à 20. Le Teide à 45. Et vous, vous n'avez rien à faire — sinon rester.",
+    "promise1_title": "Rien que pour vous",
+    "promise1_text": "Un lieu entièrement privatisé pour chaque séjour. Ici, le calme, l'espace et l'intimité ne se partagent pas.",
+    "promise2_title": "Un confort naturel",
+    "promise2_text": "Grâce à son intégration dans la roche volcanique, la grotte conserve une température douce et agréable en toute saison.",
+    "promise3_title": "L'emplacement idéal",
+    "promise3_text": "Entre l'océan, le Teide et les plus beaux villages du sud de Tenerife, tout est proche. Sauf le stress.",
     "pool_title": "L'eau chaude, toute l'année",
     "pool_text": "Une oasis creusée à même la pierre. L'eau garde sa chaleur, été comme hiver. Ici, la piscine intérieure est 100% privée et chauffée en permanence entre 34°C et 40°C.",
     "pool_feat1": "Piscine 100% privée",
@@ -250,6 +250,10 @@
     "title": "Cette page n'existe pas.",
     "text": "La page que vous cherchez n'est pas ici. Retournez à l'accueil pour découvrir Cueva Thalía.",
     "home": "Retour à l'accueil"
+  },
+  "WhatsAppFloat": {
+    "label": "Écrire sur WhatsApp",
+    "aria": "Contacter Cueva Thalía sur WhatsApp"
   },
   "Footer": {
     "tagline": "Maison troglodyte privée à Tenerife",

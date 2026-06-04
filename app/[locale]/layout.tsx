@@ -30,6 +30,12 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 export const metadata = {
   title: 'Cueva Thalía — Maison privée avec piscine chauffée à Tenerife',
   description:

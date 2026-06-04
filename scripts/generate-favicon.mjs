@@ -3,34 +3,115 @@ import { deflateSync } from 'node:zlib';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const size = 32;
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const bg = [0xf5, 0xf0, 0xe6];
+const dune = [0xc9, 0xb8, 0x96];
 const terra = [0xb8, 0x5c, 0x38];
-const turq = [0x4a, 0x9b, 0x9b];
 
-function pixel(x, y) {
-  const rounded =
-    x >= 1 &&
-    y >= 1 &&
-    x <= 30 &&
-    y <= 30 &&
-    (x < 9 ||
-      y < 9 ||
-      x > 23 ||
-      y > 23 ||
-      ((x - 9) ** 2 + (y - 9) ** 2 >= 64 &&
-        (x - 23) ** 2 + (y - 9) ** 2 >= 64 &&
-        (x - 9) ** 2 + (y - 23) ** 2 >= 64 &&
-        (x - 23) ** 2 + (y - 23) ** 2 >= 64));
+function inRoundedRect(x, y, w, h, r) {
+  if (x < 0 || y < 0 || x >= w || y >= h) return false;
+  if (x < r && y < r) return (x - r) ** 2 + (y - r) ** 2 <= r * r;
+  if (x > w - 1 - r && y < r) return (x - (w - 1 - r)) ** 2 + (y - r) ** 2 <= r * r;
+  if (x < r && y > h - 1 - r) return (x - r) ** 2 + (y - (h - 1 - r)) ** 2 <= r * r;
+  if (x > w - 1 - r && y > h - 1 - r) {
+    return (x - (w - 1 - r)) ** 2 + (y - (h - 1 - r)) ** 2 <= r * r;
+  }
+  return true;
+}
 
-  if (!rounded) return null;
+function blend(a, b, t) {
+  return Math.round(a * (1 - t) + b * t);
+}
 
-  const archY = 24 - Math.sqrt(Math.max(0, 100 - (x - 16) ** 2) * 0.35);
-  if (y >= archY) return terra;
-  if (y >= 19 && Math.abs(x - 16) <= 5) return turq;
-  return bg;
+function rectAlpha(x, y, x0, y0, x1, y1, feather = 0.4) {
+  if (x < x0 || x > x1 || y < y0 || y > y1) return 0;
+  const dx = Math.min(x - x0, x1 - x) / feather;
+  const dy = Math.min(y - y0, y1 - y) / feather;
+  return Math.min(1, Math.min(dx, dy));
+}
+
+/** Serif CT — geometry aligned with public/favicon.svg (Georgia 15px, letter-spacing -1.2) */
+function letterCAlpha(x, y) {
+  const cx = 10.15;
+  const cy = 16.2;
+  const rx = 5.35;
+  const ry = 6.1;
+  const dx = (x - cx) / rx;
+  const dy = (y - cy) / ry;
+  const d = Math.sqrt(dx * dx + dy * dy);
+  const open = x < cx + rx * 0.15;
+  const ring = Math.min(1.02 - d, d - 0.42) / 0.1;
+  let a = open && ring > 0 ? Math.min(1, ring) : 0;
+  if (x >= 8.2 && x <= 11.2 && y >= 9.4 && y <= 10.4) a = Math.max(a, rectAlpha(x, y, 8.2, 9.4, 11.2, 10.4, 0.25));
+  if (x >= 8.2 && x <= 11.2 && y >= 21.8 && y <= 22.8) a = Math.max(a, rectAlpha(x, y, 8.2, 21.8, 11.2, 22.8, 0.25));
+  return a;
+}
+
+function letterTAlpha(x, y) {
+  const left = 18.1;
+  const barTop = 9.35;
+  const barH = 2.1;
+  const stemW = 1.75;
+  const stemLeft = 20.55;
+  const stemH = 10.2;
+  const totalW = 6.35;
+
+  return Math.max(
+    rectAlpha(x, y, left, barTop, left + totalW, barTop + barH, 0.3),
+    rectAlpha(x, y, stemLeft, barTop + barH, stemLeft + stemW, barTop + barH + stemH, 0.3),
+    rectAlpha(x, y, left, barTop + barH, left + 0.55, barTop + barH + 0.85, 0.25),
+    rectAlpha(x, y, left + totalW - 0.55, barTop + barH, left + totalW, barTop + barH + 0.85, 0.25),
+  );
+}
+
+function sample(fx, fy, size) {
+  const scale = size / 32;
+  const r = Math.max(1, Math.round(3 * scale));
+  const inset = Math.max(1, Math.round(scale));
+
+  let color = [...bg];
+
+  if (!inRoundedRect(fx, fy, size, size, r)) return color;
+
+  const bx = inset;
+  const by = inset;
+  const bw = size - inset * 2;
+  const bh = size - inset * 2;
+  const br = Math.max(1, Math.round(2 * scale));
+  const lx = fx - bx;
+  const ly = fy - by;
+  const onBorder =
+    inRoundedRect(lx, ly, bw, bh, br) &&
+    !inRoundedRect(lx - 1, ly - 1, bw - 2, bh - 2, Math.max(0, br - 1));
+
+  if (onBorder) {
+    color = dune.map((c, i) => blend(bg[i], c, 0.45));
+    return color;
+  }
+
+  const gx = (fx + 0.5) / scale - 0.5;
+  const gy = (fy + 0.5) / scale - 0.5;
+  const mark = Math.max(letterCAlpha(gx, gy), letterTAlpha(gx, gy));
+  if (mark > 0) color = bg.map((c, i) => blend(c, terra[i], mark));
+  return color;
+}
+
+function pixel(x, y, size, supersample = 4) {
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  const step = 1 / supersample;
+  for (let sy = 0; sy < supersample; sy++) {
+    for (let sx = 0; sx < supersample; sx++) {
+      const c = sample(x + (sx + 0.5) * step, y + (sy + 0.5) * step, size);
+      r += c[0];
+      g += c[1];
+      b += c[2];
+    }
+  }
+  const n = supersample * supersample;
+  return [Math.round(r / n), Math.round(g / n), Math.round(b / n)];
 }
 
 function crc32(buf) {
@@ -59,15 +140,15 @@ function pngChunk(type, data) {
   return Buffer.concat([len, tag, data, crc]);
 }
 
-function createPng() {
+function createPng(size) {
+  const ss = size <= 32 ? 4 : 3;
   const raw = Buffer.alloc((size * 4 + 1) * size);
   for (let y = 0; y < size; y++) {
     const row = y * (size * 4 + 1);
     raw[row] = 0;
     for (let x = 0; x < size; x++) {
-      const color = pixel(x, y);
+      const color = pixel(x, y, size, ss);
       const i = row + 1 + x * 4;
-      if (!color) continue;
       raw[i] = color[0];
       raw[i + 1] = color[1];
       raw[i + 2] = color[2];
@@ -90,7 +171,7 @@ function createPng() {
   ]);
 }
 
-function createIco(png) {
+function createIco(png, size) {
   const header = Buffer.alloc(6);
   header.writeUInt16LE(0, 0);
   header.writeUInt16LE(1, 2);
@@ -99,10 +180,7 @@ function createIco(png) {
   const entry = Buffer.alloc(16);
   entry[0] = size >= 256 ? 0 : size;
   entry[1] = size >= 256 ? 0 : size;
-  entry[2] = 0;
-  entry[3] = 0;
   entry[4] = 1;
-  entry[5] = 0;
   entry.writeUInt16LE(32, 6);
   entry.writeUInt32LE(png.length, 8);
   entry.writeUInt32LE(6 + 16, 12);
@@ -110,11 +188,12 @@ function createIco(png) {
   return Buffer.concat([header, entry, png]);
 }
 
-const png = createPng();
-const ico = createIco(png);
+const png32 = createPng(32);
+const png180 = createPng(180);
+const ico = createIco(png32, 32);
 
 writeFileSync(join(root, 'public', 'favicon.ico'), ico);
 writeFileSync(join(root, 'app', 'favicon.ico'), ico);
-writeFileSync(join(root, 'public', 'apple-touch-icon.png'), png);
+writeFileSync(join(root, 'public', 'apple-touch-icon.png'), png180);
 
-console.log('Generated favicon.ico and apple-touch-icon.png');
+console.log('Generated favicon.ico (32×32) and apple-touch-icon.png (180×180)');
