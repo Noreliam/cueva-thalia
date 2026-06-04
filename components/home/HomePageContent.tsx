@@ -57,7 +57,10 @@ export async function HomePageContent({ locale }: { locale: string }) {
     <>
       <section className="hero">
         <div className="hero-bg" aria-hidden="true">
-          <HeroBackgroundVideo src="/videos/hero.mp4" />
+          <HeroBackgroundVideo
+            forwardSrc="/videos/hero.mp4"
+            reverseSrc="/videos/hero-reverse.mp4"
+          />
         </div>
         <div className="hero-overlay" aria-hidden="true" />
         <div className="hero-content">
