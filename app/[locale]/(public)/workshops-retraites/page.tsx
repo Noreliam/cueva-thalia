@@ -1,7 +1,8 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import { MediaFrame } from '@/components/ui/MediaFrame';
 import WorkshopForm from '@/components/forms/WorkshopForm';
+
+const WORKSHOPS_HERO_IMAGE = '/photos/optimized/workshops-retraites-hero.jpg';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -19,53 +20,41 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
 
   return (
     <div className="seo-page">
-      <section className="gallery-hero">
+      <section className="gallery-hero page-full-hero page-full-hero--workshops">
         <div
           className="gallery-hero-bg"
           style={{
-            backgroundImage: `linear-gradient(rgba(90, 56, 37, 0.35), rgba(90, 56, 37, 0.35)), url('/photos/optimized/046743a6-df86-4387-a7bf-b57f830e12c8.jpg')`,
+            backgroundImage: `linear-gradient(rgba(28, 14, 36, 0.52), rgba(28, 14, 36, 0.62)), url('${WORKSHOPS_HERO_IMAGE}')`,
           }}
         />
-        <div className="gallery-hero-content">
+        <div className="gallery-hero-content page-full-hero-content">
           <h1>{t('hero_title')}</h1>
           <p className="editorial-text page-hero-lead">{t('hero_subtitle')}</p>
           <a href="#formulaire" className="btn btn-primary">
             {t('form_title')}
           </a>
-        </div>
-      </section>
 
-      <section className="workshops">
-        <div className="container page-body-inner fade-in">
-          <h2>{t('formats_title')}</h2>
-          <div className="tags-container">
-            {[t('format_1'), t('format_2'), t('format_3'), t('format_4')].map((tag) => (
-              <span className="tag" key={tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
+          <div className="page-full-hero-body">
+            <h2>{t('formats_title')}</h2>
+            <div className="tags-container">
+              {[t('format_1'), t('format_2'), t('format_3'), t('format_4')].map((tag) => (
+                <span className="tag" key={tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-          <div className="editorial-image">
-            <MediaFrame
-              src="/photos/optimized/49b90bf0-ce3f-4a3e-8164-90993ce96cd7.jpg"
-              alt="Retraite et atelier Cueva Thalía"
-              aspectRatio="16 / 10"
-              sizes="(min-width: 1024px) 720px, 100vw"
-            />
-          </div>
-
-          <div className="info-highlight-box info-highlight-box--secondary">
-            <p className="info-block-line">{t('capacity_text')}</p>
-            <a
-              href={`https://wa.me/${whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ marginTop: 20, display: 'inline-block' }}
-            >
-              {t('cta_whatsapp')}
-            </a>
+            <div className="page-full-hero-meta">
+              <p className="info-block-line">{t('capacity_text')}</p>
+              <a
+                href={`https://wa.me/${whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                {t('cta_whatsapp')}
+              </a>
+            </div>
           </div>
         </div>
       </section>

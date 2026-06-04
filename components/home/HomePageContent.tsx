@@ -6,6 +6,7 @@ import { MediaFrame } from '@/components/ui/MediaFrame';
 import { fullReviews } from '@/lib/home-reviews';
 
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
+const STORY_DISCOVERY_IMAGE = '/photos/optimized/story-discovery.jpg';
 
 const Star = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -33,7 +34,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       text: t('pathway1_text'),
       badge: t('pathway1_badge'),
       cta: t('pathway1_cta'),
-      image: galleryPlaceholders[0].src,
+      image: '/photos/optimized/pathway-sejourner.jpg',
     },
     {
       href: '/evenements' as const,
@@ -41,7 +42,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       text: t('pathway2_text'),
       badge: t('pathway2_badge'),
       cta: t('pathway2_cta'),
-      image: galleryPlaceholders[2].src,
+      image: '/photos/optimized/pathway-celebrer.jpg',
     },
     {
       href: '/workshops-retraites' as const,
@@ -49,7 +50,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
       text: t('pathway3_text'),
       badge: t('pathway3_badge'),
       cta: t('pathway3_cta'),
-      image: galleryPlaceholders[3].src,
+      image: '/photos/optimized/pathway-retrouver.jpg',
     },
   ];
 
@@ -112,25 +113,24 @@ export async function HomePageContent({ locale }: { locale: string }) {
         </div>
       </section>
 
-      <section className="experience">
-        <div className="container experience-grid">
-          <div className="experience-text">
-            <h2>{t('story_title')}</h2>
+      <section className="experience experience--story" aria-labelledby="story-heading">
+        <div className="experience-story-bg" aria-hidden="true">
+          <Image
+            src={STORY_DISCOVERY_IMAGE}
+            alt=""
+            fill
+            quality={92}
+            sizes="100vw"
+            className="experience-story-img"
+          />
+          <div className="experience-story-overlay" />
+        </div>
+        <div className="container">
+          <div className="experience-story-content">
+            <h2 id="story-heading">{t('story_title')}</h2>
             <p className="editorial-text">{t('story_p1')}</p>
-            <p className="editorial-text" style={{ marginTop: 16 }}>
-              {t('story_p2')}
-            </p>
-            <p className="editorial-text" style={{ marginTop: 16 }}>
-              {t('story_p3')}
-            </p>
-          </div>
-          <div className="experience-image-wrapper">
-            <MediaFrame
-              src="/photos/optimized/f4544e3e-af84-4a15-aed0-df1c535af9ee.jpg"
-              alt={t('story_title')}
-              aspectRatio="3 / 4"
-              sizes="(min-width: 1024px) 40vw, 100vw"
-            />
+            <p className="editorial-text">{t('story_p2')}</p>
+            <p className="editorial-text">{t('story_p3')}</p>
           </div>
         </div>
       </section>

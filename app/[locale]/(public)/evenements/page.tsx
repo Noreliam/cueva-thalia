@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
-import { MediaFrame } from '@/components/ui/MediaFrame';
 import EventForm from '@/components/forms/EventForm';
 import { buildPageMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
+
+const EVENEMENTS_HERO_IMAGE = '/photos/optimized/evenements-hero.jpg';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -33,58 +34,46 @@ export default async function EvenementsPage({ params }: { params: Promise<{ loc
 
   return (
     <div className="seo-page">
-      <section className="gallery-hero">
+      <section className="gallery-hero page-full-hero page-full-hero--evenements">
         <div
           className="gallery-hero-bg"
           style={{
-            backgroundImage: `linear-gradient(rgba(90, 56, 37, 0.35), rgba(90, 56, 37, 0.35)), url('/photos/optimized/9eac7702-d91d-45eb-9a8b-526186764f1f.jpg')`,
+            backgroundImage: `linear-gradient(rgba(90, 56, 37, 0.38), rgba(28, 20, 12, 0.55)), url('${EVENEMENTS_HERO_IMAGE}')`,
           }}
         />
-        <div className="gallery-hero-content">
+        <div className="gallery-hero-content page-full-hero-content">
           <h1>{t('hero_title')}</h1>
           <p className="editorial-text page-hero-lead">{t('hero_subtitle')}</p>
           <a href="#formulaire" className="btn btn-primary">
             {t('form_title')}
           </a>
-        </div>
-      </section>
 
-      <section className="evenements">
-        <div className="container page-body-inner fade-in">
-          <p className="editorial-text">{t('body_text')}</p>
+          <div className="page-full-hero-body">
+            <p className="editorial-text">{t('body_text')}</p>
 
-          <h2 className="seo-subsection">{t('usages_title')}</h2>
-          <div className="tags-container">
-            {[t('usage_1'), t('usage_2'), t('usage_3'), t('usage_4')].map((tag) => (
-              <span className="tag" key={tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
+            <h2>{t('usages_title')}</h2>
+            <div className="tags-container">
+              {[t('usage_1'), t('usage_2'), t('usage_3'), t('usage_4')].map((tag) => (
+                <span className="tag" key={tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-          <div className="editorial-image">
-            <MediaFrame
-              src="/photos/optimized/galleries/jardin/photocouverture3.jpg"
-              alt="Espace événement Cueva Thalía"
-              aspectRatio="16 / 10"
-              sizes="(min-width: 1024px) 720px, 100vw"
-            />
-          </div>
-
-          <div className="info-highlight-box info-highlight-box--secondary">
-            <h3>{t('groups_title')}</h3>
-            <p className="info-block-line">{t('groups_line1')}</p>
-            <p className="info-block-line">{t('groups_line2')}</p>
-            <p className="info-block-line">{t('groups_line3')}</p>
-            <a
-              href={`https://wa.me/${whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ marginTop: 20, display: 'inline-block' }}
-            >
-              {t('cta_whatsapp')}
-            </a>
+            <div className="page-full-hero-meta">
+              <h3>{t('groups_title')}</h3>
+              <p className="info-block-line">{t('groups_line1')}</p>
+              <p className="info-block-line">{t('groups_line2')}</p>
+              <p className="info-block-line">{t('groups_line3')}</p>
+              <a
+                href={`https://wa.me/${whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+              >
+                {t('cta_whatsapp')}
+              </a>
+            </div>
           </div>
         </div>
       </section>
