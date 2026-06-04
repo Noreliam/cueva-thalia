@@ -51,34 +51,36 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
           <div className="page-full-hero-body">
             <div className="page-full-hero-intro">
               <p className="editorial-text">{t('seo_intro')}</p>
-              <p className="editorial-text page-full-hero-reminder">{t('private_reminder')}</p>
+              <p className="editorial-text">{t('private_reminder')}</p>
             </div>
 
-            <div className="page-full-hero-details">
-              <div className="page-full-hero-block">
-                <h2>{t('amenities_title')}</h2>
-                <ul className="page-full-hero-amenities">
-                  {amenities.map((key) => (
-                    <li key={key}>{t(key)}</li>
-                  ))}
-                </ul>
+            <div className="page-full-hero-panel">
+              <div className="page-full-hero-details">
+                <div className="page-full-hero-block">
+                  <h2>{t('amenities_title')}</h2>
+                  <ul className="page-full-hero-amenities">
+                    {amenities.map((key) => (
+                      <li key={key}>{t(key)}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="page-full-hero-block">
+                  <h2>{t('included_title')}</h2>
+                  <ul className="page-full-hero-included">
+                    {includedKeys.map((key) => (
+                      <li key={key}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="page-full-hero-block">
-                <h2>{t('included_title')}</h2>
-                <ul className="page-full-hero-included">
-                  {includedKeys.map((key) => (
-                    <li key={key}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      <span>{t(key)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="page-full-hero-block page-full-hero-block--full">
+              <div className="page-full-hero-block page-full-hero-block--options">
                 <h2>{t('options_title')}</h2>
                 <ul className="page-full-hero-options">
                   {optionKeys.map((key) => (
