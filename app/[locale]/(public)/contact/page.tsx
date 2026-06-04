@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import ContactForm from '@/components/forms/ContactForm';
+import '@/components/contact/contact.css';
+
+const CONTACT_HERO_IMAGE = '/photos/optimized/contact-hero.jpg';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -26,81 +29,76 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <div className="seo-page">
-      <section className="gallery-hero">
+      <section className="gallery-hero page-full-hero page-full-hero--contact">
         <div
           className="gallery-hero-bg"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('/photos/optimized/f4544e3e-af84-4a15-aed0-df1c535af9ee.jpg')`,
-          }}
+          style={{ backgroundImage: `url('${CONTACT_HERO_IMAGE}')` }}
         />
-        <div className="gallery-hero-content">
-          <h1>{t('title')}</h1>
-          <p className="editorial-text page-hero-lead">{t('subtitle')}</p>
+        <div className="contact-hero-scrim" aria-hidden="true" />
+        <div className="gallery-hero-content page-full-hero-content page-full-hero-content--contact">
+          <header className="page-full-hero-head">
+            <h1>{t('title')}</h1>
+            <p className="editorial-text page-hero-lead">{t('subtitle')}</p>
+            <a href="#formulaire" className="btn btn-primary">
+              {t('form_title')}
+            </a>
+          </header>
+
+          <div className="page-full-hero-body contact-hero-body">
+            <div className="contact-hero-columns">
+            <div className="page-full-hero-panel contact-hero-panel contact-hero-panel--coord">
+              <p className="editorial-text">{t('seo_intro')}</p>
+
+              <div className="contact-hero-channels">
+                <a
+                  href={`https://wa.me/${whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-hero-channel"
+                >
+                  <span className="small-caps">WhatsApp</span>
+                  <span>+{whatsapp}</span>
+                </a>
+                <a href="mailto:contact@cueva-thalia.com" className="contact-hero-channel">
+                  <span className="small-caps">Email</span>
+                  <span>contact@cueva-thalia.com</span>
+                </a>
+                <div className="contact-hero-channel contact-hero-channel--static">
+                  <span className="small-caps">{t('address_title')}</span>
+                  <span>Calle Las Morales 70 · San Miguel de Abona</span>
+                </div>
+              </div>
+
+              <p className="info-block-line contact-hero-response">{t('response_desc')}</p>
+            </div>
+
+            <div className="page-full-hero-panel contact-hero-panel contact-hero-panel--route">
+              <h3>{t('location_title')}</h3>
+              <ul className="contact-hero-distances">
+                {distances.map(([place, time]) => (
+                  <li key={place}>
+                    <span>{place}</span>
+                    <span className="small-caps">{time}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/sejourner" className="btn btn-secondary">
+                {t('booking_cta')}
+              </Link>
+            </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="contact">
+      <section className="page-form-section" id="formulaire">
         <div className="container">
-          <p className="editorial-text lettrine fade-in visible contact-intro">
-            {t('seo_intro')}
-          </p>
-
-          <div className="seo-reassurance fade-in visible">
-            <h3>{t('response_title')}</h3>
-            <p className="editorial-text">{t('response_desc')}</p>
+          <div className="page-form-header">
+            <h2>{t('form_title')}</h2>
           </div>
-
-          <div className="contact-split">
-            <div>
-              <div className="contact-methods contact-methods--stacked">
-                <div className="contact-card fade-in visible">
-                  <h3>WhatsApp</h3>
-                  <p>+{whatsapp}</p>
-                  <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                    Écrivez-nous
-                  </a>
-                </div>
-                <div className="contact-card fade-in visible">
-                  <h3>Email</h3>
-                  <p>contact@cueva-thalia.com</p>
-                  <a href="mailto:contact@cueva-thalia.com" className="btn btn-secondary">
-                    Envoyer un email
-                  </a>
-                </div>
-                <div className="contact-card fade-in visible">
-                  <h3>{t('address_title')}</h3>
-                  <p>
-                    Calle Las Morales 70
-                    <br />
-                    38620 San Miguel de Abona
-                    <br />
-                    Tenerife, España
-                  </p>
-                  <Link href="/sejourner" className="btn btn-primary contact-card-cta">
-                    {t('booking_cta')}
-                  </Link>
-                </div>
-              </div>
-
-              <div className="contact-distances">
-                <h3>{t('location_title')}</h3>
-                <ul className="distances-list">
-                  {distances.map(([place, time]) => (
-                    <li className="distance-item" key={place}>
-                      <span>{place}</span>
-                      <span className="small-caps">{time}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="custom-form fade-in visible">
-              <h2>{t('form_title')}</h2>
-              <ContactForm />
-            </div>
+          <div className="custom-form fade-in visible">
+            <ContactForm />
           </div>
-
           <p className="contact-back">
             <Link href="/" className="btn btn-secondary">
               ← Retour à l&apos;accueil

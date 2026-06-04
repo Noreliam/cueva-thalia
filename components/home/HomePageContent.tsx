@@ -2,11 +2,14 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { HeroBackgroundVideo } from '@/components/home/HeroBackgroundVideo';
+import { LocationMapSection } from '@/components/home/LocationMapSection';
 import { MediaFrame } from '@/components/ui/MediaFrame';
 import { fullReviews } from '@/lib/home-reviews';
 
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
 const STORY_DISCOVERY_IMAGE = '/photos/optimized/story-discovery.jpg';
+const MAPS_DIRECTIONS_URL =
+  'https://www.google.com/maps/search/?api=1&query=Calle+Las+Morales+70,+38620+San+Miguel+de+Abona,+Tenerife';
 
 const Star = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -14,13 +17,13 @@ const Star = () => (
   </svg>
 );
 
-const galleryPlaceholders = [
-  { src: '/photos/optimized/7ea5a8c2-b48b-4a12-b7be-034ca90b0d8e.jpg', alt: 'Séjour' },
-  { src: '/photos/optimized/4c8be500-7d15-4958-a5df-94e614ff3556.jpg', alt: 'Piscine' },
-  { src: '/photos/optimized/9eac7702-d91d-45eb-9a8b-526186764f1f.jpg', alt: 'Événements' },
-  { src: '/photos/optimized/49b90bf0-ce3f-4a3e-8164-90993ce96cd7.jpg', alt: 'Retraites' },
-  { src: '/photos/optimized/046743a6-df86-4387-a7bf-b57f830e12c8.jpg', alt: 'Couchages' },
-  { src: '/photos/optimized/galleries/jardin/photocouverture3.jpg', alt: 'Extérieurs' },
+const homeGalleryImages = [
+  { src: '/photos/optimized/home-galerie/01-sejour.jpg', alt: 'Séjour' },
+  { src: '/photos/optimized/home-galerie/02-piscine.jpg', alt: 'Piscine' },
+  { src: '/photos/optimized/home-galerie/03-jardin.jpg', alt: 'Extérieurs' },
+  { src: '/photos/optimized/home-galerie/04-details.jpg', alt: 'Ambiance' },
+  { src: '/photos/optimized/home-galerie/05-cuisine.jpg', alt: 'Cuisine' },
+  { src: '/photos/optimized/home-galerie/06-chambre.jpg', alt: 'Couchages' },
 ] as const;
 
 export async function HomePageContent({ locale }: { locale: string }) {
@@ -105,7 +108,9 @@ export async function HomePageContent({ locale }: { locale: string }) {
                 />
                 <h3>{pathway.title}</h3>
                 <p>{pathway.text}</p>
-                <span className="card-badge">{pathway.badge}</span>
+                {pathway.badge ? (
+                  <span className="card-badge">{pathway.badge}</span>
+                ) : null}
                 <span className="card-link card-cta">{pathway.cta} →</span>
               </Link>
             ))}
@@ -223,7 +228,7 @@ export async function HomePageContent({ locale }: { locale: string }) {
               ))}
             </ul>
             <a
-              href="https://maps.app.goo.gl/"
+              href={MAPS_DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="card-link"
@@ -232,10 +237,16 @@ export async function HomePageContent({ locale }: { locale: string }) {
               {t('location_link')}
             </a>
           </div>
-          <div className="map-stylisee" aria-hidden="true">
-            <span className="map-stylisee-label">{t('location_map_label')}</span>
-            <span className="marker" style={{ top: '45%', left: '52%' }} />
-          </div>
+          <LocationMapSection
+            ariaLabel={t('location_map_aria')}
+            cuevaLabel={t('location_map_cueva')}
+            cuevaAddress="San Miguel de Abona"
+            points={(['1', '2', '3', '4', '5', '6', '7'] as const).map((n) => ({
+              id: n,
+              name: t(`loc_${n}_place`),
+              time: t(`loc_${n}_time`),
+            }))}
+          />
         </div>
       </section>
 
@@ -243,9 +254,13 @@ export async function HomePageContent({ locale }: { locale: string }) {
         <div className="container">
           <h2 className="section-title-center">{t('gallery_title')}</h2>
           <div className="home-gallery-grid">
-            {galleryPlaceholders.map((item) => (
-              <div className="home-gallery-item" key={item.alt}>
-                <MediaFrame src={item.src} alt={item.alt} aspectRatio="4 / 3" />
+            {homeGalleryImages.map((item) => (
+              <div className="home-gallery-item" key={item.src}>
+                <MediaFrame
+                  src={item.src}
+                  alt={item.alt}
+                  aspectRatio="4 / 3"
+                />
               </div>
             ))}
           </div>

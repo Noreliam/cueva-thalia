@@ -12,7 +12,7 @@
     "pathways_title": "Tres formas de vivir la cueva",
     "pathway1_title": "Alojarse",
     "pathway1_text": "Una pausa privada en Tenerife, entre roca volcánica, agua caliente y silencio.",
-    "pathway1_badge": "Hasta 4 personas",
+    "pathway1_badge": "Hasta 14 personas",
     "pathway1_cta": "Descubrir la estancia",
     "pathway2_title": "Celebrar",
     "pathway2_text": "Un cumpleaños, una celebración íntima, un shooting o un momento para compartir en un lugar fuera de lo común.",
@@ -20,7 +20,7 @@
     "pathway2_cta": "Imaginar un evento",
     "pathway3_title": "Reunirse",
     "pathway3_text": "Yoga, meditación, talleres y retiros — un marco íntimo para ralentizar y reunirse.",
-    "pathway3_badge": "Hasta 12 participantes",
+    "pathway3_badge": "Bajo petición",
     "pathway3_cta": "Crear un workshop",
     "story_title": "Un descubrimiento inesperado",
     "story_p1": "Cuando Manon compró esta casa en San Miguel de Abona, una cueva natural dormía bajo el jardín — invisible, intacta.",
@@ -41,6 +41,9 @@
     "location_title": "Alrededor de la cueva",
     "location_intro": "Cueva Thalía está en San Miguel de Abona, en un entorno tranquilo, cerca de playas, restaurantes y lugares clave del sur de Tenerife.",
     "location_map_label": "Isla de Tenerife",
+    "location_map_aria": "Mapa OpenStreetMap del sur de Tenerife con Cueva Thalía y destinos cercanos",
+    "location_map_cueva": "Cueva Thalía",
+    "location_map_open": "Abrir en Google Maps",
     "location_link": "Ver la ruta →",
     "loc_1_place": "Aeropuerto Tenerife Sur",
     "loc_1_time": "15-20 min",
@@ -198,11 +201,13 @@
     "intro": "Explore la roca, el agua, el jardín — y la atmósfera del lugar.",
     "filter_all": "Todo",
     "filter_sejour": "Estancia",
+    "filter_cuisine": "Cocina",
+    "filter_atelier": "Taller",
     "filter_piscine": "Piscina",
-    "filter_evenements": "Eventos",
-    "filter_retraites": "Retiros",
-    "filter_couchages": "Colchonetas adicionales",
-    "filter_exterieurs": "Exteriores"
+    "filter_jardin": "Jardín",
+    "filter_chambre": "Dormitorio",
+    "filter_details": "Detalles",
+    "chambre_group_bedding": "Para recibir grupos, hay colchonetas adicionales en la cueva: doce colchones en el suelo, nidos acogedores bajo la bóveda de roca."
   },
   "Contact": {
     "title": "Contacto",
@@ -224,9 +229,14 @@
   },
   "BonCadeau": {
     "title": "Tarjeta Regalo",
-    "hero_title": "Regale tiempo",
+    "hero_title": "Regale un momento fuera del tiempo",
+    "hero_lead": "Un bono regalo para vivir la experiencia única de Cueva Thalía: la suavidad de la roca, el agua caliente y el silencio.",
     "hero_subtitle": "Una experiencia inmersiva para sus seres queridos.",
-    "form_title": "Solicitar tarjeta regalo"
+    "cta": "Solicitar bono regalo",
+    "validity": "Válido para una estancia, un evento privado o un retiro.",
+    "form_title": "Solicitar bono regalo",
+    "close_modal": "Cerrar formulario",
+    "back_home": "Volver al inicio"
   },
   "Forms": {
     "name": "Nombre",

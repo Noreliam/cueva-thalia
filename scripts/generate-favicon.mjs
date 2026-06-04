@@ -31,43 +31,30 @@ function rectAlpha(x, y, x0, y0, x1, y1, feather = 0.4) {
   return Math.min(1, Math.min(dx, dy));
 }
 
-/** Serif CT — geometry aligned with public/favicon.svg (Georgia 15px, letter-spacing -1.2) */
+/** Monogramme CT serif — aligné sur public/favicon.svg */
 function letterCAlpha(x, y) {
-  const cx = 10.15;
-  const cy = 16.2;
-  const rx = 5.35;
-  const ry = 6.1;
+  const cx = 9.55;
+  const cy = 15.9;
+  const rx = 5.05;
+  const ry = 5.75;
   const dx = (x - cx) / rx;
   const dy = (y - cy) / ry;
   const d = Math.sqrt(dx * dx + dy * dy);
-  const open = x < cx + rx * 0.15;
-  const ring = Math.min(1.02 - d, d - 0.42) / 0.1;
-  let a = open && ring > 0 ? Math.min(1, ring) : 0;
-  if (x >= 8.2 && x <= 11.2 && y >= 9.4 && y <= 10.4) a = Math.max(a, rectAlpha(x, y, 8.2, 9.4, 11.2, 10.4, 0.25));
-  if (x >= 8.2 && x <= 11.2 && y >= 21.8 && y <= 22.8) a = Math.max(a, rectAlpha(x, y, 8.2, 21.8, 11.2, 22.8, 0.25));
-  return a;
+  const open = x < cx + rx * 0.48;
+  const ring = Math.min(1.05 - d, d - 0.38) / 0.11;
+  return open && ring > 0 ? Math.min(1, ring) : 0;
 }
 
 function letterTAlpha(x, y) {
-  const left = 18.1;
-  const barTop = 9.35;
-  const barH = 2.1;
-  const stemW = 1.75;
-  const stemLeft = 20.55;
-  const stemH = 10.2;
-  const totalW = 6.35;
-
   return Math.max(
-    rectAlpha(x, y, left, barTop, left + totalW, barTop + barH, 0.3),
-    rectAlpha(x, y, stemLeft, barTop + barH, stemLeft + stemW, barTop + barH + stemH, 0.3),
-    rectAlpha(x, y, left, barTop + barH, left + 0.55, barTop + barH + 0.85, 0.25),
-    rectAlpha(x, y, left + totalW - 0.55, barTop + barH, left + totalW, barTop + barH + 0.85, 0.25),
+    rectAlpha(x, y, 14.6, 10.1, 23.15, 11.38, 0.3),
+    rectAlpha(x, y, 18.05, 11.38, 19.87, 21.5, 0.3),
   );
 }
 
 function sample(fx, fy, size) {
   const scale = size / 32;
-  const r = Math.max(1, Math.round(3 * scale));
+  const r = Math.max(1, Math.round(6 * scale));
   const inset = Math.max(1, Math.round(scale));
 
   let color = [...bg];

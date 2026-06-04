@@ -72,7 +72,7 @@ export default async function WorkshopsPage({ params }: { params: Promise<{ loca
 
       <section className="page-bottom-cta">
         <div className="container">
-          <Link href="/galerie/interieur" className="card-link">
+          <Link href="/galerie/atelier" className="card-link">
             Voir l&apos;intérieur →
           </Link>
           <p style={{ marginTop: 24 }}>

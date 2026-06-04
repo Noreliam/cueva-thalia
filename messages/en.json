@@ -12,7 +12,7 @@
     "pathways_title": "Three ways to live the cueva",
     "pathway1_title": "Stay",
     "pathway1_text": "A private pause in Tenerife, between volcanic rock, warm water and silence.",
-    "pathway1_badge": "Up to 4 guests",
+    "pathway1_badge": "Up to 14 guests",
     "pathway1_cta": "Discover the stay",
     "pathway2_title": "Celebrate",
     "pathway2_text": "A birthday, an intimate celebration, a photo shoot or a moment to share in an extraordinary place.",
@@ -20,7 +20,7 @@
     "pathway2_cta": "Imagine an event",
     "pathway3_title": "Reconnect",
     "pathway3_text": "Yoga, meditation, workshops and retreats — an intimate setting to slow down and reconnect.",
-    "pathway3_badge": "Up to 12 participants",
+    "pathway3_badge": "On request",
     "pathway3_cta": "Create a workshop",
     "story_title": "An unexpected discovery",
     "story_p1": "When Manon bought this house in San Miguel de Abona, a natural cave lay sleeping beneath the garden — invisible, untouched.",
@@ -41,6 +41,9 @@
     "location_title": "Around the cave",
     "location_intro": "Cueva Thalía is in San Miguel de Abona, in a calm setting close to beaches, restaurants and key places in south Tenerife.",
     "location_map_label": "Island of Tenerife",
+    "location_map_aria": "OpenStreetMap of south Tenerife with Cueva Thalía and nearby destinations",
+    "location_map_cueva": "Cueva Thalía",
+    "location_map_open": "Open in Google Maps",
     "location_link": "Get directions →",
     "loc_1_place": "Tenerife South Airport",
     "loc_1_time": "15-20 min",
@@ -198,11 +201,13 @@
     "intro": "Explore the rock, the water, the garden — and the atmosphere of the place.",
     "filter_all": "All",
     "filter_sejour": "Stay",
+    "filter_cuisine": "Kitchen",
+    "filter_atelier": "Studio",
     "filter_piscine": "Pool",
-    "filter_evenements": "Events",
-    "filter_retraites": "Retreats",
-    "filter_couchages": "Extra bedding",
-    "filter_exterieurs": "Outdoors"
+    "filter_jardin": "Garden",
+    "filter_chambre": "Bedroom",
+    "filter_details": "Details",
+    "chambre_group_bedding": "For group stays, extra bedding is available in the cave: twelve floor mattresses, cosy nests beneath the rock vault."
   },
   "Contact": {
     "title": "Contact",
@@ -224,9 +229,14 @@
   },
   "BonCadeau": {
     "title": "Gift Card",
-    "hero_title": "Give the gift of time",
+    "hero_title": "Offer a moment outside of time",
+    "hero_lead": "A gift voucher to experience Cueva Thalía: the softness of the rock, warm water and silence.",
     "hero_subtitle": "An immersive experience for your loved ones.",
-    "form_title": "Order a gift card"
+    "cta": "Order a gift voucher",
+    "validity": "Valid for a stay, a private event or a retreat.",
+    "form_title": "Order a gift voucher",
+    "close_modal": "Close form",
+    "back_home": "Back to home"
   },
   "Forms": {
     "name": "Name",

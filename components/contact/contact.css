@@ -1,0 +1,171 @@
+/* Contact — hero plein écran, 2 blocs latéraux, typo alignée sur les autres pages */
+
+.page-full-hero--contact .gallery-hero-bg {
+  background-position: center 40%;
+  z-index: 0;
+}
+
+.contact-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28, 20, 12, 0.55) 0%,
+      rgba(28, 20, 12, 0.15) 38%,
+      rgba(28, 20, 12, 0.2) 62%,
+      rgba(28, 20, 12, 0.62) 100%
+    ),
+    radial-gradient(
+      ellipse 130% 90% at 50% 30%,
+      rgba(90, 56, 37, 0.22) 0%,
+      transparent 65%
+    );
+}
+
+.page-full-hero-content--contact {
+  width: 100%;
+  max-width: min(1080px, 100%);
+}
+
+.page-full-hero--contact .page-full-hero-head .btn-primary {
+  margin-bottom: 0;
+}
+
+.page-full-hero--contact .contact-hero-body {
+  width: 100%;
+}
+
+/* — Deux blocs côte à côte — */
+.contact-hero-columns {
+  display: grid;
+  gap: clamp(28px, 4vw, 40px);
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .contact-hero-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 48px);
+  }
+}
+
+.page-full-hero--contact .contact-hero-panel {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(28px, 4vw, 40px);
+  background: rgba(28, 20, 12, 0.58);
+  border: 1px solid rgba(245, 240, 230, 0.22);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 48px rgba(28, 20, 12, 0.28);
+}
+
+.page-full-hero--contact .contact-hero-panel .editorial-text {
+  margin-bottom: clamp(24px, 3.5vw, 32px);
+}
+
+.page-full-hero--contact .contact-hero-panel h3 {
+  text-align: left;
+  margin-bottom: clamp(16px, 2.5vw, 20px);
+}
+
+/* — Bloc coordonnées (gauche) — */
+.contact-hero-channels {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 16px);
+  margin-bottom: clamp(24px, 3.5vw, 32px);
+}
+
+.contact-hero-channel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(14px, 2vw, 18px) clamp(16px, 2.5vw, 20px);
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(245, 240, 230, 0.18);
+  border-radius: 6px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+a.contact-hero-channel:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(245, 240, 230, 0.32);
+}
+
+.contact-hero-channel .small-caps {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(245, 240, 230, 0.68);
+}
+
+.contact-hero-channel span:last-child {
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1.5;
+}
+
+.contact-hero-channel--static {
+  cursor: default;
+}
+
+.contact-hero-response {
+  margin: 0;
+  margin-top: auto;
+  padding-top: clamp(20px, 3vw, 28px);
+  border-top: 1px solid rgba(245, 240, 230, 0.16);
+}
+
+/* — Bloc itinéraire (droite) — */
+.contact-hero-panel--route {
+  justify-content: flex-start;
+}
+
+.contact-hero-distances {
+  list-style: none;
+  margin: 0 0 clamp(28px, 4vw, 36px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-hero-distances li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: clamp(12px, 1.8vw, 14px) 0;
+  border-bottom: 1px solid rgba(245, 240, 230, 0.14);
+  font-size: clamp(14px, 1.2vw, 15px);
+  line-height: 1.45;
+  color: rgba(245, 240, 230, 0.95);
+}
+
+.contact-hero-distances li:last-child {
+  border-bottom: none;
+}
+
+.contact-hero-distances li span:last-child {
+  flex-shrink: 0;
+  color: var(--ct-sable);
+  font-size: 11px;
+  opacity: 0.88;
+}
+
+.page-full-hero--contact .contact-hero-panel--route .btn-secondary {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@media (max-width: 767px) {
+  .page-full-hero--contact .contact-hero-panel {
+    padding: 22px 18px;
+  }
+}

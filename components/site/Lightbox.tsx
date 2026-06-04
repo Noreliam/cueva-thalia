@@ -5,14 +5,17 @@ import Image from 'next/image';
 
 export function Lightbox() {
   const [src, setSrc] = useState<string | null>(null);
+  const [caption, setCaption] = useState<string | null>(null);
 
   const close = useCallback(() => {
     setSrc(null);
+    setCaption(null);
     document.body.style.overflow = '';
   }, []);
 
-  const open = useCallback((imageSrc: string) => {
+  const open = useCallback((imageSrc: string, imageCaption: string | null) => {
     setSrc(imageSrc);
+    setCaption(imageCaption);
     document.body.style.overflow = 'hidden';
   }, []);
 
@@ -23,7 +26,7 @@ export function Lightbox() {
     items.forEach((item) => {
       const fn = () => {
         const imageSrc = item.getAttribute('data-src');
-        if (imageSrc) open(imageSrc);
+        if (imageSrc) open(imageSrc, item.getAttribute('data-caption'));
       };
       item.addEventListener('click', fn);
       handlers.push({ el: item, fn });
@@ -58,7 +61,8 @@ export function Lightbox() {
         <button className="lightbox-close" aria-label="Fermer la galerie" onClick={close}>
           &times;
         </button>
-        <Image src={src} alt="" width={1200} height={800} style={{ width: '100%', height: 'auto' }} />
+        <Image src={src} alt={caption ?? ''} width={1200} height={800} style={{ width: '100%', height: 'auto' }} />
+        {caption ? <p className="lightbox-caption">{caption}</p> : null}
       </div>
     </div>
   );

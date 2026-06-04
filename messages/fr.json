@@ -12,7 +12,7 @@
     "pathways_title": "Trois façons de vivre la cueva",
     "pathway1_title": "Séjourner",
     "pathway1_text": "Une parenthèse privée à Tenerife, entre roche volcanique, eau chaude et silence.",
-    "pathway1_badge": "Jusqu'à 4 personnes",
+    "pathway1_badge": "Jusqu'à 14 personnes",
     "pathway1_cta": "Découvrir le séjour",
     "pathway2_title": "Célébrer",
     "pathway2_text": "Un anniversaire, une célébration intime, un shooting ou un moment à partager dans un lieu hors du commun.",
@@ -20,7 +20,7 @@
     "pathway2_cta": "Imaginer un événement",
     "pathway3_title": "Se retrouver",
     "pathway3_text": "Yoga, méditation, ateliers et retraites — un cadre intime pour ralentir et se retrouver.",
-    "pathway3_badge": "Jusqu'à 12 participants",
+    "pathway3_badge": "Sur demande",
     "pathway3_cta": "Créer un workshop",
     "story_title": "Une découverte inattendue",
     "story_p1": "Quand Manon a acheté cette maison à San Miguel de Abona, une grotte naturelle dormait encore sous le jardin — invisible, intacte.",
@@ -41,6 +41,9 @@
     "location_title": "Autour de la cueva",
     "location_intro": "Cueva Thalía se situe à San Miguel de Abona, dans un environnement calme, à proximité des plages, restaurants et lieux clés du sud de Tenerife.",
     "location_map_label": "Île de Tenerife",
+    "location_map_aria": "Carte OpenStreetMap du sud de Tenerife avec Cueva Thalía et les lieux accessibles en voiture",
+    "location_map_cueva": "Cueva Thalía",
+    "location_map_open": "Ouvrir dans Google Maps",
     "location_link": "Voir l'itinéraire →",
     "loc_1_place": "Aéroport Tenerife Sud",
     "loc_1_time": "15-20 min",
@@ -197,11 +200,13 @@
     "intro": "Explorez la roche, l'eau, le jardin — et l'atmosphère du lieu.",
     "filter_all": "Tout",
     "filter_sejour": "Séjour",
+    "filter_cuisine": "Cuisine",
+    "filter_atelier": "Atelier",
     "filter_piscine": "Piscine",
-    "filter_evenements": "Événements",
-    "filter_retraites": "Retraites",
-    "filter_couchages": "Couchages supplémentaires",
-    "filter_exterieurs": "Extérieurs"
+    "filter_jardin": "Jardin",
+    "filter_chambre": "Chambre",
+    "filter_details": "Détails",
+    "chambre_group_bedding": "Pour accueillir les groupes, des couchages additionnels sont disponibles dans la grotte : douze matelas au sol, nids douillets sous la voûte de roche."
   },
   "Contact": {
     "title": "Contact",
@@ -223,9 +228,14 @@
   },
   "BonCadeau": {
     "title": "Bon Cadeau",
-    "hero_title": "Offrez le temps",
+    "hero_title": "Offrez un moment hors du temps",
+    "hero_lead": "Un bon cadeau pour vivre l'expérience unique de Cueva Thalía : la douceur de la roche, l'eau chaude et le silence.",
     "hero_subtitle": "Une expérience immersive pour ceux qui comptent.",
-    "form_title": "Commander un bon cadeau"
+    "cta": "Commander un bon cadeau",
+    "validity": "Valable pour un séjour, un événement privé ou une retraite.",
+    "form_title": "Commander un bon cadeau",
+    "close_modal": "Fermer le formulaire",
+    "back_home": "Retour à l'accueil"
   },
   "Forms": {
     "name": "Nom",

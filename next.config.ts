@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
-import { SECURITY_HEADERS } from '@/lib/security/headers';
+import { getSecurityHeaders } from '@/lib/security/headers';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/:path*',
-        headers: Object.entries(SECURITY_HEADERS).map(([key, value]) => ({ key, value })),
+        headers: Object.entries(getSecurityHeaders()).map(([key, value]) => ({ key, value })),
       },
     ];
   },

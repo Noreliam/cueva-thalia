@@ -1,6 +1,6 @@
 import { Link } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { MediaFrame } from '@/components/ui/MediaFrame';
 import { getGalleryBySlug, galleryCategories, galleryImagePath } from '@/lib/gallery-data';
@@ -35,6 +35,7 @@ export default async function GalleryCategoryPage({ params }: Props) {
   const gallery = getGalleryBySlug(slug);
   if (!gallery) notFound();
 
+  const t = await getTranslations({ locale, namespace: 'Galerie' });
   const coverSrc = galleryImagePath(gallery.folder, gallery.cover);
 
   return (
@@ -57,18 +58,20 @@ export default async function GalleryCategoryPage({ params }: Props) {
       <section className="galerie gallery-subpage">
         <div className="container">
           <div className="gallery-grid">
-            {gallery.images.map((filename, index) => {
-              const src = galleryImagePath(gallery.folder, filename);
+            {gallery.images.map((image, index) => {
+              const src = galleryImagePath(gallery.folder, image.filename);
               const aspectRatio = galleryAspectRatios[index % galleryAspectRatios.length];
+              const caption = image.captionKey ? t(image.captionKey) : undefined;
               return (
-                <div className="gallery-item" data-src={src} key={filename}>
+                <figure className="gallery-item" data-src={src} data-caption={caption} key={image.filename}>
                   <MediaFrame
                     src={src}
-                    alt={gallery.title}
+                    alt={caption ?? gallery.title}
                     aspectRatio={aspectRatio}
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
-                </div>
+                  {caption ? <figcaption className="gallery-item-caption">{caption}</figcaption> : null}
+                </figure>
               );
             })}
           </div>
