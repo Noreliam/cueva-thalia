@@ -130,7 +130,7 @@ export default function BonCadeauPageContent({ copy }: { copy: BonCadeauCopy }) 
         <div className="container">
           <p>
             <Link href="/" className="card-link">
-              ← {copy.backHome}
+              {copy.backHome}
             </Link>
           </p>
         </div>

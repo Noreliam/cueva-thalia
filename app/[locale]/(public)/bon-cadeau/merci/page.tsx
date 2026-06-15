@@ -37,7 +37,7 @@ export default async function BonCadeauMerciPage({
           ) : null}
           <p style={{ marginTop: '2rem' }}>
             <Link href="/" className="card-link">
-              ← {t('back_home')}
+              {t('back_home')}
             </Link>
           </p>
         </div>

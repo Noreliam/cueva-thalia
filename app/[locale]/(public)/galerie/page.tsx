@@ -24,10 +24,12 @@ export default async function GaleriePage({ params }: { params: Promise<{ locale
   const categories = galleryCategories.map((cat) => ({
     slug: cat.slug,
     folder: cat.folder,
-    cover: cat.cover,
-    previewAspectRatio: cat.previewAspectRatio,
     usage: cat.usage,
     title: t(`category_${cat.slug}` as 'category_sejour'),
+    images: cat.images.map((image) => ({
+      filename: image.filename,
+      caption: image.captionKey ? t(image.captionKey) : undefined,
+    })),
   }));
 
   return (
