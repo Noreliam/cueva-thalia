@@ -1,10 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 
 export default function SmoobuWidget() {
   const [mounted, setMounted] = useState(false);
   const widgetId = process.env.NEXT_PUBLIC_SMOOBU_WIDGET_ID;
+  const params = useParams();
+  const locale = (params?.locale as string) ?? 'es';
 
   useEffect(() => {
     setMounted(true);
@@ -28,7 +31,7 @@ export default function SmoobuWidget() {
   return (
     <div className="smoobu-widget-container w-full min-h-[500px] rounded-lg overflow-hidden bg-white shadow-sm border border-ct-dune/20">
       <iframe
-        src={`https://login.smoobu.com/fr/booking-tool/iframe/${widgetId}`}
+        src={`https://login.smoobu.com/${locale}/booking-tool/iframe/${widgetId}`}
         width="100%"
         height="100%"
         className="min-h-[500px] border-none"
