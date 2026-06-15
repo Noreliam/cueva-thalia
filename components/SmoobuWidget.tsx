@@ -28,7 +28,7 @@ export default function SmoobuWidget() {
   return (
     <div className="smoobu-widget-container w-full min-h-[500px] rounded-lg overflow-hidden bg-white shadow-sm border border-ct-dune/20">
       <iframe
-        src={`https://login.smoobu.com/fr/booking-widget/iframe/${widgetId}`}
+        src={`https://login.smoobu.com/fr/booking-tool/iframe/${widgetId}`}
         width="100%"
         height="100%"
         className="min-h-[500px] border-none"
