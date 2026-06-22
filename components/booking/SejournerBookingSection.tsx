@@ -23,11 +23,19 @@ type Copy = {
   bookingEventsLink: string;
   bookingCalendarTitle: string;
   bookingCalendarDesc: string;
+  bookingPaymentTitle: string;
+  bookingPaymentDesc: string;
   bookingNoscript: string;
   whatsappHref: string;
 };
 
-export function SejournerBookingSection({ copy }: { copy: Copy }) {
+export function SejournerBookingSection({
+  copy,
+  locale,
+}: {
+  copy: Copy;
+  locale: 'fr' | 'es' | 'en';
+}) {
   return (
     <div className="booking-layout fade-in">
       <div className="booking-panel">
@@ -36,6 +44,7 @@ export function SejournerBookingSection({ copy }: { copy: Copy }) {
           <p className="booking-panel-lead">{copy.reservationLead}</p>
         </header>
         <SmoobuBookingGate
+          locale={locale}
           copy={{
             label: copy.bookingGuests,
             continue: copy.bookingContinue,
@@ -45,6 +54,8 @@ export function SejournerBookingSection({ copy }: { copy: Copy }) {
             eventsLink: copy.bookingEventsLink,
             calendarTitle: copy.bookingCalendarTitle,
             calendarDesc: copy.bookingCalendarDesc,
+            paymentTitle: copy.bookingPaymentTitle,
+            paymentDesc: copy.bookingPaymentDesc,
             noscript: copy.bookingNoscript,
           }}
         />

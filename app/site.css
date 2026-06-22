@@ -3566,6 +3566,38 @@
       margin-top: 8px;
     }
 
+    .booking-step + .booking-step {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--ct-dune);
+    }
+
+    .smoobu-calendar-skeleton {
+      width: 100%;
+      min-height: 420px;
+      border-radius: 8px;
+      border: 1px solid color-mix(in srgb, var(--ct-dune) 20%, transparent);
+      background: var(--ct-blanc-casse);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .smoobu-calendar-iframe iframe {
+      border: none;
+      display: block;
+      max-width: 100%;
+    }
+
+    .smoobu-calendar-iframe .bigDevices {
+      width: 100%;
+    }
+
+    @media (max-width: 639px) {
+      .smoobu-calendar-iframe {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
     .booking-gate--widget .placeholder-content h3 {
       font-size: clamp(20px, 2.2vw, 24px);
       margin-bottom: 8px;

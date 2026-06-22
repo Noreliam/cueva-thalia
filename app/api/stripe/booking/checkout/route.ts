@@ -2,6 +2,7 @@ import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
+import { checkSmoobuAvailability } from '@/lib/smoobu/availability';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 import { getClientIpFromRequest } from '@/lib/security/client-ip';
 import { checkRateLimit } from '@/lib/security/rate-limit';
@@ -96,6 +97,22 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('[STRIPE:booking:checkout] pricing error', error);
     return NextResponse.json({ ok: false, error: 'Invalid booking parameters' }, { status: 400 });
+  }
+
+  const availability = await checkSmoobuAvailability({
+    checkInDate: parsed.checkInDate,
+    checkOutDate: parsed.checkOutDate,
+    guestCount: parsed.guestCount,
+  }).catch((error) => {
+    console.error('[STRIPE:booking:checkout] Smoobu availability error', error);
+    return { available: false as const, reason: 'Availability check failed' };
+  });
+
+  if (!availability.available) {
+    return NextResponse.json(
+      { ok: false, error: 'Selected dates are not available' },
+      { status: 409 },
+    );
   }
 
   // Generate booking ID

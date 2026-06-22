@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import BookingForm from '@/components/booking/BookingForm';
 import SmoobuWidget from '@/components/SmoobuWidget';
 import { Link } from '@/i18n/routing';
 
@@ -13,10 +14,18 @@ type Copy = {
   eventsLink: string;
   calendarTitle: string;
   calendarDesc: string;
+  paymentTitle: string;
+  paymentDesc: string;
   noscript: string;
 };
 
-export default function SmoobuBookingGate({ copy }: { copy: Copy }) {
+export default function SmoobuBookingGate({
+  copy,
+  locale = 'en',
+}: {
+  copy: Copy;
+  locale?: 'fr' | 'es' | 'en';
+}) {
   const [selected, setSelected] = useState(2);
   const [confirmed, setConfirmed] = useState(false);
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
@@ -82,11 +91,22 @@ export default function SmoobuBookingGate({ copy }: { copy: Copy }) {
 
   return (
     <div className="booking-gate booking-gate--widget">
-      <div className="placeholder-content">
-        <h3>{copy.calendarTitle}</h3>
-        <p style={{ marginBottom: 24 }}>{copy.calendarDesc}</p>
-      </div>
-      <SmoobuWidget />
+      <section className="booking-step" aria-labelledby="booking-calendar-title">
+        <div className="placeholder-content">
+          <h3 id="booking-calendar-title">{copy.calendarTitle}</h3>
+          <p style={{ marginBottom: 24 }}>{copy.calendarDesc}</p>
+        </div>
+        <SmoobuWidget />
+      </section>
+
+      <section className="booking-step booking-step--payment" aria-labelledby="booking-payment-title">
+        <div className="placeholder-content">
+          <h3 id="booking-payment-title">{copy.paymentTitle}</h3>
+          <p style={{ marginBottom: 24 }}>{copy.paymentDesc}</p>
+        </div>
+        <BookingForm locale={locale} guestCount={selected} />
+      </section>
+
       <button type="button" className="link-subtle booking-gate-back" onClick={() => setConfirmed(false)}>
         ←
       </button>

@@ -106,6 +106,7 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
       <section className="sejourner" id="reservation">
         <div className="container">
           <SejournerBookingSection
+            locale={loc}
             copy={{
               reservationTitle: t('reservation_title'),
               reservationLead: t('reservation_lead'),
@@ -129,6 +130,8 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               bookingEventsLink: t('booking_events_link'),
               bookingCalendarTitle: t('booking_calendar_title'),
               bookingCalendarDesc: t('booking_calendar_desc'),
+              bookingPaymentTitle: t('booking_payment_title'),
+              bookingPaymentDesc: t('booking_payment_desc'),
               bookingNoscript: t('booking_noscript'),
               whatsappHref: `https://wa.me/${whatsapp}`,
             }}

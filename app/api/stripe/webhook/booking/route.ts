@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
+import { fulfillBookingOrder, orderFromBookingCheckoutSession } from '@/lib/booking/fulfill';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 
 export const runtime = 'nodejs';
@@ -40,32 +41,16 @@ export async function POST(request: Request) {
   try {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
+      const booking = orderFromBookingCheckoutSession(session);
 
-      if (session.payment_status === 'paid') {
-        const bookingId = session.metadata?.bookingId;
-
-        if (!bookingId) {
-          console.error('[STRIPE:webhook:booking] missing bookingId in metadata', {
-            sessionId: session.id,
-          });
-          return NextResponse.json({ received: true });
-        }
-
-        // TODO: Implement booking confirmation logic
-        // Pour l'instant, on log juste la réservation
-        console.log('[STRIPE:webhook:booking] booking confirmed', {
-          bookingId,
+      if (!booking) {
+        console.error('[STRIPE:webhook:booking] missing booking metadata', {
           sessionId: session.id,
-          customerEmail: session.customer_email,
-          metadata: session.metadata,
         });
-
-        // Prochaines étapes:
-        // 1. Créer un enregistrement de réservation en base de données
-        // 2. Envoyer un email de confirmation au client
-        // 3. Envoyer une notification à Manon
-        // 4. (Optionnel) Bloquer les dates dans Smoobu
+        return NextResponse.json({ received: true });
       }
+
+      await fulfillBookingOrder(booking);
     } else if (event.type === 'charge.dispute.created') {
       const charge = event.data.object as Stripe.Dispute;
       console.warn('[STRIPE:webhook:booking] dispute created', {

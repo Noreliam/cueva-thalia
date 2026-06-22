@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
+import { fulfillBookingOrder, orderFromBookingCheckoutSession } from '@/lib/booking/fulfill';
 import { fulfillGiftVoucherOrder, orderFromCheckoutSession } from '@/lib/gift-voucher/fulfill';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 
@@ -34,13 +35,18 @@ export async function POST(request: Request) {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
       if (session.payment_status === 'paid') {
-        const order = orderFromCheckoutSession(session);
-        if (order) {
-          await fulfillGiftVoucherOrder(order);
+        const booking = orderFromBookingCheckoutSession(session);
+        if (booking) {
+          await fulfillBookingOrder(booking);
         } else {
-          console.error('[STRIPE:webhook] missing gift voucher metadata', {
-            sessionId: session.id,
-          });
+          const order = orderFromCheckoutSession(session);
+          if (order) {
+            await fulfillGiftVoucherOrder(order);
+          } else {
+            console.error('[STRIPE:webhook] unrecognized checkout session metadata', {
+              sessionId: session.id,
+            });
+          }
         }
       }
     }
