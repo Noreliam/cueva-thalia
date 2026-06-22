@@ -3583,15 +3583,30 @@
 
     .smoobu-calendar-iframe iframe {
       border: none;
-      display: block;
       max-width: 100%;
     }
 
-    .smoobu-calendar-iframe .bigDevices {
-      width: 100%;
+    @media screen and (min-width: 768px) {
+      .smoobu-calendar-iframe .smallDevices {
+        display: none;
+      }
+
+      .smoobu-calendar-iframe .bigDevices {
+        display: block;
+        width: 100%;
+      }
     }
 
-    @media (max-width: 639px) {
+    @media screen and (max-width: 767px) {
+      .smoobu-calendar-iframe .bigDevices {
+        display: none;
+      }
+
+      .smoobu-calendar-iframe .smallDevices {
+        display: block;
+        width: 100%;
+      }
+
       .smoobu-calendar-iframe {
         display: flex;
         justify-content: center;
