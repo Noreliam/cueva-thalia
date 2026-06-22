@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
-import { checkSmoobuAvailability } from '@/lib/smoobu/availability';
+import { checkBookingDatesAvailable } from '@/lib/booking/blocked-ranges';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 import { getClientIpFromRequest } from '@/lib/security/client-ip';
 import { checkRateLimit } from '@/lib/security/rate-limit';
@@ -99,12 +99,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid booking parameters' }, { status: 400 });
   }
 
-  const availability = await checkSmoobuAvailability({
-    checkInDate: parsed.checkInDate,
-    checkOutDate: parsed.checkOutDate,
-    guestCount: parsed.guestCount,
-  }).catch((error) => {
-    console.error('[STRIPE:booking:checkout] Smoobu availability error', error);
+  const availability = await checkBookingDatesAvailable(
+    parsed.checkInDate,
+    parsed.checkOutDate,
+  ).catch((error) => {
+    console.error('[STRIPE:booking:checkout] availability error', error);
     return { available: false as const, reason: 'Availability check failed' };
   });
 

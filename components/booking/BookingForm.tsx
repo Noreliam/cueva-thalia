@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { bookingCheckoutSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
@@ -9,9 +9,16 @@ import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
 interface BookingFormProps {
   locale?: 'fr' | 'es' | 'en';
   guestCount?: number;
+  checkInDate: string;
+  checkOutDate: string;
 }
 
-export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFormProps) {
+export default function BookingForm({
+  locale = 'en',
+  guestCount = 2,
+  checkInDate,
+  checkOutDate,
+}: BookingFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState('');
@@ -20,6 +27,7 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     watch,
   } = useForm<BookingCheckoutFormInput>({
@@ -27,14 +35,26 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
     defaultValues: {
       locale,
       guestCount,
+      checkInDate: '',
+      checkOutDate: '',
       termsAccepted: false,
     },
   });
+
+  useEffect(() => {
+    setValue('checkInDate', checkInDate, { shouldValidate: Boolean(checkInDate) });
+    setValue('checkOutDate', checkOutDate, { shouldValidate: Boolean(checkOutDate) });
+  }, [checkInDate, checkOutDate, setValue]);
 
   const termsAccepted = watch('termsAccepted');
 
   const onSubmit = async (data: BookingCheckoutFormInput) => {
     if (hp.trim().length > 0) {
+      return;
+    }
+
+    if (!checkInDate || !checkOutDate) {
+      setError(t.pickDates);
       return;
     }
 
@@ -47,6 +67,8 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...data,
+          checkInDate,
+          checkOutDate,
           locale,
           guestCount,
           _hp: hp,
@@ -77,40 +99,37 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
       name: 'Nom complet',
       email: 'Email',
       phone: 'Téléphone (optionnel)',
-      checkIn: 'Date d\'arrivée',
-      checkOut: 'Date de départ',
       requests: 'Demandes spéciales',
       terms: 'J\'accepte les conditions générales',
       submit: 'Procéder au paiement',
       processing: 'Traitement...',
       error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
-      unavailable: 'Ces dates ne sont pas disponibles. Vérifiez le calendrier ci-dessus.',
+      unavailable: 'Ces dates ne sont plus disponibles. Choisissez d\'autres dates.',
+      pickDates: 'Sélectionnez vos dates d\'arrivée et de départ dans le calendrier.',
     },
     es: {
       name: 'Nombre completo',
       email: 'Email',
       phone: 'Teléfono (opcional)',
-      checkIn: 'Fecha de llegada',
-      checkOut: 'Fecha de salida',
       requests: 'Solicitudes especiales',
       terms: 'Acepto los términos y condiciones',
       submit: 'Proceder al pago',
       processing: 'Procesando...',
       error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
-      unavailable: 'Estas fechas no están disponibles. Consulte el calendario arriba.',
+      unavailable: 'Estas fechas ya no están disponibles. Elija otras fechas.',
+      pickDates: 'Seleccione las fechas de llegada y salida en el calendario.',
     },
     en: {
       name: 'Full name',
       email: 'Email',
       phone: 'Phone (optional)',
-      checkIn: 'Check-in date',
-      checkOut: 'Check-out date',
       requests: 'Special requests',
       terms: 'I accept the terms and conditions',
       submit: 'Proceed to payment',
       processing: 'Processing...',
       error: 'Payment could not be started. Please try again or contact us.',
-      unavailable: 'These dates are not available. Check the calendar above.',
+      unavailable: 'These dates are no longer available. Please choose other dates.',
+      pickDates: 'Select your check-in and check-out dates on the calendar.',
     },
   };
 
@@ -120,7 +139,16 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
     <form onSubmit={handleSubmit(onSubmit)} className="site-form">
       {error && (
         <div className="form-alert form-alert--error" role="alert">
-          {t.error}
+          {error}
+        </div>
+      )}
+
+      <input type="hidden" {...register('checkInDate')} />
+      <input type="hidden" {...register('checkOutDate')} />
+
+      {(errors.checkInDate || errors.checkOutDate) && (
+        <div className="form-alert form-alert--error" role="alert">
+          {errors.checkInDate?.message || errors.checkOutDate?.message || t.pickDates}
         </div>
       )}
 
@@ -177,40 +205,6 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
         )}
       </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="booking-check-in">{t.checkIn}</label>
-          <input
-            id="booking-check-in"
-            type="date"
-            {...register('checkInDate')}
-            disabled={isLoading}
-            aria-describedby={errors.checkInDate ? 'booking-check-in-error' : undefined}
-          />
-          {errors.checkInDate && (
-            <span id="booking-check-in-error" className="form-error">
-              {errors.checkInDate.message}
-            </span>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="booking-check-out">{t.checkOut}</label>
-          <input
-            id="booking-check-out"
-            type="date"
-            {...register('checkOutDate')}
-            disabled={isLoading}
-            aria-describedby={errors.checkOutDate ? 'booking-check-out-error' : undefined}
-          />
-          {errors.checkOutDate && (
-            <span id="booking-check-out-error" className="form-error">
-              {errors.checkOutDate.message}
-            </span>
-          )}
-        </div>
-      </div>
-
       <div className="form-group">
         <label htmlFor="booking-requests">{t.requests}</label>
         <textarea
@@ -257,7 +251,7 @@ export default function BookingForm({ locale = 'en', guestCount = 2 }: BookingFo
 
       <button
         type="submit"
-        disabled={isLoading || !termsAccepted || !turnstileToken}
+        disabled={isLoading || !termsAccepted || !turnstileToken || !checkInDate || !checkOutDate}
         className="btn btn-primary"
         aria-busy={isLoading}
       >

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import BookingDatePicker from '@/components/booking/BookingDatePicker';
 import BookingForm from '@/components/booking/BookingForm';
-import SmoobuWidget from '@/components/SmoobuWidget';
 import { Link } from '@/i18n/routing';
 
 type Copy = {
@@ -28,6 +28,8 @@ export default function SmoobuBookingGate({
 }) {
   const [selected, setSelected] = useState(2);
   const [confirmed, setConfirmed] = useState(false);
+  const [checkInDate, setCheckInDate] = useState('');
+  const [checkOutDate, setCheckOutDate] = useState('');
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '34657077910';
 
   if (!confirmed) {
@@ -96,7 +98,15 @@ export default function SmoobuBookingGate({
           <h3 id="booking-calendar-title">{copy.calendarTitle}</h3>
           <p style={{ marginBottom: 24 }}>{copy.calendarDesc}</p>
         </div>
-        <SmoobuWidget />
+        <BookingDatePicker
+          locale={locale}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+          onChange={({ checkInDate: inDate, checkOutDate: outDate }) => {
+            setCheckInDate(inDate);
+            setCheckOutDate(outDate);
+          }}
+        />
       </section>
 
       <section className="booking-step booking-step--payment" aria-labelledby="booking-payment-title">
@@ -104,7 +114,12 @@ export default function SmoobuBookingGate({
           <h3 id="booking-payment-title">{copy.paymentTitle}</h3>
           <p style={{ marginBottom: 24 }}>{copy.paymentDesc}</p>
         </div>
-        <BookingForm locale={locale} guestCount={selected} />
+        <BookingForm
+          locale={locale}
+          guestCount={selected}
+          checkInDate={checkInDate}
+          checkOutDate={checkOutDate}
+        />
       </section>
 
       <button type="button" className="link-subtle booking-gate-back" onClick={() => setConfirmed(false)}>
