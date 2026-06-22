@@ -41,10 +41,23 @@ export function hreflangAlternates(path: string, locale?: string): Metadata['alt
   };
 }
 
-/** Public Search Console token (also overridable via env on Netlify). */
-const GOOGLE_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() ||
-  'Y-Di3KWzGB-kj_Ci3y07ha21NEtC9czM5JKImHwi-2Q';
+const GOOGLE_SITE_VERIFICATION_FALLBACK = 'Y-Di3KWzGB-kj_Ci3y07ha21NEtC9czM5JKImHwi-2Q';
+
+function normalizeGoogleSiteVerification(raw?: string): string {
+  const value = raw?.trim();
+  if (!value) return GOOGLE_SITE_VERIFICATION_FALLBACK;
+
+  const fromMetaTag = value.match(/content=["']([^"']+)["']/i)?.[1]?.trim();
+  if (fromMetaTag) return fromMetaTag;
+
+  if (!value.includes('<')) return value;
+
+  return GOOGLE_SITE_VERIFICATION_FALLBACK;
+}
+
+const GOOGLE_SITE_VERIFICATION = normalizeGoogleSiteVerification(
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+);
 
 export function siteVerificationMetadata(): Pick<Metadata, 'verification'> {
   return { verification: { google: GOOGLE_SITE_VERIFICATION } };
