@@ -41,10 +41,13 @@ export function hreflangAlternates(path: string, locale?: string): Metadata['alt
   };
 }
 
-export function siteVerificationMetadata(): Pick<Metadata, 'verification'> | undefined {
-  const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
-  if (!google) return undefined;
-  return { verification: { google } };
+/** Public Search Console token (also overridable via env on Netlify). */
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim() ||
+  'Y-Di3KWzGB-kj_Ci3y07ha21NEtC9czM5JKImHwi-2Q';
+
+export function siteVerificationMetadata(): Pick<Metadata, 'verification'> {
+  return { verification: { google: GOOGLE_SITE_VERIFICATION } };
 }
 
 export function buildPageMetadata({

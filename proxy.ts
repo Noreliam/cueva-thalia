@@ -31,7 +31,7 @@ export default function proxy(request: NextRequest) {
   if (googleVerification) {
     const filename = pathname.slice(1);
     return applySecurityHeaders(
-      new NextResponse(`google-site-verification: ${filename}\n`, {
+      new NextResponse(`google-site-verification: ${filename}`, {
         status: 200,
         headers: { 'Content-Type': 'text/html; charset=utf-8' },
       })
