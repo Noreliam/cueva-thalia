@@ -9,9 +9,11 @@ const staticPaths = [
   '/workshops-retraites',
   '/galerie',
   '/bon-cadeau',
+  '/reserver',
   '/contact',
   '/mentions-legales',
   '/conditions-generales',
+  '/politique-annulation',
   '/politique-confidentialite',
 ];
 
@@ -27,9 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: path === '' ? 'weekly' : 'monthly',
         priority: path === '' ? 1 : 0.8,
         alternates: {
-          languages: Object.fromEntries(
-            routing.locales.map((loc) => [loc, `${SITE_URL}${localizedPath(path, loc)}`])
-          ),
+          languages: {
+            ...Object.fromEntries(
+              routing.locales.map((loc) => [loc, `${SITE_URL}${localizedPath(path, loc)}`])
+            ),
+            'x-default': `${SITE_URL}${localizedPath(path, routing.defaultLocale)}`,
+          },
         },
       });
     }

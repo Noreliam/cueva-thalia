@@ -41,6 +41,12 @@ export function hreflangAlternates(path: string, locale?: string): Metadata['alt
   };
 }
 
+export function siteVerificationMetadata(): Pick<Metadata, 'verification'> | undefined {
+  const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+  if (!google) return undefined;
+  return { verification: { google } };
+}
+
 export function buildPageMetadata({
   locale,
   path,
@@ -62,6 +68,7 @@ export function buildPageMetadata({
     title,
     description,
     robots,
+    ...siteVerificationMetadata(),
     alternates: hreflangAlternates(path, locale),
     openGraph: {
       title,

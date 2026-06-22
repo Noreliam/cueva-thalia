@@ -1,3 +1,5 @@
+import { SITE_URL } from '@/lib/seo';
+
 export const lodgingBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LodgingBusiness',
@@ -12,8 +14,11 @@ export const lodgingBusinessJsonLd = {
     addressCountry: 'ES',
   },
   telephone: '+34657077910',
-  url: 'https://www.cuevathalia.com',
+  url: SITE_URL,
   priceRange: '€€',
   checkinTime: '16:00',
   checkoutTime: '13:00',
+  sameAs: [
+    'https://www.google.com/maps/search/?api=1&query=Calle+Las+Morales+70,+38620+San+Miguel+de+Abona,+Tenerife',
+  ],
 };

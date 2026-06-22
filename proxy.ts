@@ -18,11 +18,24 @@ const BLOCKED_PATHS = [
   /^\/\.well-known\/(?!security\.txt)/i,
 ];
 
+const GOOGLE_VERIFICATION = /^\/google[a-z0-9]+\.html$/;
+
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (BLOCKED_PATHS.some((pattern) => pattern.test(pathname))) {
     return new NextResponse(null, { status: 404 });
+  }
+
+  const googleVerification = pathname.match(GOOGLE_VERIFICATION);
+  if (googleVerification) {
+    const filename = pathname.slice(1);
+    return applySecurityHeaders(
+      new NextResponse(`google-site-verification: ${filename}\n`, {
+        status: 200,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      })
+    );
   }
 
   const localeAsset = pathname.match(LOCALE_STATIC_ASSET);
