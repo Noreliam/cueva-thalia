@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
 import { checkBookingDatesAvailable } from '@/lib/booking/blocked-ranges';
-import { getStripe, isStripeConfigured, normalizeEnvSecret } from '@/lib/stripe/server';
+import { getStripe, getStripeSecretKey, isStripeConfigured, normalizeEnvSecret } from '@/lib/stripe/server';
 import { getClientIpFromRequest } from '@/lib/security/client-ip';
 import { checkRateLimit } from '@/lib/security/rate-limit';
 import { verifyTurnstileToken } from '@/lib/security/turnstile';
@@ -190,6 +190,7 @@ export async function POST(request: Request) {
 export async function GET() {
   const stripeConfigured = isStripeConfigured();
   const turnstileConfigured = Boolean(normalizeEnvSecret(process.env.TURNSTILE_SECRET_KEY));
+  const stripeKey = getStripeSecretKey();
 
   let stripeReachable = false;
   let stripeStatus: string | undefined;
@@ -216,6 +217,9 @@ export async function GET() {
     turnstileConfigured,
     stripeReachable,
     stripeStatus,
+    stripeKeyPrefix: stripeKey?.slice(0, 16),
+    stripeKeyLength: stripeKey?.length ?? 0,
+    expectedKeyPrefix: 'sk_live_51TebID',
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cueva-thalia.com',
   });
 }
