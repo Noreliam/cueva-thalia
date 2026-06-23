@@ -1,4 +1,5 @@
 import type Stripe from 'stripe';
+import { sendBookingConfirmation } from '@/lib/email/booking-confirmation';
 import { createSmoobuReservation } from '@/lib/smoobu/reservations';
 
 export type BookingOrder = {
@@ -56,7 +57,7 @@ export function orderFromBookingCheckoutSession(
 }
 
 /**
- * Post-payment hook: Supabase, e-mail, blocage Smoobu — à brancher.
+ * Post-payment hook: Smoobu sync, confirmation email, Supabase — à compléter.
  */
 export async function fulfillBookingOrder(order: BookingOrder): Promise<void> {
   let smoobuReservationId: number | null = null;
@@ -65,6 +66,15 @@ export async function fulfillBookingOrder(order: BookingOrder): Promise<void> {
     smoobuReservationId = await createSmoobuReservation(order);
   } catch (error) {
     console.error('[STRIPE:booking] Smoobu sync failed after payment', {
+      bookingId: order.bookingId,
+      error,
+    });
+  }
+
+  try {
+    await sendBookingConfirmation(order);
+  } catch (error) {
+    console.error('[EMAIL:booking] confirmation email failed', {
       bookingId: order.bookingId,
       error,
     });

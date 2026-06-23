@@ -35,6 +35,14 @@ export function rangeBlocksNight(range: { start: string; end: string }, night: s
   return night >= range.start && night < range.end;
 }
 
+/** Une date est bloquée pour l'arrivée si la nuit correspondante est occupée. */
+export function isCheckInBlocked(
+  iso: string,
+  blockedRanges: { start: string; end: string }[],
+): boolean {
+  return blockedRanges.some((range) => rangeBlocksNight(range, iso));
+}
+
 export function isStayAvailable(
   checkIn: string,
   checkOut: string,

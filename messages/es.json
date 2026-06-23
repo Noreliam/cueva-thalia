@@ -178,7 +178,7 @@
     "booking_calendar_title": "Elija sus fechas",
     "booking_calendar_desc": "Haga clic en la llegada y luego en la salida. Las fechas ocupadas (Airbnb, Booking, etc.) no se pueden seleccionar.",
     "booking_payment_title": "Reservar y pagar",
-    "booking_payment_desc": "Elija sus fechas abajo y pague en línea con Stripe — sin usar el motor de reservas de Smoobu.",
+    "booking_payment_desc": "Pago seguro mediante Stripe.",
     "booking_noscript": "Activa JavaScript para reservar en línea (hasta 4 personas), o contáctanos por email o WhatsApp.",
     "reservation_title": "Reservar su estancia",
     "reservation_lead": "Elija el número de personas y consulte la disponibilidad en directo.",

@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   formatIsoDate,
+  isCheckInBlocked,
   isStayAvailable,
   parseIsoDate,
-  rangeBlocksNight,
   todayIso,
 } from '@/lib/booking/dates';
 import type { DateRange } from '@/lib/booking/ical-parse';
@@ -91,10 +91,6 @@ function buildMonthGrid(viewDate: Date): (Date | null)[] {
   return cells;
 }
 
-function isBlockedDay(iso: string, blocked: DateRange[]): boolean {
-  return blocked.some((range) => rangeBlocksNight(range, iso));
-}
-
 function isInSelectedRange(iso: string, checkIn: string, checkOut: string): boolean {
   return Boolean(checkIn && checkOut && iso >= checkIn && iso < checkOut);
 }
@@ -137,9 +133,28 @@ export default function BookingDatePicker({
     [viewDate],
   );
 
+  const selectingCheckOut = Boolean(checkInDate && !checkOutDate);
+
+  const isDayDisabled = useCallback(
+    (iso: string): boolean => {
+      if (disabled || iso < todayIso()) return true;
+
+      if (!checkInDate || (checkInDate && checkOutDate)) {
+        return isCheckInBlocked(iso, blocked);
+      }
+
+      if (iso <= checkInDate) {
+        return isCheckInBlocked(iso, blocked);
+      }
+
+      return !isStayAvailable(checkInDate, iso, blocked).available;
+    },
+    [blocked, checkInDate, checkOutDate, disabled],
+  );
+
   const handleDayClick = useCallback(
     (iso: string) => {
-      if (disabled || isBlockedDay(iso, blocked) || iso < todayIso()) return;
+      if (isDayDisabled(iso)) return;
 
       if (!checkInDate || (checkInDate && checkOutDate)) {
         onChange({ checkInDate: iso, checkOutDate: '' });
@@ -151,15 +166,9 @@ export default function BookingDatePicker({
         return;
       }
 
-      const stay = isStayAvailable(checkInDate, iso, blocked);
-      if (!stay.available) {
-        onChange({ checkInDate: iso, checkOutDate: '' });
-        return;
-      }
-
       onChange({ checkInDate, checkOutDate: iso });
     },
-    [blocked, checkInDate, checkOutDate, disabled, onChange],
+    [checkInDate, checkOutDate, isDayDisabled, onChange],
   );
 
   const nightCount =
@@ -230,9 +239,13 @@ export default function BookingDatePicker({
                   }
 
                   const iso = formatIsoDate(date);
-                  const blockedDay = isBlockedDay(iso, blocked);
-                  const past = iso < todayIso();
-                  const unavailable = blockedDay || past;
+                  const unavailable = isDayDisabled(iso);
+                  const checkInBlocked = isCheckInBlocked(iso, blocked);
+                  const checkoutOnly =
+                    selectingCheckOut &&
+                    checkInBlocked &&
+                    iso > checkInDate &&
+                    isStayAvailable(checkInDate, iso, blocked).available;
                   const isStart = checkInDate === iso;
                   const isEnd = checkOutDate === iso;
                   const inRange = isInSelectedRange(iso, checkInDate, checkOutDate);
@@ -242,12 +255,12 @@ export default function BookingDatePicker({
                       key={iso}
                       type="button"
                       role="gridcell"
-                      disabled={disabled || unavailable}
+                      disabled={unavailable}
                       aria-label={iso}
                       aria-pressed={isStart || isEnd || inRange}
                       className={[
                         'booking-calendar-day',
-                        unavailable ? 'is-blocked' : 'is-available',
+                        unavailable ? 'is-blocked' : checkoutOnly ? 'is-checkout-only' : 'is-available',
                         inRange ? 'is-in-range' : '',
                         isStart ? 'is-range-start' : '',
                         isEnd ? 'is-range-end' : '',

@@ -26,7 +26,17 @@ const homeGalleryImageKeys = [
   { src: '/photos/optimized/home-galerie/06-chambre.jpg', altKey: 'gallery_alt_chambre' },
 ] as const;
 
-const AIRBNB_REVIEWS_URL = process.env.NEXT_PUBLIC_AIRBNB_REVIEWS_URL ?? '#';
+const AIRBNB_REVIEWS_URL = process.env.NEXT_PUBLIC_AIRBNB_REVIEWS_URL?.trim() ?? '';
+
+function isValidExternalUrl(url: string): boolean {
+  if (!url || url === '#') return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
 
 export async function HomePageContent({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: 'Home' });
@@ -210,16 +220,18 @@ export async function HomePageContent({ locale }: { locale: string }) {
               </div>
             ))}
           </div>
-          <p style={{ textAlign: 'center', marginTop: 40 }}>
-            <a
-              href={AIRBNB_REVIEWS_URL}
-              className="card-link"
-              target={AIRBNB_REVIEWS_URL.startsWith('http') ? '_blank' : undefined}
-              rel={AIRBNB_REVIEWS_URL.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {t('reviews_link')}
-            </a>
-          </p>
+          {isValidExternalUrl(AIRBNB_REVIEWS_URL) && (
+            <p style={{ textAlign: 'center', marginTop: 40 }}>
+              <a
+                href={AIRBNB_REVIEWS_URL}
+                className="card-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('reviews_link')}
+              </a>
+            </p>
+          )}
         </div>
       </section>
 

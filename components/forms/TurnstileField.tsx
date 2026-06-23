@@ -18,6 +18,7 @@ declare global {
           'expired-callback'?: () => void;
           'error-callback'?: () => void;
           theme?: 'light' | 'dark' | 'auto';
+          size?: 'normal' | 'compact' | 'flexible';
         },
       ) => string;
       remove: (widgetId: string) => void;
@@ -33,13 +34,19 @@ export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   const renderWidget = useCallback(() => {
-    if (!containerRef.current || !siteKey || !window.turnstile || widgetIdRef.current) {
+    if (!containerRef.current || !siteKey || !window.turnstile) {
       return;
+    }
+
+    if (widgetIdRef.current) {
+      window.turnstile.remove(widgetIdRef.current);
+      widgetIdRef.current = null;
     }
 
     widgetIdRef.current = window.turnstile.render(containerRef.current, {
       sitekey: siteKey,
       theme: 'light',
+      size: 'flexible',
       callback: onTokenChange,
       'expired-callback': () => onTokenChange(''),
       'error-callback': () => onTokenChange(''),
@@ -50,7 +57,28 @@ export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
     window.onTurnstileLoad = renderWidget;
     renderWidget();
 
+    const container = containerRef.current;
+    if (!container) {
+      return () => {
+        if (widgetIdRef.current && window.turnstile) {
+          window.turnstile.remove(widgetIdRef.current);
+          widgetIdRef.current = null;
+        }
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          renderWidget();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(container);
+
     return () => {
+      observer.disconnect();
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
         widgetIdRef.current = null;

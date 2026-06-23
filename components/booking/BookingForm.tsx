@@ -48,6 +48,8 @@ export default function BookingForm({
 
   const termsAccepted = watch('termsAccepted');
 
+  const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+
   const onSubmit = async (data: BookingCheckoutFormInput) => {
     if (hp.trim().length > 0) {
       return;
@@ -55,6 +57,11 @@ export default function BookingForm({
 
     if (!checkInDate || !checkOutDate) {
       setError(t.pickDates);
+      return;
+    }
+
+    if (turnstileConfigured && !turnstileToken) {
+      setError(t.captchaRequired);
       return;
     }
 
@@ -106,6 +113,7 @@ export default function BookingForm({
       error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
       unavailable: 'Ces dates ne sont plus disponibles. Choisissez d\'autres dates.',
       pickDates: 'Sélectionnez vos dates d\'arrivée et de départ dans le calendrier.',
+      captchaRequired: 'Veuillez valider la vérification anti-spam avant de continuer.',
     },
     es: {
       name: 'Nombre completo',
@@ -118,6 +126,7 @@ export default function BookingForm({
       error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
       unavailable: 'Estas fechas ya no están disponibles. Elija otras fechas.',
       pickDates: 'Seleccione las fechas de llegada y salida en el calendario.',
+      captchaRequired: 'Complete la verificación anti-spam antes de continuar.',
     },
     en: {
       name: 'Full name',
@@ -130,6 +139,7 @@ export default function BookingForm({
       error: 'Payment could not be started. Please try again or contact us.',
       unavailable: 'These dates are no longer available. Please choose other dates.',
       pickDates: 'Select your check-in and check-out dates on the calendar.',
+      captchaRequired: 'Please complete the anti-spam check before continuing.',
     },
   };
 
@@ -251,8 +261,8 @@ export default function BookingForm({
 
       <button
         type="submit"
-        disabled={isLoading || !termsAccepted || !turnstileToken || !checkInDate || !checkOutDate}
-        className="btn btn-primary"
+        disabled={isLoading || !termsAccepted || !checkInDate || !checkOutDate}
+        className="btn btn-primary booking-form-submit"
         aria-busy={isLoading}
       >
         {isLoading ? t.processing : t.submit}

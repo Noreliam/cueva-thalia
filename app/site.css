@@ -3712,6 +3712,17 @@
       cursor: not-allowed;
     }
 
+    .booking-calendar-day.is-checkout-only {
+      background: color-mix(in srgb, var(--ct-turquoise) 8%, white);
+      border: 1px dashed color-mix(in srgb, var(--ct-turquoise) 45%, transparent);
+      color: var(--ct-brun-chaud);
+      cursor: pointer;
+    }
+
+    .booking-calendar-day.is-checkout-only:hover {
+      background: color-mix(in srgb, var(--ct-turquoise) 16%, white);
+    }
+
     .booking-calendar-day.is-available:hover {
       background: color-mix(in srgb, var(--ct-turquoise) 12%, white);
     }
@@ -3735,6 +3746,12 @@
       padding-top: 16px;
       border-top: 1px solid var(--ct-dune);
       font-size: 0.95rem;
+    }
+
+    .booking-form-submit {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 8px;
     }
 
     .booking-gate--widget .placeholder-content h3 {

@@ -178,7 +178,7 @@
     "booking_calendar_title": "Choose your dates",
     "booking_calendar_desc": "Click check-in, then check-out. Booked dates (Airbnb, Booking, etc.) cannot be selected.",
     "booking_payment_title": "Book and pay",
-    "booking_payment_desc": "Choose your dates below and pay online via Stripe — not through Smoobu's booking engine.",
+    "booking_payment_desc": "Secure payment via Stripe.",
     "booking_noscript": "Enable JavaScript to book online (up to 4 guests), or contact us by email or WhatsApp.",
     "reservation_title": "Book your stay",
     "reservation_lead": "Choose the number of guests, then check availability in real time.",
