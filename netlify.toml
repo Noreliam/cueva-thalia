@@ -7,8 +7,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Turnstile site key is public by design (embedded in client JS like any NEXT_PUBLIC_* var)
-  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_TURNSTILE_SITE_KEY"
+  # Public-by-design values that also appear in static HTML / translations
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_TURNSTILE_SITE_KEY,SMTP_USER,EMAIL_FROM"
 
 [[headers]]
   for = "/*"
