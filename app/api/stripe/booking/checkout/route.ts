@@ -188,9 +188,34 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  const stripeConfigured = isStripeConfigured();
+  const turnstileConfigured = Boolean(normalizeEnvSecret(process.env.TURNSTILE_SECRET_KEY));
+
+  let stripeReachable = false;
+  let stripeStatus: string | undefined;
+
+  if (stripeConfigured) {
+    try {
+      const stripe = getStripe();
+      await stripe.balance.retrieve();
+      stripeReachable = true;
+      stripeStatus = 'ready';
+    } catch (error) {
+      const stripeError = error as { type?: string; code?: string; message?: string };
+      stripeStatus = stripeError.code || stripeError.type || 'connection_failed';
+      console.error('[STRIPE:booking:checkout] health check failed', {
+        type: stripeError.type,
+        code: stripeError.code,
+        message: stripeError.message,
+      });
+    }
+  }
+
   return NextResponse.json({
-    stripeConfigured: isStripeConfigured(),
-    turnstileConfigured: Boolean(normalizeEnvSecret(process.env.TURNSTILE_SECRET_KEY)),
+    stripeConfigured,
+    turnstileConfigured,
+    stripeReachable,
+    stripeStatus,
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cueva-thalia.com',
   });
 }
