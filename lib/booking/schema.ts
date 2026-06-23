@@ -51,12 +51,9 @@ export const bookingCheckoutSchema = z.object({
     .enum(['fr', 'es', 'en'])
     .default('en'),
 
-  // Security
+  // Security — verified in the API route before parse (not validated here)
   _hp: z.string().optional(),
-
-  turnstileToken: z
-    .string()
-    .min(1, 'CAPTCHA verification required'),
+  turnstileToken: z.string().optional(),
 
   // Terms acceptance
   termsAccepted: z
