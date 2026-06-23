@@ -3,7 +3,15 @@ import Stripe from 'stripe';
 let stripeClient: Stripe | null = null;
 
 export function getStripeSecretKey(): string | undefined {
-  return process.env.STRIPE_SECRET_KEY?.trim();
+  const key = process.env.STRIPE_SECRET_KEY?.trim();
+  if (!key) {
+    return undefined;
+  }
+  if (!/^sk_(live|test)_/.test(key)) {
+    console.error('[STRIPE] STRIPE_SECRET_KEY has an invalid format');
+    return undefined;
+  }
+  return key;
 }
 
 export function isStripeConfigured(): boolean {

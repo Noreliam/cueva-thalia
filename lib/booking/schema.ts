@@ -15,8 +15,9 @@ export const bookingCheckoutSchema = z.object({
     .email('Invalid email address'),
 
   phone: z
-    .string()
+    .union([z.string(), z.null()])
     .optional()
+    .transform((val) => (typeof val === 'string' ? val.trim() : '') || undefined)
     .refine(
       (val) => !val || /^\+?[0-9\s\-()]+$/.test(val),
       'Invalid phone format'
@@ -42,9 +43,13 @@ export const bookingCheckoutSchema = z.object({
 
   // Optional
   specialRequests: z
-    .string()
-    .max(500, 'Message must be less than 500 characters')
-    .optional(),
+    .union([z.string(), z.null()])
+    .optional()
+    .transform((val) => {
+      const text = typeof val === 'string' ? val.trim() : '';
+      return text || undefined;
+    })
+    .refine((val) => !val || val.length <= 500, 'Message must be less than 500 characters'),
 
   // Locale
   locale: z

@@ -64,6 +64,8 @@ export default function BookingForm({
       submit: 'Procéder au paiement',
       processing: 'Traitement...',
       error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
+      stripeError: 'Stripe n\'a pas pu ouvrir la page de paiement. Réessayez dans quelques minutes ou contactez-nous.',
+      rateLimit: 'Trop de tentatives. Patientez 15 minutes puis réessayez.',
       unavailable: 'Ces dates ne sont plus disponibles. Choisissez d\'autres dates.',
       captchaFailed: 'La vérification anti-spam a échoué. Rechargez la page et réessayez.',
       paymentsOff: 'Les paiements en ligne ne sont pas encore activés. Contactez-nous pour réserver.',
@@ -80,6 +82,8 @@ export default function BookingForm({
       submit: 'Proceder al pago',
       processing: 'Procesando...',
       error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
+      stripeError: 'Stripe no pudo abrir la página de pago. Inténtelo en unos minutos o contáctenos.',
+      rateLimit: 'Demasiados intentos. Espere 15 minutos e inténtelo de nuevo.',
       unavailable: 'Estas fechas ya no están disponibles. Elija otras fechas.',
       captchaFailed: 'La verificación anti-spam falló. Recargue la página e inténtelo de nuevo.',
       paymentsOff: 'Los pagos en línea aún no están activos. Contáctenos para reservar.',
@@ -96,6 +100,8 @@ export default function BookingForm({
       submit: 'Proceed to payment',
       processing: 'Processing...',
       error: 'Payment could not be started. Please try again or contact us.',
+      stripeError: 'Stripe could not open the checkout page. Try again in a few minutes or contact us.',
+      rateLimit: 'Too many attempts. Please wait 15 minutes and try again.',
       unavailable: 'These dates are no longer available. Please choose other dates.',
       captchaFailed: 'Anti-spam verification failed. Reload the page and try again.',
       paymentsOff: 'Online payments are not active yet. Contact us to book.',
@@ -154,7 +160,12 @@ export default function BookingForm({
         }),
       });
 
-      const result = (await response.json()) as { ok?: boolean; url?: string; error?: string };
+      let result: { ok?: boolean; url?: string; error?: string; code?: string };
+      try {
+        result = (await response.json()) as typeof result;
+      } catch {
+        throw new Error('network');
+      }
 
       if (!response.ok || !result.ok || !result.url) {
         if (response.status === 409) {
@@ -165,6 +176,12 @@ export default function BookingForm({
         }
         if (response.status === 503) {
           throw new Error('paymentsOff');
+        }
+        if (response.status === 429) {
+          throw new Error('rateLimit');
+        }
+        if (response.status === 502 || result.code === 'stripe_error') {
+          throw new Error('stripe');
         }
         throw new Error(result.error || 'Checkout failed');
       }
@@ -179,9 +196,13 @@ export default function BookingForm({
             ? t.captchaFailed
             : code === 'paymentsOff'
               ? t.paymentsOff
-              : t.error;
+              : code === 'stripe'
+                ? t.stripeError
+                : code === 'rateLimit'
+                  ? t.rateLimit
+                  : t.error;
       showFeedback(message);
-      if (code === 'captcha') {
+      if (code === 'captcha' || code === 'stripe') {
         turnstileRef.current?.reset();
       }
       setIsLoading(false);

@@ -76,7 +76,12 @@ export async function POST(request: Request) {
 
   // Verify CAPTCHA
   const turnstileToken = typeof record.turnstileToken === 'string' ? record.turnstileToken : '';
-  const turnstileOk = await verifyTurnstileToken(turnstileToken, ip);
+  let turnstileOk = false;
+  try {
+    turnstileOk = await verifyTurnstileToken(turnstileToken, ip);
+  } catch (error) {
+    console.error('[STRIPE:booking:checkout] turnstile verify error', error);
+  }
   if (!turnstileOk) {
     return genericError(403, 'Captcha verification failed');
   }
@@ -153,14 +158,6 @@ export async function POST(request: Request) {
       },
       success_url: successUrl,
       cancel_url: cancelUrl,
-      payment_intent_data: {
-        metadata: {
-          bookingId,
-          guestEmail: parsed.email,
-          checkInDate: parsed.checkInDate,
-          checkOutDate: parsed.checkOutDate,
-        },
-      },
     });
 
     if (!session.url) {
@@ -174,8 +171,16 @@ export async function POST(request: Request) {
       bookingId,
     });
   } catch (error) {
-    console.error('[STRIPE:booking:checkout] session creation failed', error);
-    return NextResponse.json({ ok: false, error: 'Checkout unavailable' }, { status: 502 });
+    const stripeError = error as { type?: string; code?: string; message?: string };
+    console.error('[STRIPE:booking:checkout] session creation failed', {
+      type: stripeError.type,
+      code: stripeError.code,
+      message: stripeError.message,
+    });
+    return NextResponse.json(
+      { ok: false, error: 'Checkout unavailable', code: 'stripe_error' },
+      { status: 502 },
+    );
   }
 }
 
