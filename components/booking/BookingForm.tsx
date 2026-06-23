@@ -151,7 +151,7 @@ export default function BookingForm({
         if (response.status === 409) {
           throw new Error('unavailable');
         }
-        if (response.status === 403) {
+        if (response.status === 403 || /captcha/i.test(result.error ?? '')) {
           throw new Error('captcha');
         }
         if (response.status === 503) {

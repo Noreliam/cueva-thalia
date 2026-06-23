@@ -22,8 +22,13 @@ export async function verifyTurnstileToken(token: string, ip: string): Promise<b
   const body = new URLSearchParams({
     secret,
     response: token,
-    remoteip: ip,
   });
+
+  // Only send remoteip when we have a real visitor IP. Behind Cloudflare/Netlify,
+  // a proxy IP mismatch causes Turnstile to reject otherwise valid tokens.
+  if (ip && ip !== 'unknown') {
+    body.set('remoteip', ip);
+  }
 
   const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
@@ -32,9 +37,15 @@ export async function verifyTurnstileToken(token: string, ip: string): Promise<b
   });
 
   if (!response.ok) {
+    console.error('[TURNSTILE] siteverify HTTP error', response.status);
     return false;
   }
 
   const result = (await response.json()) as TurnstileResult;
-  return result.success === true;
+  if (result.success !== true) {
+    console.error('[TURNSTILE] verification failed', result['error-codes'] ?? 'unknown');
+    return false;
+  }
+
+  return true;
 }

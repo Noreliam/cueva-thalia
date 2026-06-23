@@ -73,18 +73,7 @@ export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
       };
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          renderWidget();
-        }
-      },
-      { threshold: 0.1 },
-    );
-    observer.observe(container);
-
     return () => {
-      observer.disconnect();
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.remove(widgetIdRef.current);
         widgetIdRef.current = null;
