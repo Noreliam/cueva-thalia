@@ -2,7 +2,6 @@ import type { BookingOrder } from '@/lib/booking/fulfill';
 import {
   getSmoobuApartmentId,
   getSmoobuChannelId,
-  getSmoobuApiSecret,
   isSmoobuConfigured,
   smoobuFetch,
 } from '@/lib/smoobu/client';
@@ -31,13 +30,8 @@ export async function createSmoobuReservation(order: BookingOrder): Promise<numb
   }
 
   if (!isSmoobuConfigured()) {
-    console.warn('[SMOOBU] reservation sync skipped — API not configured');
-    return null;
-  }
-
-  if (!getSmoobuApiSecret()) {
     console.warn(
-      '[SMOOBU] reservation sync skipped — add SMOOBU_API_SECRET from Smoobu → Paramètres avancés → Clés API',
+      '[SMOOBU] reservation sync skipped — add SMOOBU_API_KEY from Smoobu → Settings → For Developers',
     );
     return null;
   }
@@ -48,7 +42,6 @@ export async function createSmoobuReservation(order: BookingOrder): Promise<numb
 
   const result = await smoobuFetch<CreateReservationResponse>('/api/reservations', {
     method: 'POST',
-    useHmac: true,
     body: {
       arrivalDate: order.checkInDate,
       departureDate: order.checkOutDate,

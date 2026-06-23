@@ -34,7 +34,7 @@ const COPY: Record<'fr' | 'es' | 'en', Copy> = {
   fr: {
     loading: 'Chargement des disponibilités…',
     unavailable: 'Occupé',
-    hint: 'Cliquez sur votre date d\'arrivée, puis sur votre date de départ.',
+    hint: 'Cliquez sur votre date d\'arrivée, puis sur votre date de départ. Une date hachurée peut servir de départ si votre nuit précédente est libre (départ le matin, arrivée l\'après-midi).',
     checkIn: 'Arrivée',
     checkOut: 'Départ',
     nights: 'nuits',
@@ -45,7 +45,7 @@ const COPY: Record<'fr' | 'es' | 'en', Copy> = {
   es: {
     loading: 'Cargando disponibilidad…',
     unavailable: 'Ocupado',
-    hint: 'Haga clic en la fecha de llegada y luego en la de salida.',
+    hint: 'Haga clic en la fecha de llegada y luego en la de salida. Una fecha sombreada puede servir de salida si la noche anterior está libre (salida por la mañana, llegada por la tarde).',
     checkIn: 'Llegada',
     checkOut: 'Salida',
     nights: 'noches',
@@ -56,7 +56,7 @@ const COPY: Record<'fr' | 'es' | 'en', Copy> = {
   en: {
     loading: 'Loading availability…',
     unavailable: 'Booked',
-    hint: 'Click your check-in date, then your check-out date.',
+    hint: 'Click your check-in date, then your check-out date. A shaded date can be used as checkout if the previous night is free (morning checkout, afternoon check-in).',
     checkIn: 'Check-in',
     checkOut: 'Check-out',
     nights: 'nights',

@@ -46,7 +46,7 @@ export function isSmoobuAvailabilityConfigured(): boolean {
 }
 
 export function isSmoobuReservationSyncConfigured(): boolean {
-  return isSmoobuConfigured() && Boolean(getSmoobuApiSecret() || getSmoobuCustomerId());
+  return isSmoobuConfigured() && process.env.SMOOBU_ENABLE_API_SYNC === 'true';
 }
 
 type SmoobuFetchOptions = {
@@ -101,7 +101,7 @@ export async function resolveSmoobuCustomerId(): Promise<number | undefined> {
   }
 
   try {
-    const me = await smoobuFetch<SmoobuMeResponse>('/api/me', { method: 'GET', useHmac: true });
+    const me = await smoobuFetch<SmoobuMeResponse>('/api/me', { method: 'GET' });
     if (me.id && me.id > 0) {
       cachedCustomerId = me.id;
       return me.id;

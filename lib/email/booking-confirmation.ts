@@ -37,6 +37,28 @@ function buildTemplate(order: BookingOrder, locale: BookingLocale): EmailTemplat
   const checkOut = formatBookingDate(order.checkOutDate, locale);
   const amount = formatAmount(order.amountCents);
   const guestName = order.guestName || 'Guest';
+  const checkInUrl = order.onlineCheckInUrl?.trim();
+
+  const onlineCheckInFr = checkInUrl
+    ? `<p><strong>Check-in en ligne (obligatoire)</strong></p>
+<p>Merci de compléter le formulaire d'enregistrement avant votre arrivée :<br>
+<a href="${checkInUrl}">${checkInUrl}</a></p>`
+    : `<p><strong>Check-in en ligne (obligatoire)</strong></p>
+<p>Vous recevrez un lien personnel pour compléter votre enregistrement — pensez à le remplir avant votre arrivée.</p>`;
+
+  const onlineCheckInEn = checkInUrl
+    ? `<p><strong>Online check-in (required)</strong></p>
+<p>Please complete the registration form before arrival:<br>
+<a href="${checkInUrl}">${checkInUrl}</a></p>`
+    : `<p><strong>Online check-in (required)</strong></p>
+<p>You will receive a personal link to complete your registration — please fill it in before arrival.</p>`;
+
+  const onlineCheckInEs = checkInUrl
+    ? `<p><strong>Check-in en línea (obligatorio)</strong></p>
+<p>Complete el formulario de registro antes de su llegada:<br>
+<a href="${checkInUrl}">${checkInUrl}</a></p>`
+    : `<p><strong>Check-in en línea (obligatorio)</strong></p>
+<p>Recibirá un enlace personal para completar su registro — complételo antes de su llegada.</p>`;
 
   const templates: Record<BookingLocale, EmailTemplate> = {
     fr: {
@@ -55,6 +77,8 @@ Référence : ${order.bookingId}<br>
 Montant&nbsp;&nbsp;&nbsp;: ${amount} €
 </p>
 <hr>
+${onlineCheckInFr}
+<hr>
 <p><strong>Ce qui vous attend</strong></p>
 <p>
 Une grotte volcanique creusée à même la roche, nichée sous un jardin de Tenerife.<br>
@@ -65,10 +89,12 @@ Le silence. La lumière douce. L'impression d'être ailleurs, enfin.
 <p><strong>Informations pratiques</strong></p>
 <p>
 Adresse&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(détails d'accès envoyés 48h avant votre arrivée)<br>
-Check-in&nbsp;&nbsp;: à partir de 15h00<br>
-Check-out : avant 11h00<br>
+Check-in&nbsp;&nbsp;: à partir de 16h00<br>
+Check-out : avant 13h00<br>
 Parking&nbsp;&nbsp;&nbsp;: disponible sur place
+</p>
+<p>
+Les codes d'accès et consignes d'arrivée vous seront envoyés séparément, environ 48&nbsp;h avant votre arrivée (email ou WhatsApp).
 </p>
 <p>
 Une question, une demande particulière ?<br>
@@ -96,6 +122,8 @@ Reference : ${order.bookingId}<br>
 Paid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: €${amount}
 </p>
 <hr>
+${onlineCheckInEn}
+<hr>
 <p><strong>What awaits you</strong></p>
 <p>
 A volcanic cave carved into the rock, hidden beneath a garden in Tenerife.<br>
@@ -106,10 +134,12 @@ Silence. Warm light. The rare feeling of being somewhere truly different.
 <p><strong>Practical information</strong></p>
 <p>
 Address&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(full access details sent 48h before arrival)<br>
-Check-in&nbsp;&nbsp;: from 3:00 PM<br>
-Check-out : before 11:00 AM<br>
+Check-in&nbsp;&nbsp;: from 4:00 PM<br>
+Check-out : before 1:00 PM<br>
 Parking&nbsp;&nbsp;&nbsp;: available on site
+</p>
+<p>
+Access codes and arrival instructions will be sent separately, about 48&nbsp;hours before check-in (email or WhatsApp).
 </p>
 <p>
 Any questions or special requests?<br>
@@ -137,6 +167,8 @@ Referencia : ${order.bookingId}<br>
 Pagado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${amount} €
 </p>
 <hr>
+${onlineCheckInEs}
+<hr>
 <p><strong>Lo que te espera</strong></p>
 <p>
 Una cueva volcánica excavada en la roca viva, escondida bajo un jardín de Tenerife.<br>
@@ -147,10 +179,12 @@ Silencio. Luz cálida. La sensación de haber encontrado un lugar único.
 <p><strong>Información práctica</strong></p>
 <p>
 Dirección&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(detalles de acceso enviados 48h antes de la llegada)<br>
-Check-in&nbsp;&nbsp;&nbsp;&nbsp;: a partir de las 15:00 h<br>
-Check-out&nbsp;&nbsp;&nbsp;: antes de las 11:00 h<br>
+Check-in&nbsp;&nbsp;&nbsp;&nbsp;: a partir de las 16:00 h<br>
+Check-out&nbsp;&nbsp;&nbsp;: antes de las 13:00 h<br>
 Aparcamiento : disponible en el lugar
+</p>
+<p>
+Los códigos de acceso y las instrucciones de llegada se enviarán por separado, unos 48&nbsp;h antes de su llegada (email o WhatsApp).
 </p>
 <p>
 ¿Alguna pregunta o solicitud especial?<br>

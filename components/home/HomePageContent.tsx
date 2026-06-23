@@ -26,7 +26,9 @@ const homeGalleryImageKeys = [
   { src: '/photos/optimized/home-galerie/06-chambre.jpg', altKey: 'gallery_alt_chambre' },
 ] as const;
 
-const AIRBNB_REVIEWS_URL = process.env.NEXT_PUBLIC_AIRBNB_REVIEWS_URL?.trim() ?? '';
+const AIRBNB_REVIEWS_URL =
+  process.env.NEXT_PUBLIC_AIRBNB_REVIEWS_URL?.trim() ||
+  'https://www.airbnb.fr/rooms/1581890704026445902';
 
 function isValidExternalUrl(url: string): boolean {
   if (!url || url === '#') return false;

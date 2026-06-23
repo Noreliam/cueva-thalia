@@ -28,32 +28,38 @@ declare global {
   }
 }
 
+const isDev = process.env.NODE_ENV === 'development';
+
 export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const onTokenChangeRef = useRef(onTokenChange);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  const renderWidget = useCallback(() => {
-    if (!containerRef.current || !siteKey || !window.turnstile) {
-      return;
-    }
+  useEffect(() => {
+    onTokenChangeRef.current = onTokenChange;
+  }, [onTokenChange]);
 
-    if (widgetIdRef.current) {
-      window.turnstile.remove(widgetIdRef.current);
-      widgetIdRef.current = null;
+  const renderWidget = useCallback(() => {
+    if (!containerRef.current || !siteKey || !window.turnstile || widgetIdRef.current) {
+      return;
     }
 
     widgetIdRef.current = window.turnstile.render(containerRef.current, {
       sitekey: siteKey,
       theme: 'light',
       size: 'flexible',
-      callback: onTokenChange,
-      'expired-callback': () => onTokenChange(''),
-      'error-callback': () => onTokenChange(''),
+      callback: (token) => onTokenChangeRef.current(token),
+      'expired-callback': () => onTokenChangeRef.current(''),
+      'error-callback': () => onTokenChangeRef.current(''),
     });
-  }, [onTokenChange, siteKey]);
+  }, [siteKey]);
 
   useEffect(() => {
+    if (isDev || !siteKey) {
+      return;
+    }
+
     window.onTurnstileLoad = renderWidget;
     renderWidget();
 
@@ -84,9 +90,9 @@ export function TurnstileField({ onTokenChange }: TurnstileFieldProps) {
         widgetIdRef.current = null;
       }
     };
-  }, [renderWidget]);
+  }, [renderWidget, siteKey]);
 
-  if (!siteKey) {
+  if (isDev || !siteKey) {
     return null;
   }
 

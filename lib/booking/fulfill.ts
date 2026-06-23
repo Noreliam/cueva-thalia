@@ -1,5 +1,6 @@
 import type Stripe from 'stripe';
 import { sendBookingConfirmation } from '@/lib/email/booking-confirmation';
+import { getOnlineCheckInLink } from '@/lib/smoobu/placeholders';
 import { createSmoobuReservation } from '@/lib/smoobu/reservations';
 
 export type BookingOrder = {
@@ -16,6 +17,8 @@ export type BookingOrder = {
   specialRequests: string | null;
   locale: string;
   paidAt: string;
+  smoobuReservationId?: number | null;
+  onlineCheckInUrl?: string | null;
 };
 
 export function orderFromBookingCheckoutSession(
@@ -71,8 +74,25 @@ export async function fulfillBookingOrder(order: BookingOrder): Promise<void> {
     });
   }
 
+  let onlineCheckInUrl: string | null = null;
+  if (smoobuReservationId) {
+    try {
+      onlineCheckInUrl = await getOnlineCheckInLink(smoobuReservationId, order.locale);
+    } catch (error) {
+      console.error('[STRIPE:booking] Smoobu online check-in link fetch failed', {
+        bookingId: order.bookingId,
+        smoobuReservationId,
+        error,
+      });
+    }
+  }
+
   try {
-    await sendBookingConfirmation(order);
+    await sendBookingConfirmation({
+      ...order,
+      smoobuReservationId,
+      onlineCheckInUrl,
+    });
   } catch (error) {
     console.error('[EMAIL:booking] confirmation email failed', {
       bookingId: order.bookingId,

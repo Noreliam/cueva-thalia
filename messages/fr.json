@@ -176,7 +176,7 @@
     "booking_whatsapp": "Nous contacter sur WhatsApp",
     "booking_events_link": "Voir les événements →",
     "booking_calendar_title": "Choisissez vos dates",
-    "booking_calendar_desc": "Cliquez sur votre arrivée puis votre départ. Les dates occupées (Airbnb, Booking, etc.) ne sont pas sélectionnables.",
+    "booking_calendar_desc": "Cliquez sur votre arrivée puis votre départ. Une date hachurée peut servir de date de départ si la nuit précédente est libre.",
     "booking_payment_title": "Réserver et payer",
     "booking_payment_desc": "Paiement sécurisé via Stripe.",
     "booking_noscript": "Activez JavaScript pour réserver en ligne (jusqu'à 4 personnes), ou contactez-nous par email ou WhatsApp.",

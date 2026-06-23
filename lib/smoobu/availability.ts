@@ -37,7 +37,7 @@ export async function checkSmoobuAvailability(params: {
   const customerId = await resolveSmoobuCustomerId();
   if (!customerId) {
     console.warn(
-      '[SMOOBU] availability check skipped — set SMOOBU_CUSTOMER_ID or add SMOOBU_API_SECRET (Paramètres avancés → Clés API)',
+      '[SMOOBU] availability check skipped — set SMOOBU_CUSTOMER_ID or ensure SMOOBU_API_KEY can access /api/me',
     );
     return { available: true, skipped: true };
   }

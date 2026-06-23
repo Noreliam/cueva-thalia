@@ -157,6 +157,13 @@
       box-shadow: 0 10px 20px var(--ct-ombre-chaude);
     }
 
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
     .btn-secondary {
       background-color: transparent;
       color: var(--ct-brun-chaud);
@@ -496,6 +503,18 @@
 
     .seo-page-content h1 {
       margin-bottom: 24px;
+    }
+
+    .seo-page-content .tarifs-card .btn-primary {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 640px) {
+      .seo-page-content .tarifs-card {
+        margin-bottom: 72px;
+      }
     }
 
     /* ANIMATIONS (FADE IN) — contenu toujours visible, animation légère au scroll */
@@ -1570,6 +1589,49 @@
     .form-group textarea {
       resize: vertical;
       min-height: 120px;
+    }
+
+    .form-group--checkbox {
+      margin-bottom: 20px;
+    }
+
+    .form-group--checkbox .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 0;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--ct-brun-chaud);
+    }
+
+    .form-group--checkbox .checkbox-label input[type='checkbox'] {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      margin: 2px 0 0;
+      padding: 0;
+      flex-shrink: 0;
+      border-radius: 4px;
+      border: 2px solid var(--ct-dune);
+      background-color: #fff;
+      accent-color: var(--ct-terracotta);
+      cursor: pointer;
+    }
+
+    .form-group--checkbox .checkbox-label input[type='checkbox']:focus {
+      outline: none;
+      border-color: var(--ct-terracotta);
+      box-shadow: 0 0 0 3px rgba(184, 92, 56, 0.15);
+    }
+
+    .form-group--checkbox .checkbox-label span {
+      flex: 1;
+      padding-top: 1px;
     }
     
     .form-group input[type="date"] {
@@ -3746,6 +3808,14 @@
       padding-top: 16px;
       border-top: 1px solid var(--ct-dune);
       font-size: 0.95rem;
+    }
+
+    .booking-form-feedback {
+      min-height: 0;
+    }
+
+    .booking-form-feedback .form-alert {
+      margin-bottom: 12px;
     }
 
     .booking-form-submit {

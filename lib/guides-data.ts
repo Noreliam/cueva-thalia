@@ -4,7 +4,7 @@ export type GuidePage = {
   titles: { es: string; fr: string; en: string };
   descriptions: { es: string; fr: string; en: string };
   h1: { es: string; fr: string; en: string };
-  keywords?: string[];
+  keywords?: { es: string[]; fr: string[]; en: string[] };
 };
 
 export const guidePages: GuidePage[] = [
@@ -23,10 +23,14 @@ export const guidePages: GuidePage[] = [
     },
     descriptions: {
       fr: "Dormez dans une vraie grotte volcanique à Tenerife. Cueva Thalía, piscine intérieure privée, silence absolu. L'hébergement insolite le plus unique du sud de l'île.",
-      es: 'Duerma en una auténtica cueva volcánica en Tenerife. Cueva Thalía, piscina interior privada, silencio absoluto.',
-      en: 'Sleep in a real volcanic cave in Tenerife. Cueva Thalía, private indoor pool, absolute silence.',
+      es: 'Duerma en una auténtica cueva volcánica en Tenerife. Cueva Thalía, piscina interior privada, silencio absoluto. El alojamiento insólito más singular del sur de la isla.',
+      en: 'Sleep in a real volcanic cave in Tenerife. Cueva Thalía, private indoor pool, absolute silence. The most unique unusual stay in the south of the island.',
     },
-    keywords: ['cueva privada Tenerife', 'hébergement insolite Tenerife', 'dormir dans une grotte Tenerife'],
+    keywords: {
+      fr: ['cueva privada Tenerife', 'hébergement insolite Tenerife', 'dormir dans une grotte Tenerife'],
+      es: ['cueva privada Tenerife', 'alojamiento insólito Tenerife', 'dormir en una cueva Tenerife'],
+      en: ['private cave Tenerife', 'unique stay Tenerife', 'sleep in a cave Tenerife'],
+    },
   },
   {
     slug: 'que-faire-san-miguel-de-abona',
@@ -65,7 +69,11 @@ export const guidePages: GuidePage[] = [
       es: 'Yoga, breathwork, sonoterapia en Tenerife en un espacio 100% privado. Cueva Thalía, cueva volcánica, piscina interior.',
       en: 'Yoga, breathwork, sound healing in Tenerife in a 100% private space. Cueva Thalía, volcanic cave, indoor pool.',
     },
-    keywords: ['retraite yoga Tenerife', 'lieu bien-être privatif Tenerife', 'workshop Tenerife'],
+    keywords: {
+      fr: ['retraite yoga Tenerife', 'lieu bien-être privatif Tenerife', 'workshop Tenerife'],
+      es: ['retiro yoga Tenerife', 'lugar bienestar privado Tenerife', 'taller Tenerife'],
+      en: ['yoga retreat Tenerife', 'private wellness venue Tenerife', 'workshop Tenerife'],
+    },
   },
   {
     slug: 'week-end-romantique-tenerife',
@@ -85,7 +93,11 @@ export const guidePages: GuidePage[] = [
       es: 'Una escapada romántica única en Tenerife: cueva volcánica, piscina interior climatizada, intimidad absoluta.',
       en: 'A unique romantic weekend in Tenerife: volcanic cave, heated indoor pool, absolute intimacy.',
     },
-    keywords: ['séjour romantique Tenerife', 'escapada romántica Tenerife', 'piscina privada Tenerife'],
+    keywords: {
+      fr: ['séjour romantique Tenerife', 'week-end en amoureux Tenerife', 'piscine privée Tenerife'],
+      es: ['escapada romántica Tenerife', 'fin de semana romántico Tenerife', 'piscina privada Tenerife'],
+      en: ['romantic getaway Tenerife', 'romantic weekend Tenerife', 'private pool Tenerife'],
+    },
   },
   {
     slug: 'plages-sud-tenerife',
@@ -124,7 +136,11 @@ export const guidePages: GuidePage[] = [
       es: 'Privatice una cueva volcánica para su evento o shooting en Tenerife. Decorado natural único, intimidad total.',
       en: 'Hire a volcanic cave for your event or photo shoot in Tenerife. Unique natural setting, total privacy.',
     },
-    keywords: ['lieu événement privé Tenerife', 'shooting photo Tenerife', 'privatisation Tenerife'],
+    keywords: {
+      fr: ['lieu événement privé Tenerife', 'shooting photo Tenerife', 'privatisation Tenerife'],
+      es: ['lugar evento privado Tenerife', 'sesión de fotos Tenerife', 'privatización Tenerife'],
+      en: ['private event venue Tenerife', 'photo shoot Tenerife', 'venue hire Tenerife'],
+    },
   },
 ];
 

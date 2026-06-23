@@ -64,7 +64,10 @@ export const bookingCheckoutSchema = z.object({
     .refine((val) => val === true, 'Terms must be accepted'),
 });
 
-export type BookingCheckoutFormInput = z.input<typeof bookingCheckoutSchema>;
+/** Validation côté client (sans turnstileToken / honeypot — envoyés séparément au submit). */
+export const bookingFormSchema = bookingCheckoutSchema.omit({ turnstileToken: true, _hp: true });
+
+export type BookingCheckoutFormInput = z.input<typeof bookingFormSchema>;
 export type BookingCheckoutRequest = z.output<typeof bookingCheckoutSchema>;
 
 /**

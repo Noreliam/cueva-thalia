@@ -11,8 +11,8 @@ import { absoluteUrl } from '@/lib/seo';
 
 const MAX_BODY_BYTES = 16_384;
 
-function genericError(status: number) {
-  return NextResponse.json({ ok: false, error: 'Request rejected' }, { status });
+function genericError(status: number, error = 'Request rejected') {
+  return NextResponse.json({ ok: false, error }, { status });
 }
 
 /**
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
   const turnstileToken = typeof record.turnstileToken === 'string' ? record.turnstileToken : '';
   const turnstileOk = await verifyTurnstileToken(turnstileToken, ip);
   if (!turnstileOk) {
-    return genericError(403);
+    return genericError(403, 'Captcha verification failed');
   }
 
   // Parse & validate request

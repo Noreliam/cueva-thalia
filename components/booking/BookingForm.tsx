@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { bookingCheckoutSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
+import { bookingFormSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
 import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
 
 interface BookingFormProps {
@@ -23,15 +23,15 @@ export default function BookingForm({
   const [error, setError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState('');
   const [hp, setHp] = useState('');
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-    watch,
   } = useForm<BookingCheckoutFormInput>({
-    resolver: zodResolver(bookingCheckoutSchema),
+    resolver: zodResolver(bookingFormSchema),
     defaultValues: {
       locale,
       guestCount,
@@ -44,11 +44,73 @@ export default function BookingForm({
   useEffect(() => {
     setValue('checkInDate', checkInDate, { shouldValidate: Boolean(checkInDate) });
     setValue('checkOutDate', checkOutDate, { shouldValidate: Boolean(checkOutDate) });
-  }, [checkInDate, checkOutDate, setValue]);
+    setValue('guestCount', guestCount);
+    setValue('locale', locale);
+  }, [checkInDate, checkOutDate, guestCount, locale, setValue]);
 
-  const termsAccepted = watch('termsAccepted');
+  const turnstileConfigured =
+    process.env.NODE_ENV !== 'development' &&
+    Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
-  const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+  const labels = {
+    fr: {
+      name: 'Nom complet',
+      email: 'Email',
+      phone: 'Téléphone (optionnel)',
+      requests: 'Demandes spéciales',
+      terms: 'J\'accepte les conditions générales',
+      submit: 'Procéder au paiement',
+      processing: 'Traitement...',
+      error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
+      unavailable: 'Ces dates ne sont plus disponibles. Choisissez d\'autres dates.',
+      captchaFailed: 'La vérification anti-spam a échoué. Rechargez la page et réessayez.',
+      paymentsOff: 'Les paiements en ligne ne sont pas encore activés. Contactez-nous pour réserver.',
+      pickDates: 'Sélectionnez vos dates d\'arrivée et de départ dans le calendrier.',
+      captchaRequired: 'Veuillez valider la vérification anti-spam avant de continuer.',
+      formInvalid: 'Veuillez remplir tous les champs obligatoires et accepter les conditions.',
+    },
+    es: {
+      name: 'Nombre completo',
+      email: 'Email',
+      phone: 'Teléfono (opcional)',
+      requests: 'Solicitudes especiales',
+      terms: 'Acepto los términos y condiciones',
+      submit: 'Proceder al pago',
+      processing: 'Procesando...',
+      error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
+      unavailable: 'Estas fechas ya no están disponibles. Elija otras fechas.',
+      captchaFailed: 'La verificación anti-spam falló. Recargue la página e inténtelo de nuevo.',
+      paymentsOff: 'Los pagos en línea aún no están activos. Contáctenos para reservar.',
+      pickDates: 'Seleccione las fechas de llegada y salida en el calendario.',
+      captchaRequired: 'Complete la verificación anti-spam antes de continuar.',
+      formInvalid: 'Complete todos los campos obligatorios y acepte las condiciones.',
+    },
+    en: {
+      name: 'Full name',
+      email: 'Email',
+      phone: 'Phone (optional)',
+      requests: 'Special requests',
+      terms: 'I accept the terms and conditions',
+      submit: 'Proceed to payment',
+      processing: 'Processing...',
+      error: 'Payment could not be started. Please try again or contact us.',
+      unavailable: 'These dates are no longer available. Please choose other dates.',
+      captchaFailed: 'Anti-spam verification failed. Reload the page and try again.',
+      paymentsOff: 'Online payments are not active yet. Contact us to book.',
+      pickDates: 'Select your check-in and check-out dates on the calendar.',
+      captchaRequired: 'Please complete the anti-spam check before continuing.',
+      formInvalid: 'Please fill in all required fields and accept the terms.',
+    },
+  };
+
+  const t = labels[locale] || labels.en;
+
+  const showFeedback = (message: string) => {
+    setError(message);
+    requestAnimationFrame(() => {
+      feedbackRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  };
 
   const onSubmit = async (data: BookingCheckoutFormInput) => {
     if (hp.trim().length > 0) {
@@ -56,12 +118,12 @@ export default function BookingForm({
     }
 
     if (!checkInDate || !checkOutDate) {
-      setError(t.pickDates);
+      showFeedback(t.pickDates);
       return;
     }
 
     if (turnstileConfigured && !turnstileToken) {
-      setError(t.captchaRequired);
+      showFeedback(t.captchaRequired);
       return;
     }
 
@@ -89,72 +151,40 @@ export default function BookingForm({
         if (response.status === 409) {
           throw new Error('unavailable');
         }
+        if (response.status === 403) {
+          throw new Error('captcha');
+        }
+        if (response.status === 503) {
+          throw new Error('paymentsOff');
+        }
         throw new Error(result.error || 'Checkout failed');
       }
 
       window.location.href = result.url;
     } catch (err) {
+      const code = err instanceof Error ? err.message : '';
       const message =
-        err instanceof Error && err.message === 'unavailable' ? t.unavailable : t.error;
-      setError(message);
+        code === 'unavailable'
+          ? t.unavailable
+          : code === 'captcha'
+            ? t.captchaFailed
+            : code === 'paymentsOff'
+              ? t.paymentsOff
+              : t.error;
+      showFeedback(message);
       setIsLoading(false);
     }
   };
 
-  const labels = {
-    fr: {
-      name: 'Nom complet',
-      email: 'Email',
-      phone: 'Téléphone (optionnel)',
-      requests: 'Demandes spéciales',
-      terms: 'J\'accepte les conditions générales',
-      submit: 'Procéder au paiement',
-      processing: 'Traitement...',
-      error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
-      unavailable: 'Ces dates ne sont plus disponibles. Choisissez d\'autres dates.',
-      pickDates: 'Sélectionnez vos dates d\'arrivée et de départ dans le calendrier.',
-      captchaRequired: 'Veuillez valider la vérification anti-spam avant de continuer.',
-    },
-    es: {
-      name: 'Nombre completo',
-      email: 'Email',
-      phone: 'Teléfono (opcional)',
-      requests: 'Solicitudes especiales',
-      terms: 'Acepto los términos y condiciones',
-      submit: 'Proceder al pago',
-      processing: 'Procesando...',
-      error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
-      unavailable: 'Estas fechas ya no están disponibles. Elija otras fechas.',
-      pickDates: 'Seleccione las fechas de llegada y salida en el calendario.',
-      captchaRequired: 'Complete la verificación anti-spam antes de continuar.',
-    },
-    en: {
-      name: 'Full name',
-      email: 'Email',
-      phone: 'Phone (optional)',
-      requests: 'Special requests',
-      terms: 'I accept the terms and conditions',
-      submit: 'Proceed to payment',
-      processing: 'Processing...',
-      error: 'Payment could not be started. Please try again or contact us.',
-      unavailable: 'These dates are no longer available. Please choose other dates.',
-      pickDates: 'Select your check-in and check-out dates on the calendar.',
-      captchaRequired: 'Please complete the anti-spam check before continuing.',
-    },
+  const onInvalid = () => {
+    showFeedback(t.formInvalid);
   };
 
-  const t = labels[locale] || labels.en;
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="site-form">
-      {error && (
-        <div className="form-alert form-alert--error" role="alert">
-          {error}
-        </div>
-      )}
-
+    <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="site-form">
       <input type="hidden" {...register('checkInDate')} />
       <input type="hidden" {...register('checkOutDate')} />
+      <input type="hidden" {...register('locale')} />
 
       {(errors.checkInDate || errors.checkOutDate) && (
         <div className="form-alert form-alert--error" role="alert">
@@ -259,9 +289,17 @@ export default function BookingForm({
         )}
       </div>
 
+      <div ref={feedbackRef} className="booking-form-feedback">
+        {error && (
+          <div className="form-alert form-alert--error" role="alert">
+            {error}
+          </div>
+        )}
+      </div>
+
       <button
         type="submit"
-        disabled={isLoading || !termsAccepted || !checkInDate || !checkOutDate}
+        disabled={isLoading}
         className="btn btn-primary booking-form-submit"
         aria-busy={isLoading}
       >

@@ -57,9 +57,9 @@ export default async function GuidePage({ params }: Props) {
         <p className="editorial-text" style={{ marginTop: 24 }}>
           {guide.descriptions[loc]}
         </p>
-        {guide.keywords?.length ? (
+        {guide.keywords?.[loc]?.length ? (
           <p className="small-caps" style={{ marginTop: 32 }}>
-            {guide.keywords.join(' · ')}
+            {guide.keywords[loc].join(' · ')}
           </p>
         ) : null}
         <div className="seo-guide-links" style={{ marginTop: 48 }}>
