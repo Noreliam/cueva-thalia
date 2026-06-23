@@ -72,6 +72,7 @@ export default function BookingForm({
       pickDates: 'Sélectionnez vos dates d\'arrivée et de départ dans le calendrier.',
       captchaRequired: 'Veuillez valider la vérification anti-spam avant de continuer.',
       formInvalid: 'Veuillez remplir tous les champs obligatoires et accepter les conditions.',
+      validationError: 'Certaines informations du formulaire sont invalides. Vérifiez l\'email et le téléphone, puis réessayez.',
     },
     es: {
       name: 'Nombre completo',
@@ -90,6 +91,7 @@ export default function BookingForm({
       pickDates: 'Seleccione las fechas de llegada y salida en el calendario.',
       captchaRequired: 'Complete la verificación anti-spam antes de continuar.',
       formInvalid: 'Complete todos los campos obligatorios y acepte las condiciones.',
+      validationError: 'Algunos datos del formulario no son válidos. Revise el email y el teléfono, e inténtelo de nuevo.',
     },
     en: {
       name: 'Full name',
@@ -108,6 +110,7 @@ export default function BookingForm({
       pickDates: 'Select your check-in and check-out dates on the calendar.',
       captchaRequired: 'Please complete the anti-spam check before continuing.',
       formInvalid: 'Please fill in all required fields and accept the terms.',
+      validationError: 'Some form details look invalid. Check your email and phone, then try again.',
     },
   };
 
@@ -183,6 +186,9 @@ export default function BookingForm({
         if (response.status === 502 || result.code === 'stripe_error') {
           throw new Error('stripe');
         }
+        if (response.status === 400 || result.code === 'validation_error') {
+          throw new Error('validation');
+        }
         throw new Error(result.error || 'Checkout failed');
       }
 
@@ -198,9 +204,11 @@ export default function BookingForm({
               ? t.paymentsOff
               : code === 'stripe'
                 ? t.stripeError
-                : code === 'rateLimit'
-                  ? t.rateLimit
-                  : t.error;
+            : code === 'rateLimit'
+              ? t.rateLimit
+              : code === 'validation'
+                ? t.validationError
+                : t.error;
       showFeedback(message);
       if (code === 'captcha' || code === 'stripe') {
         turnstileRef.current?.reset();

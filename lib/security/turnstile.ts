@@ -1,3 +1,5 @@
+import { normalizeEnvSecret } from '@/lib/stripe/server';
+
 type TurnstileResult = {
   success: boolean;
   'error-codes'?: string[];
@@ -8,7 +10,7 @@ export async function verifyTurnstileToken(token: string, _ip: string): Promise<
     return true;
   }
 
-  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
+  const secret = normalizeEnvSecret(process.env.TURNSTILE_SECRET_KEY);
 
   if (!secret) {
     console.error('[TURNSTILE] TURNSTILE_SECRET_KEY is missing in production — all form submissions will fail');

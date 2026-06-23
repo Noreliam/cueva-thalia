@@ -2,8 +2,16 @@ import Stripe from 'stripe';
 
 let stripeClient: Stripe | null = null;
 
+export function normalizeEnvSecret(value: string | undefined): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+  return trimmed.replace(/^["']|["']$/g, '');
+}
+
 export function getStripeSecretKey(): string | undefined {
-  const key = process.env.STRIPE_SECRET_KEY?.trim();
+  const key = normalizeEnvSecret(process.env.STRIPE_SECRET_KEY);
   if (!key) {
     return undefined;
   }

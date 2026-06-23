@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
 import { checkBookingDatesAvailable } from '@/lib/booking/blocked-ranges';
-import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
+import { getStripe, isStripeConfigured, normalizeEnvSecret } from '@/lib/stripe/server';
 import { getClientIpFromRequest } from '@/lib/security/client-ip';
 import { checkRateLimit } from '@/lib/security/rate-limit';
 import { verifyTurnstileToken } from '@/lib/security/turnstile';
@@ -92,7 +92,10 @@ export async function POST(request: Request) {
     parsed = bookingCheckoutSchema.parse(body);
   } catch (error) {
     console.error('[STRIPE:booking:checkout] validation error', error);
-    return genericError(400);
+    return NextResponse.json(
+      { ok: false, error: 'Validation failed', code: 'validation_error' },
+      { status: 400 },
+    );
   }
 
   // Calculate price
@@ -185,5 +188,9 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+  return NextResponse.json({
+    stripeConfigured: isStripeConfigured(),
+    turnstileConfigured: Boolean(normalizeEnvSecret(process.env.TURNSTILE_SECRET_KEY)),
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cueva-thalia.com',
+  });
 }
