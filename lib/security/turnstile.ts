@@ -3,12 +3,12 @@ type TurnstileResult = {
   'error-codes'?: string[];
 };
 
-export async function verifyTurnstileToken(token: string, ip: string): Promise<boolean> {
+export async function verifyTurnstileToken(token: string, _ip: string): Promise<boolean> {
   if (process.env.NODE_ENV === 'development') {
     return true;
   }
 
-  const secret = process.env.TURNSTILE_SECRET_KEY;
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
 
   if (!secret) {
     console.error('[TURNSTILE] TURNSTILE_SECRET_KEY is missing in production — all form submissions will fail');
@@ -23,12 +23,6 @@ export async function verifyTurnstileToken(token: string, ip: string): Promise<b
     secret,
     response: token,
   });
-
-  // Only send remoteip when we have a real visitor IP. Behind Cloudflare/Netlify,
-  // a proxy IP mismatch causes Turnstile to reject otherwise valid tokens.
-  if (ip && ip !== 'unknown') {
-    body.set('remoteip', ip);
-  }
 
   const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',

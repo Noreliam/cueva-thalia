@@ -1,14 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import { TurnstileField } from '@/components/forms/TurnstileField';
+import { TurnstileField, type TurnstileFieldHandle } from '@/components/forms/TurnstileField';
 
 type FormSecurityFieldsProps = {
   honeypotProps?: React.InputHTMLAttributes<HTMLInputElement>;
   onTokenChange: (token: string) => void;
+  turnstileRef?: React.Ref<TurnstileFieldHandle>;
+  executeOnSubmit?: boolean;
 };
 
-export function FormSecurityFields({ honeypotProps, onTokenChange }: FormSecurityFieldsProps) {
+export function FormSecurityFields({
+  honeypotProps,
+  onTokenChange,
+  turnstileRef,
+  executeOnSubmit = false,
+}: FormSecurityFieldsProps) {
   const [hp, setHp] = useState('');
 
   return (
@@ -24,7 +31,11 @@ export function FormSecurityFields({ honeypotProps, onTokenChange }: FormSecurit
         className="form-honeypot"
         {...honeypotProps}
       />
-      <TurnstileField onTokenChange={onTokenChange} />
+      <TurnstileField
+        ref={turnstileRef}
+        onTokenChange={onTokenChange}
+        executeOnSubmit={executeOnSubmit}
+      />
     </>
   );
 }

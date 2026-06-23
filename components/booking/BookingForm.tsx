@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { bookingFormSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
 import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
+import type { TurnstileFieldHandle } from '@/components/forms/TurnstileField';
 
 interface BookingFormProps {
   locale?: 'fr' | 'es' | 'en';
@@ -24,6 +25,7 @@ export default function BookingForm({
   const [turnstileToken, setTurnstileToken] = useState('');
   const [hp, setHp] = useState('');
   const feedbackRef = useRef<HTMLDivElement>(null);
+  const turnstileRef = useRef<TurnstileFieldHandle>(null);
 
   const {
     register,
@@ -122,15 +124,22 @@ export default function BookingForm({
       return;
     }
 
-    if (turnstileConfigured && !turnstileToken) {
-      showFeedback(t.captchaRequired);
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
     try {
+      let token = '';
+      if (turnstileConfigured) {
+        try {
+          token = (await turnstileRef.current?.getToken()) ?? '';
+        } catch {
+          throw new Error('captcha');
+        }
+        if (!token) {
+          throw new Error('captcha');
+        }
+      }
+
       const response = await fetch('/api/stripe/booking/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -141,7 +150,7 @@ export default function BookingForm({
           locale,
           guestCount,
           _hp: hp,
-          turnstileToken,
+          turnstileToken: token,
         }),
       });
 
@@ -172,6 +181,9 @@ export default function BookingForm({
               ? t.paymentsOff
               : t.error;
       showFeedback(message);
+      if (code === 'captcha') {
+        turnstileRef.current?.reset();
+      }
       setIsLoading(false);
     }
   };
@@ -264,6 +276,8 @@ export default function BookingForm({
       <input type="hidden" {...register('guestCount', { valueAsNumber: true })} />
 
       <FormSecurityFields
+        turnstileRef={turnstileRef}
+        executeOnSubmit
         honeypotProps={{
           value: hp,
           onChange: (event) => setHp(event.target.value),
