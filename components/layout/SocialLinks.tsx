@@ -70,7 +70,7 @@ export function SocialLinksFooter() {
 
 export function BookNowLink({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <Link href="/sejourner#reservation" className={className}>
+    <Link href="/sejourner?from=newsletter#reservation" className={className}>
       {children}
     </Link>
   );

@@ -16,6 +16,7 @@ const modules = [
   { title: 'Médias', href: '#', desc: 'Google Drive Manon [URL à renseigner]' },
   { title: 'Documents', href: '/dashboard/documents', desc: 'Conditions, FAQ, modèles WhatsApp' },
   { title: 'Marketing', href: '/dashboard/marketing', desc: 'GA4, GSC, calendrier éditorial' },
+  { title: 'Newsletter', href: '/dashboard/newsletter', desc: 'Inscrits pop-up WELCOME10 — emails et export CSV' },
 ];
 
 export default async function DashboardPage() {

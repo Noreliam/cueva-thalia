@@ -41,6 +41,7 @@ interface PricingResult {
     nightsCount: number;
     baseTotal: number;
     guestDiscount: number;
+    promoDiscount: number;
     finalTotal: number;
   };
 }
@@ -121,6 +122,7 @@ export function calculateBookingPrice(
   checkIn: Date | string,
   checkOut: Date | string,
   guestCount: number,
+  promoDiscountPercent = 0,
 ): PricingResult {
   const checkInDate = typeof checkIn === 'string' ? new Date(checkIn) : checkIn;
   const checkOutDate = typeof checkOut === 'string' ? new Date(checkOut) : checkOut;
@@ -163,7 +165,11 @@ export function calculateBookingPrice(
   // Exemple: -5% pour 7+ nuits, -10% pour 14+ nuits
   const progressiveDiscount = 0; // À implémenter
 
-  const finalTotal = baseTotal - progressiveDiscount;
+  const promoDiscount =
+    promoDiscountPercent > 0
+      ? Math.round(baseTotal * promoDiscountPercent) / 100
+      : 0;
+  const finalTotal = baseTotal - progressiveDiscount - promoDiscount;
 
   return {
     nights,
@@ -173,6 +179,7 @@ export function calculateBookingPrice(
       nightsCount: nights,
       baseTotal: Math.round(baseTotal * 100) / 100,
       guestDiscount: progressiveDiscount,
+      promoDiscount: Math.round(promoDiscount * 100) / 100,
       finalTotal: Math.round(finalTotal * 100) / 100,
     },
   };

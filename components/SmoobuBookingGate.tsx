@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import BookingDatePicker from '@/components/booking/BookingDatePicker';
 import BookingForm from '@/components/booking/BookingForm';
 import { Link } from '@/i18n/routing';
@@ -153,12 +153,14 @@ export default function SmoobuBookingGate({
             <h3 id="booking-payment-title">{copy.paymentTitle}</h3>
             <p style={{ marginBottom: 24 }}>{copy.paymentDesc}</p>
           </div>
-          <BookingForm
-            locale={locale}
-            guestCount={selected}
-            checkInDate={checkInDate}
-            checkOutDate={checkOutDate}
-          />
+          <Suspense fallback={null}>
+            <BookingForm
+              locale={locale}
+              guestCount={selected}
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+            />
+          </Suspense>
         </section>
       )}
 

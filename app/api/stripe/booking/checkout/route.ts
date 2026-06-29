@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
+import { validatePromoCode } from '@/lib/booking/promo-codes';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
 import { checkBookingDatesAvailable } from '@/lib/booking/blocked-ranges';
 import { getStripe, getStripeSecretKey, isStripeConfigured, normalizeEnvSecret } from '@/lib/stripe/server';
@@ -98,10 +99,24 @@ export async function POST(request: Request) {
     );
   }
 
+  // Validate promo code (if provided)
+  const promoValidation = await validatePromoCode(parsed.promoCode, parsed.email);
+  if (!promoValidation.valid) {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid promo code', code: `promo_${promoValidation.error}` },
+      { status: 400 },
+    );
+  }
+
   // Calculate price
   let pricing;
   try {
-    pricing = calculateBookingPrice(parsed.checkInDate, parsed.checkOutDate, parsed.guestCount);
+    pricing = calculateBookingPrice(
+      parsed.checkInDate,
+      parsed.checkOutDate,
+      parsed.guestCount,
+      promoValidation.discountPercent,
+    );
   } catch (error) {
     console.error('[STRIPE:booking:checkout] pricing error', error);
     return NextResponse.json({ ok: false, error: 'Invalid booking parameters' }, { status: 400 });
@@ -156,6 +171,8 @@ export async function POST(request: Request) {
         checkOutDate: parsed.checkOutDate,
         guestCount: String(parsed.guestCount),
         specialRequests: parsed.specialRequests?.slice(0, 500) ?? '',
+        promoCode: promoValidation.code || '',
+        promoDiscountPercent: String(promoValidation.discountPercent),
         locale: parsed.locale,
         amountCents: String(pricing.amountCents),
       },

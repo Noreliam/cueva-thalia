@@ -11,6 +11,7 @@ import {
   markNewsletterSubscribed,
   markPopupDismissed,
 } from '@/lib/newsletter/constants';
+import type { NewsletterSource } from '@/lib/newsletter/subscribers';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -68,9 +69,11 @@ function PopupShell({
 
 function NewsletterForm({
   compact = false,
+  source,
   onSuccess,
 }: {
   compact?: boolean;
+  source: NewsletterSource;
   onSuccess: () => void;
 }) {
   const t = useTranslations('Popup');
@@ -103,7 +106,7 @@ function NewsletterForm({
       return;
     }
 
-    await submit({ email: email.trim(), locale, gdprAccepted: true });
+    await submit({ email: email.trim(), locale, source, gdprAccepted: true });
   };
 
   if (success) {
@@ -123,7 +126,7 @@ function NewsletterForm({
 
   return (
     <form className={`newsletter-popup-form${compact ? ' newsletter-popup-form--compact' : ''}`} onSubmit={handleSubmit}>
-      <input type="text" name="_hp" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden className="hp-field" />
+      <input type="text" name="_hp" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden className="form-honeypot" />
       <input
         type="email"
         required
@@ -249,7 +252,7 @@ export default function NewsletterPopups() {
               <li>✓ {t('welcome_benefit_2')}</li>
               <li>✓ {t('welcome_benefit_3')}</li>
             </ul>
-            <NewsletterForm onSuccess={() => setTimeout(closeWelcome, 100)} />
+            <NewsletterForm source="popup_welcome" onSuccess={() => setTimeout(closeWelcome, 100)} />
           </div>
         </PopupShell>
       )}
@@ -261,7 +264,7 @@ export default function NewsletterPopups() {
             <h2>{t('exit_title')}</h2>
             <p>{t('exit_subtitle')}</p>
             <p>{t('exit_offer')}</p>
-            <NewsletterForm compact onSuccess={closeExit} />
+            <NewsletterForm source="popup_exit" compact onSuccess={closeExit} />
           </div>
         </PopupShell>
       )}

@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { bookingFormSchema, type BookingCheckoutFormInput } from '@/lib/booking/schema';
+import { normalizePromoCode } from '@/lib/booking/promo-codes';
+import { WELCOME_DISCOUNT_CODE } from '@/lib/newsletter/constants';
 import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
 import type { TurnstileFieldHandle } from '@/components/forms/TurnstileField';
 
@@ -26,6 +29,12 @@ export default function BookingForm({
   const [hp, setHp] = useState('');
   const feedbackRef = useRef<HTMLDivElement>(null);
   const turnstileRef = useRef<TurnstileFieldHandle>(null);
+  const searchParams = useSearchParams();
+  const promoFromUrl = searchParams.get('promo');
+  const fromNewsletter = searchParams.get('from') === 'newsletter';
+  const initialPromo = normalizePromoCode(
+    promoFromUrl ?? (fromNewsletter ? WELCOME_DISCOUNT_CODE : ''),
+  );
 
   const {
     register,
@@ -39,6 +48,7 @@ export default function BookingForm({
       guestCount,
       checkInDate: '',
       checkOutDate: '',
+      promoCode: initialPromo,
       termsAccepted: false,
     },
   });
@@ -73,6 +83,11 @@ export default function BookingForm({
       captchaRequired: 'Veuillez valider la vérification anti-spam avant de continuer.',
       formInvalid: 'Veuillez remplir tous les champs obligatoires et accepter les conditions.',
       validationError: 'Certaines informations du formulaire sont invalides. Vérifiez l\'email et le téléphone, puis réessayez.',
+      promoCode: 'Code promo (optionnel)',
+      promoHint: 'Ex. WELCOME10 pour 10 % de réduction sur votre première réservation.',
+      promoInvalid: 'Ce code promo est invalide. Vérifiez l\'orthographe et réessayez.',
+      promoExpired: 'Ce code promo a expiré (valable 30 jours après inscription).',
+      promoEmailMismatch: 'Ce code promo doit être utilisé avec l\'email de votre inscription newsletter.',
     },
     es: {
       name: 'Nombre completo',
@@ -92,6 +107,11 @@ export default function BookingForm({
       captchaRequired: 'Complete la verificación anti-spam antes de continuar.',
       formInvalid: 'Complete todos los campos obligatorios y acepte las condiciones.',
       validationError: 'Algunos datos del formulario no son válidos. Revise el email y el teléfono, e inténtelo de nuevo.',
+      promoCode: 'Código promocional (opcional)',
+      promoHint: 'Ej. WELCOME10 para un 10 % de descuento en su primera reserva.',
+      promoInvalid: 'Este código promocional no es válido. Compruebe la ortografía e inténtelo de nuevo.',
+      promoExpired: 'Este código promocional ha caducado (válido 30 días tras la inscripción).',
+      promoEmailMismatch: 'Este código debe usarse con el email de su inscripción a la newsletter.',
     },
     en: {
       name: 'Full name',
@@ -111,6 +131,11 @@ export default function BookingForm({
       captchaRequired: 'Please complete the anti-spam check before continuing.',
       formInvalid: 'Please fill in all required fields and accept the terms.',
       validationError: 'Some form details look invalid. Check your email and phone, then try again.',
+      promoCode: 'Promo code (optional)',
+      promoHint: 'E.g. WELCOME10 for 10% off your first direct booking.',
+      promoInvalid: 'This promo code is invalid. Check the spelling and try again.',
+      promoExpired: 'This promo code has expired (valid for 30 days after sign-up).',
+      promoEmailMismatch: 'This promo code must be used with the email from your newsletter sign-up.',
     },
   };
 
@@ -189,6 +214,15 @@ export default function BookingForm({
         if (response.status === 400 || result.code === 'validation_error') {
           throw new Error('validation');
         }
+        if (result.code === 'promo_invalid') {
+          throw new Error('promoInvalid');
+        }
+        if (result.code === 'promo_expired') {
+          throw new Error('promoExpired');
+        }
+        if (result.code === 'promo_email_mismatch') {
+          throw new Error('promoEmailMismatch');
+        }
         throw new Error(result.error || 'Checkout failed');
       }
 
@@ -208,7 +242,13 @@ export default function BookingForm({
               ? t.rateLimit
               : code === 'validation'
                 ? t.validationError
-                : t.error;
+                : code === 'promoInvalid'
+                  ? t.promoInvalid
+                  : code === 'promoExpired'
+                    ? t.promoExpired
+                    : code === 'promoEmailMismatch'
+                      ? t.promoEmailMismatch
+                      : t.error;
       showFeedback(message);
       if (code === 'captcha' || code === 'stripe') {
         turnstileRef.current?.reset();
@@ -283,6 +323,27 @@ export default function BookingForm({
           <span id="booking-phone-error" className="form-error">
             {errors.phone.message}
           </span>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="booking-promo">{t.promoCode}</label>
+        <input
+          id="booking-promo"
+          type="text"
+          autoComplete="off"
+          spellCheck={false}
+          placeholder="WELCOME10"
+          {...register('promoCode')}
+          disabled={isLoading}
+          aria-describedby="booking-promo-hint"
+          className="booking-promo-input"
+        />
+        <span id="booking-promo-hint" className="form-hint">
+          {t.promoHint}
+        </span>
+        {errors.promoCode && (
+          <span className="form-error">{errors.promoCode.message}</span>
         )}
       </div>
 

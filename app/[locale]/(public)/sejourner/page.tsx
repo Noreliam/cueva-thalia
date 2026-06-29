@@ -120,7 +120,6 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               ratePerNight: t('rate_per_night'),
               ratesFootnote: t('rates_footnote'),
               checkinCheckout: t('checkin_checkout'),
-              deposit: t('deposit'),
               ctaWhatsappQuote: t('cta_whatsapp_quote'),
               bookingGuests: t('booking_guests'),
               bookingContinue: t('booking_continue'),

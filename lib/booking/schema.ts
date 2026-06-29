@@ -41,6 +41,16 @@ export const bookingCheckoutSchema = z.object({
     .min(1, 'At least 1 guest required')
     .max(4, 'Online booking available for up to 4 guests. For 5+ guests, please contact us via WhatsApp or email.'),
 
+  // Optional promo code (e.g. WELCOME10)
+  promoCode: z
+    .union([z.string(), z.null()])
+    .optional()
+    .transform((val) => {
+      const text = typeof val === 'string' ? val.trim().toUpperCase() : '';
+      return text || undefined;
+    })
+    .refine((val) => !val || val.length <= 32, 'Promo code must be less than 32 characters'),
+
   // Optional
   specialRequests: z
     .union([z.string(), z.null()])
