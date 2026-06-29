@@ -25,6 +25,8 @@ type Copy = {
   bookingCalendarDesc: string;
   bookingPaymentTitle: string;
   bookingPaymentDesc: string;
+  bookingGuestsTitle: string;
+  bookingGuestsDesc: string;
   bookingNoscript: string;
   whatsappHref: string;
 };
@@ -56,6 +58,8 @@ export function SejournerBookingSection({
             calendarDesc: copy.bookingCalendarDesc,
             paymentTitle: copy.bookingPaymentTitle,
             paymentDesc: copy.bookingPaymentDesc,
+            guestsTitle: copy.bookingGuestsTitle,
+            guestsDesc: copy.bookingGuestsDesc,
             noscript: copy.bookingNoscript,
           }}
         />

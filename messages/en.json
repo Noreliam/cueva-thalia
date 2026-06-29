@@ -179,9 +179,11 @@
     "booking_calendar_desc": "Click check-in, then check-out. A shaded date can be used as checkout if the previous night is free.",
     "booking_payment_title": "Book and pay",
     "booking_payment_desc": "Secure payment via Stripe.",
+    "booking_guests_title": "Number of guests",
+    "booking_guests_desc": "Indicate how many people will stay at Cueva Thalía (up to 4 online).",
     "booking_noscript": "Enable JavaScript to book online (up to 4 guests), or contact us by email or WhatsApp.",
     "reservation_title": "Book your stay",
-    "reservation_lead": "Choose the number of guests, then check availability in real time.",
+    "reservation_lead": "First choose your dates in the calendar, then indicate the number of guests.",
     "rate_weekday_label": "Monday – Thursday",
     "rate_weekend_label": "Fri. – Sun. & public holidays",
     "rate_per_night": "/ night",
@@ -364,7 +366,11 @@
     "cgv": "Terms & Conditions",
     "privacy": "Privacy Policy",
     "cancel": "Cancellation Policy",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "follow_us": "Follow us",
+    "social_instagram": "Instagram",
+    "social_facebook": "Facebook",
+    "social_tiktok": "TikTok"
   },
   "Articles": {
     "journal": "Journal",
@@ -383,5 +389,28 @@
     "title": "Page not found.",
     "text": "The page you're looking for isn't here. Head back home to discover Cueva Thalía.",
     "home": "Back to home"
+  },
+  "Popup": {
+    "welcome_title": "Join the Cueva Thalía Private Circle",
+    "welcome_subtitle": "Your first experience deserves a privilege.",
+    "welcome_offer": "Receive 10% off your first booking made directly on our website.",
+    "welcome_benefit_1": "Exclusive offers reserved for our members",
+    "welcome_benefit_2": "New availability and last-minute cancellations",
+    "welcome_benefit_3": "News, retreats and events at Cueva Thalía",
+    "email_placeholder": "Enter your email address",
+    "welcome_cta": "Get my welcome offer",
+    "welcome_disclaimer": "Your code is valid for 30 days from receipt. Offer reserved for new sign-ups and cannot be combined with other promotions.",
+    "welcome_success_title": "Welcome to the Private Circle!",
+    "welcome_success_code_label": "Your discount code is:",
+    "welcome_success_text": "Enjoy 10% off your first direct booking.",
+    "welcome_success_validity": "Valid for 30 days.",
+    "welcome_success_cta": "Book now",
+    "exit_title": "Before you go…",
+    "exit_subtitle": "Don't miss your welcome offer.",
+    "exit_offer": "Receive 10% off your first direct booking at Cueva Thalía.",
+    "exit_cta": "Get my code",
+    "gdpr_label": "I agree to receive communications from Cueva Thalía (offers, news and events). I can unsubscribe at any time.",
+    "close": "Close",
+    "social_follow": "In the meantime, find us on"
   }
 }

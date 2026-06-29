@@ -1,0 +1,13 @@
+{
+  "periods": [
+    {
+      "id": "exemple-noel",
+      "label": "Promo Noël (exemple — à adapter)",
+      "startDate": "2026-12-20",
+      "endDate": "2026-12-26",
+      "peakDayRate": 220,
+      "offDayRate": 180,
+      "note": "Tarif promotionnel pour attirer plus de clients en basse saison. Supprimez ou modifiez cette entrée."
+    }
+  ]
+}

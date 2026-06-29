@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Link, routing } from '@/i18n/routing';
 import { getGuideBySlug, guidePages } from '@/lib/guides-data';
+import { getGuideContent } from '@/lib/guides-content';
 import { buildPageMetadata } from '@/lib/seo';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -35,7 +36,8 @@ export default async function GuidePage({ params }: Props) {
 
   const loc = locale as 'es' | 'fr' | 'en';
   const t = await getTranslations({ locale, namespace: 'Guides' });
-  const commonT = await getTranslations({ locale, namespace: 'Common' });
+  const content = getGuideContent(slug);
+  const body = content?.[loc];
   const canonical = `https://cueva-thalia.com${locale === 'es' ? '' : `/${locale}`}/guides/${slug}`;
 
   const articleJsonLd = {
@@ -53,10 +55,44 @@ export default async function GuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <article className="seo-page-content">
         <h1>{guide.h1[loc]}</h1>
-        <p className="editorial-text">{commonT('guide_placeholder')}</p>
-        <p className="editorial-text" style={{ marginTop: 24 }}>
-          {guide.descriptions[loc]}
-        </p>
+        {body ? (
+          <div className="seo-guide-body">
+            {body.intro.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)} className="editorial-text">
+                {paragraph}
+              </p>
+            ))}
+            {body.sections.map((section) => (
+              <section key={section.heading}>
+                <h2>{section.heading}</h2>
+                {section.paragraphs?.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className="editorial-text">
+                    {paragraph}
+                  </p>
+                ))}
+                {section.items?.length ? (
+                  <ul className="seo-guide-list">
+                    {section.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {section.closingParagraphs?.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)} className="editorial-text">
+                    {paragraph}
+                  </p>
+                ))}
+              </section>
+            ))}
+            {body.outro.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)} className="editorial-text">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p className="editorial-text">{guide.descriptions[loc]}</p>
+        )}
         {guide.keywords?.[loc]?.length ? (
           <p className="small-caps" style={{ marginTop: 32 }}>
             {guide.keywords[loc].join(' · ')}

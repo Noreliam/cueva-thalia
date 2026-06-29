@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer';
 import type { BookingOrder } from '@/lib/booking/fulfill';
+import { getSmtpConfig, sendViaSmtp, shouldSendEmailInProduction } from '@/lib/email/smtp';
 
 type BookingLocale = 'fr' | 'en' | 'es';
 
@@ -201,45 +201,14 @@ O simplemente responde a este correo.
   return templates[locale];
 }
 
-async function sendViaSmtp(options: {
-  user: string;
-  pass: string;
-  from: string;
-  to: string;
-  replyTo?: string;
-  subject: string;
-  html: string;
-}): Promise<void> {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: options.user,
-      pass: options.pass,
-    },
-  });
-
-  await transporter.sendMail({
-    from: options.from,
-    to: options.to,
-    replyTo: options.replyTo,
-    subject: options.subject,
-    html: options.html,
-  });
-}
-
 export async function sendBookingConfirmation(order: BookingOrder): Promise<void> {
-  const smtpUser = process.env.SMTP_USER;
-  const smtpPass = process.env.SMTP_PASS;
-  if (!smtpUser || !smtpPass) {
+  const smtp = getSmtpConfig();
+  if (!smtp) {
     console.warn('[EMAIL:booking] SMTP_USER / SMTP_PASS not set — skipping confirmation email', {
       bookingId: order.bookingId,
     });
     return;
   }
-
-  const from = process.env.EMAIL_FROM || `Cueva Thalía <${smtpUser}>`;
 
   if (!order.guestEmail) {
     console.warn('[EMAIL:booking] guest email missing — skipping confirmation email', {
@@ -250,14 +219,13 @@ export async function sendBookingConfirmation(order: BookingOrder): Promise<void
 
   const locale = normalizeLocale(order.locale);
   const { subject, html } = buildTemplate(order, locale);
-  const replyTo = process.env.EMAIL_REPLY_TO || smtpUser;
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (!shouldSendEmailInProduction()) {
     console.log('[EMAIL:booking] dev mode — email not sent', {
       bookingId: order.bookingId,
       to: order.guestEmail,
-      from,
-      replyTo,
+      from: smtp.from,
+      replyTo: smtp.replyTo,
       locale,
       subject,
       html,
@@ -266,11 +234,11 @@ export async function sendBookingConfirmation(order: BookingOrder): Promise<void
   }
 
   await sendViaSmtp({
-    user: smtpUser,
-    pass: smtpPass,
-    from,
+    user: smtp.user,
+    pass: smtp.pass,
+    from: smtp.from,
     to: order.guestEmail,
-    replyTo,
+    replyTo: smtp.replyTo,
     subject,
     html,
   });

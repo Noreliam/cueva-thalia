@@ -132,6 +132,8 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               bookingCalendarDesc: t('booking_calendar_desc'),
               bookingPaymentTitle: t('booking_payment_title'),
               bookingPaymentDesc: t('booking_payment_desc'),
+              bookingGuestsTitle: t('booking_guests_title'),
+              bookingGuestsDesc: t('booking_guests_desc'),
               bookingNoscript: t('booking_noscript'),
               whatsappHref: `https://wa.me/${whatsapp}`,
             }}

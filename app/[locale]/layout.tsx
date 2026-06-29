@@ -11,6 +11,7 @@ import SiteHeader from '@/components/layout/SiteHeader';
 import SiteFooter from '@/components/layout/SiteFooter';
 import SiteWhatsApp from '@/components/layout/SiteWhatsApp';
 import CookieBanner from '@/components/layout/CookieBanner';
+import NewsletterPopups from '@/components/marketing/NewsletterPopups';
 import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 
 const cormorant = Cormorant_Garamond({
@@ -78,6 +79,7 @@ export default async function LocaleLayout({
           <main id="main">{children}</main>
           <SiteFooter />
           <SiteWhatsApp />
+          <NewsletterPopups />
           <CookieBanner
             copy={{
               title: cookieT('cookie_title'),

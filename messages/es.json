@@ -179,9 +179,11 @@
     "booking_calendar_desc": "Haga clic en la llegada y luego en la salida. Una fecha sombreada puede servir de salida si la noche anterior está libre.",
     "booking_payment_title": "Reservar y pagar",
     "booking_payment_desc": "Pago seguro mediante Stripe.",
+    "booking_guests_title": "Número de huéspedes",
+    "booking_guests_desc": "Indique cuántas personas se alojarán en Cueva Thalía (hasta 4 en línea).",
     "booking_noscript": "Active JavaScript para reservar en línea (hasta 4 personas), o contáctenos por email o WhatsApp.",
     "reservation_title": "Reservar su estancia",
-    "reservation_lead": "Elija el número de personas y consulte la disponibilidad en directo.",
+    "reservation_lead": "Elija primero sus fechas en el calendario, luego indique el número de huéspedes.",
     "rate_weekday_label": "Lunes – jueves",
     "rate_weekend_label": "Vie. – dom. y festivos",
     "rate_per_night": "/ noche",
@@ -364,7 +366,11 @@
     "cgv": "Condiciones Generales",
     "privacy": "Política de Privacidad",
     "cancel": "Política de Cancelación",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "follow_us": "Síguenos",
+    "social_instagram": "Instagram",
+    "social_facebook": "Facebook",
+    "social_tiktok": "TikTok"
   },
   "Articles": {
     "journal": "Diario",
@@ -383,5 +389,28 @@
     "title": "Esta página no existe.",
     "text": "La página que busca no está aquí. Vuelva al inicio para descubrir Cueva Thalía.",
     "home": "Volver al inicio"
+  },
+  "Popup": {
+    "welcome_title": "Únase al Círculo Privado de Cueva Thalía",
+    "welcome_subtitle": "Su primera experiencia merece un privilegio.",
+    "welcome_offer": "Reciba un 10 % de descuento en su primera reserva realizada directamente en nuestro sitio.",
+    "welcome_benefit_1": "Ofertas exclusivas reservadas a nuestros miembros",
+    "welcome_benefit_2": "Nuevas disponibilidades y cancelaciones de última hora",
+    "welcome_benefit_3": "Novedades, retiros y eventos organizados en Cueva Thalía",
+    "email_placeholder": "Introduzca su dirección de correo",
+    "welcome_cta": "Recibir mi ventaja de bienvenida",
+    "welcome_disclaimer": "Su código es válido durante 30 días desde su recepción. Oferta reservada a nuevas inscripciones y no acumulable con otras promociones.",
+    "welcome_success_title": "¡Bienvenido/a al Círculo Privado!",
+    "welcome_success_code_label": "Su código de descuento es:",
+    "welcome_success_text": "Disfrute de un 10 % de descuento en su primera reserva directa.",
+    "welcome_success_validity": "Válido durante 30 días.",
+    "welcome_success_cta": "Reservar ahora",
+    "exit_title": "Antes de irse…",
+    "exit_subtitle": "No pierda su ventaja de bienvenida.",
+    "exit_offer": "Reciba un 10 % de descuento en su primera reserva directa en Cueva Thalía.",
+    "exit_cta": "Recibir mi código",
+    "gdpr_label": "Acepto recibir comunicaciones de Cueva Thalía (ofertas, novedades y eventos). Podré darme de baja en cualquier momento.",
+    "close": "Cerrar",
+    "social_follow": "Mientras tanto, encuéntrenos en"
   }
 }

@@ -1,5 +1,6 @@
 import type Stripe from 'stripe';
 import { sendBookingConfirmation } from '@/lib/email/booking-confirmation';
+import { sendBookingNotificationToManon } from '@/lib/email/booking-notification-admin';
 import { getOnlineCheckInLink } from '@/lib/smoobu/placeholders';
 import { createSmoobuReservation } from '@/lib/smoobu/reservations';
 
@@ -87,14 +88,25 @@ export async function fulfillBookingOrder(order: BookingOrder): Promise<void> {
     }
   }
 
+  const enrichedOrder = {
+    ...order,
+    smoobuReservationId,
+    onlineCheckInUrl,
+  };
+
   try {
-    await sendBookingConfirmation({
-      ...order,
-      smoobuReservationId,
-      onlineCheckInUrl,
-    });
+    await sendBookingConfirmation(enrichedOrder);
   } catch (error) {
     console.error('[EMAIL:booking] confirmation email failed', {
+      bookingId: order.bookingId,
+      error,
+    });
+  }
+
+  try {
+    await sendBookingNotificationToManon(enrichedOrder);
+  } catch (error) {
+    console.error('[EMAIL:admin] notification email failed', {
       bookingId: order.bookingId,
       error,
     });

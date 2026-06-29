@@ -1,6 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
+import { SocialLinksFooter } from '@/components/layout/SocialLinks';
 import { siteNavItems } from '@/lib/site-nav';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '@/components/layout/LocaleSwitcher';
@@ -35,6 +36,7 @@ export default function SiteFooter() {
             {t('tagline')}
           </p>
           <p>{t('description')}</p>
+          <SocialLinksFooter />
         </div>
 
         <div className="footer-nav">
@@ -60,6 +62,8 @@ export default function SiteFooter() {
             <Link href="/conditions-generales">{t('cgv')}</Link>
             <span>·</span>
             <Link href="/politique-confidentialite">{t('privacy')}</Link>
+            <span>·</span>
+            <Link href="/politique-annulation">{t('cancel')}</Link>
             <span>·</span>
             <Link href="/guides/sejour-insolite-tenerife">{t('guides')}</Link>
           </div>

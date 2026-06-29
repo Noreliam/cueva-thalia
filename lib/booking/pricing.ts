@@ -3,9 +3,11 @@
  *
  * Structure:
  * - Tarifs de base par nuit (weekend vs weekday)
- * - Réductions pour groupes (6+ invités)
+ * - Surcharges / promos par période (data/pricing-overrides.json)
  * - Minimums (nuits, invités)
  */
+
+import { getPricingOverrideRates } from '@/lib/booking/pricing-overrides';
 
 /**
  * Configuration des tarifs (Cueva Thalía)
@@ -151,7 +153,8 @@ export function calculateBookingPrice(
   let currentDate = new Date(checkInDate);
 
   while (currentDate < checkOutDate) {
-    const rate = isPeakDay(currentDate) ? BASE_RATES.peakDay : BASE_RATES.offDay;
+    const { peakDay, offDay } = getPricingOverrideRates(currentDate, BASE_RATES.peakDay, BASE_RATES.offDay);
+    const rate = isPeakDay(currentDate) ? peakDay : offDay;
     baseTotal += rate;
     currentDate.setDate(currentDate.getDate() + 1);
   }

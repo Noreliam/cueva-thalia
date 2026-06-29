@@ -3930,3 +3930,211 @@
     .dashboard-card:hover {
       border-color: var(--ct-terracotta);
     }
+
+    /* Social links */
+    .social-links {
+      margin-top: 20px;
+    }
+
+    .social-links-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--ct-roche);
+    }
+
+    .social-links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+    }
+
+    .social-link {
+      color: var(--ct-brun-chaud);
+      text-decoration: none;
+      font-size: 0.9rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .social-link:hover {
+      border-bottom-color: var(--ct-terracotta);
+    }
+
+    /* Newsletter popups */
+    .newsletter-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(20, 14, 10, 0.55);
+      animation: popupFadeIn 0.45s ease;
+    }
+
+    @keyframes popupFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popupZoomIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .newsletter-popup-panel {
+      position: relative;
+      width: min(560px, 100%);
+      max-height: min(92vh, 900px);
+      overflow: auto;
+      border-radius: 6px;
+      background: var(--ct-blanc-casse);
+      box-shadow: 0 24px 80px rgba(20, 14, 10, 0.35);
+      animation: popupZoomIn 0.45s ease;
+    }
+
+    .newsletter-popup--welcome .newsletter-popup-panel {
+      overflow: hidden;
+    }
+
+    .newsletter-popup-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .newsletter-popup-content {
+      position: relative;
+      z-index: 1;
+      padding: 36px 28px 32px;
+      color: var(--ct-blanc-casse);
+    }
+
+    .newsletter-popup--welcome .newsletter-popup-content {
+      background: linear-gradient(rgba(20, 14, 10, 0.15), rgba(20, 14, 10, 0.35));
+    }
+
+    .newsletter-popup-content--exit {
+      color: var(--ct-brun-chaud);
+      background: var(--ct-blanc-casse);
+    }
+
+    .newsletter-popup-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      z-index: 2;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    .newsletter-popup-close:hover {
+      opacity: 1;
+    }
+
+    .newsletter-popup-kicker {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .newsletter-popup-content h2 {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .newsletter-popup-lead {
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-popup-benefits {
+      list-style: none;
+      margin: 16px 0 24px;
+      padding: 0;
+    }
+
+    .newsletter-popup-benefits li {
+      margin-bottom: 8px;
+    }
+
+    .newsletter-popup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .newsletter-popup-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ct-brun-chaud);
+    }
+
+    .newsletter-popup-content--exit .newsletter-popup-input {
+      border-color: var(--ct-dune);
+    }
+
+    .newsletter-popup-gdpr {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .newsletter-popup-disclaimer {
+      font-size: 0.78rem;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .newsletter-popup-code {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      letter-spacing: 0.12em;
+      margin: 8px 0 16px;
+    }
+
+    .newsletter-popup-success {
+      text-align: center;
+    }
+
+    .newsletter-popup-emoji {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .newsletter-popup-error {
+      color: #c0392b;
+      font-size: 0.85rem;
+    }
+
+    .popup-social {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .popup-social a {
+      color: inherit;
+    }
+
+    @media (max-width: 640px) {
+      .newsletter-popup-content {
+        padding: 28px 20px 24px;
+      }
+    }
