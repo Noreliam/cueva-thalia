@@ -12,6 +12,7 @@ import {
   markPopupDismissed,
 } from '@/lib/newsletter/constants';
 import type { NewsletterSource } from '@/lib/newsletter/subscribers';
+import { trackGa4Event } from '@/lib/analytics/ga4';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -87,6 +88,7 @@ function NewsletterForm({
     onSuccess: () => {
       markNewsletterSubscribed();
       setSuccess(true);
+      trackGa4Event('newsletter_signup', { source, locale });
       onSuccess();
     },
   });

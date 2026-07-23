@@ -1,12 +1,9 @@
 'use client';
 
+import { writeStoredConsent, readStoredConsent, type ConsentChoice } from '@/lib/analytics/consent';
+import { loadGa4Script } from '@/lib/analytics/ga4';
 import { Link } from '@/i18n/routing';
 import { useEffect, useState } from 'react';
-
-const STORAGE_KEY = 'cueva-thalia-cookie-consent';
-
-type StoredConsent = 'all' | 'none' | 'custom';
-type Consent = StoredConsent | null;
 
 type Copy = {
   title: string;
@@ -19,57 +16,34 @@ type Copy = {
   privacy: string;
 };
 
-function loadGa4() {
-  const gaId = process.env.NEXT_PUBLIC_GA4_ID;
-  if (!gaId || typeof window === 'undefined') return;
-  if (document.getElementById('ga4-script')) return;
-
-  const script = document.createElement('script');
-  script.id = 'ga4-script';
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-  script.defer = true;
-  document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
-  }
-  window.gtag = gtag;
-  gtag('js', new Date());
-  gtag('config', gaId, { anonymize_ip: true });
-}
-
-declare global {
-  interface Window {
-    dataLayer: unknown[];
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
 export default function CookieBanner({ copy }: { copy: Copy }) {
-  const [consent, setConsent] = useState<Consent>(null);
+  const [consent, setConsent] = useState<ConsentChoice | null>(null);
   const [showCustomize, setShowCustomize] = useState(false);
   const [analytics, setAnalytics] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as StoredConsent | null;
-    if (stored === 'all') {
-      setConsent('all');
-      loadGa4();
-    } else if (stored === 'none') {
-      setConsent('none');
-    } else if (stored === 'custom') {
-      setConsent('custom');
+    const stored = readStoredConsent();
+    if (!stored) {
+      return;
+    }
+
+    setConsent(stored.choice);
+    if (stored.analytics) {
+      loadGa4Script();
     }
   }, []);
 
-  const persist = (value: StoredConsent, withAnalytics = false) => {
-    localStorage.setItem(STORAGE_KEY, value);
-    setConsent(value);
-    if (withAnalytics) loadGa4();
+  const persist = (choice: ConsentChoice, withAnalytics = false) => {
+    writeStoredConsent(choice, withAnalytics);
+    setConsent(choice);
+    if (withAnalytics) {
+      loadGa4Script();
+    }
   };
 
-  if (consent !== null) return null;
+  if (consent !== null) {
+    return null;
+  }
 
   return (
     <div className="cookie-banner" role="dialog" aria-labelledby="cookie-title">
@@ -94,11 +68,7 @@ export default function CookieBanner({ copy }: { copy: Copy }) {
               {copy.customize}
             </button>
           ) : (
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() => persist('custom', analytics)}
-            >
+            <button type="button" className="btn btn-secondary" onClick={() => persist('custom', analytics)}>
               {copy.save}
             </button>
           )}

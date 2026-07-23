@@ -11,6 +11,7 @@ import SiteHeader from '@/components/layout/SiteHeader';
 import SiteFooter from '@/components/layout/SiteFooter';
 import SiteWhatsApp from '@/components/layout/SiteWhatsApp';
 import CookieBanner from '@/components/layout/CookieBanner';
+import { Ga4PageViews } from '@/components/analytics/Ga4PageViews';
 import NewsletterPopups from '@/components/marketing/NewsletterPopups';
 import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 
@@ -75,6 +76,7 @@ export default async function LocaleLayout({
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SiteClientEffects />
+          <Ga4PageViews />
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />

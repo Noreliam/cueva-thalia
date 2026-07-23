@@ -6,12 +6,12 @@ const CSP_BASE = [
   "form-action 'self'",
   "frame-ancestors 'self'",
   "object-src 'none'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
-  "img-src 'self' data: blob: https:",
+  "img-src 'self' data: blob: https: https://www.google-analytics.com https://www.googletagmanager.com",
   "media-src 'self' blob:",
-  "connect-src 'self' https://challenges.cloudflare.com https://*.supabase.co https://api.stripe.com",
+  "connect-src 'self' https://challenges.cloudflare.com https://*.supabase.co https://api.stripe.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://www.googletagmanager.com",
   "frame-src 'self' https://challenges.cloudflare.com https://login.smoobu.com https://*.smoobu.com",
 ];
 
