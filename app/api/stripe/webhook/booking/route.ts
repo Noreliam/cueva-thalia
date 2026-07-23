@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import { fulfillBookingOrder, orderFromBookingCheckoutSession } from '@/lib/booking/fulfill';
+import { recordInfluenceurCommissionFromSession } from '@/lib/influenceurs/commissions';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 
 export const runtime = 'nodejs';
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
       }
 
       await fulfillBookingOrder(booking);
+      await recordInfluenceurCommissionFromSession(session);
     } else if (event.type === 'charge.dispute.created') {
       const charge = event.data.object as Stripe.Dispute;
       console.warn('[STRIPE:webhook:booking] dispute created', {

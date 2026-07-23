@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { calculateBookingPrice, generateBookingId, getBookingProductName } from '@/lib/booking/pricing';
+import { verifyInfluenceurCode } from '@/lib/influenceurs/verify';
 import { validatePromoCode } from '@/lib/booking/promo-codes';
 import { bookingCheckoutSchema } from '@/lib/booking/schema';
 import { checkBookingDatesAvailable } from '@/lib/booking/blocked-ranges';
@@ -99,13 +100,38 @@ export async function POST(request: Request) {
     );
   }
 
-  // Validate promo code (if provided)
-  const promoValidation = await validatePromoCode(parsed.promoCode, parsed.email);
-  if (!promoValidation.valid) {
+  // Anti-cumul: influencer ref and WELCOME10 cannot be combined
+  if (parsed.influenceurCode && parsed.promoCode) {
     return NextResponse.json(
-      { ok: false, error: 'Invalid promo code', code: `promo_${promoValidation.error}` },
+      { ok: false, error: 'Cannot combine influencer and promo discounts', code: 'discount_conflict' },
       { status: 400 },
     );
+  }
+
+  let discountPercent = 0;
+  let promoCodeMeta = '';
+  let influenceurCode: string | undefined;
+
+  if (parsed.influenceurCode) {
+    const influenceurValidation = await verifyInfluenceurCode(parsed.influenceurCode);
+    if (!influenceurValidation.valid) {
+      return NextResponse.json(
+        { ok: false, error: 'Invalid influencer code', code: 'influenceur_invalid' },
+        { status: 400 },
+      );
+    }
+    influenceurCode = influenceurValidation.code;
+    discountPercent = influenceurValidation.discountPercent;
+  } else {
+    const promoValidation = await validatePromoCode(parsed.promoCode, parsed.email);
+    if (!promoValidation.valid) {
+      return NextResponse.json(
+        { ok: false, error: 'Invalid promo code', code: `promo_${promoValidation.error}` },
+        { status: 400 },
+      );
+    }
+    discountPercent = promoValidation.discountPercent;
+    promoCodeMeta = promoValidation.code;
   }
 
   // Calculate price
@@ -115,7 +141,7 @@ export async function POST(request: Request) {
       parsed.checkInDate,
       parsed.checkOutDate,
       parsed.guestCount,
-      promoValidation.discountPercent,
+      discountPercent,
     );
   } catch (error) {
     console.error('[STRIPE:booking:checkout] pricing error', error);
@@ -148,6 +174,7 @@ export async function POST(request: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       customer_email: parsed.email,
+      ...(influenceurCode ? { client_reference_id: influenceurCode } : {}),
       locale: parsed.locale === 'en' ? 'en' : parsed.locale === 'fr' ? 'fr' : 'es',
       line_items: [
         {
@@ -171,8 +198,10 @@ export async function POST(request: Request) {
         checkOutDate: parsed.checkOutDate,
         guestCount: String(parsed.guestCount),
         specialRequests: parsed.specialRequests?.slice(0, 500) ?? '',
-        promoCode: promoValidation.code || '',
-        promoDiscountPercent: String(promoValidation.discountPercent),
+        promoCode: promoCodeMeta,
+        promoDiscountPercent: String(discountPercent),
+        influenceurCode: influenceurCode ?? '',
+        influenceurDiscountPercent: influenceurCode ? String(discountPercent) : '0',
         locale: parsed.locale,
         amountCents: String(pricing.amountCents),
       },

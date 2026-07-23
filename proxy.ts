@@ -54,7 +54,7 @@ export default function proxy(request: NextRequest) {
     return applySecurityHeaders(NextResponse.next());
   }
 
-  if (pathname.startsWith('/dashboard')) {
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/admin')) {
     return applySecurityHeaders(NextResponse.next());
   }
 

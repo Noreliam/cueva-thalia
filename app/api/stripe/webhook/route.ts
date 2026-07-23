@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import { fulfillBookingOrder, orderFromBookingCheckoutSession } from '@/lib/booking/fulfill';
 import { fulfillGiftVoucherOrder, orderFromCheckoutSession } from '@/lib/gift-voucher/fulfill';
+import { recordInfluenceurCommissionFromSession } from '@/lib/influenceurs/commissions';
 import { getStripe, isStripeConfigured } from '@/lib/stripe/server';
 
 export const runtime = 'nodejs';
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
         const booking = orderFromBookingCheckoutSession(session);
         if (booking) {
           await fulfillBookingOrder(booking);
+          await recordInfluenceurCommissionFromSession(session);
         } else {
           const order = orderFromCheckoutSession(session);
           if (order) {
