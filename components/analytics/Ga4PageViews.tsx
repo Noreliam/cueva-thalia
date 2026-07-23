@@ -1,6 +1,6 @@
 'use client';
 
-import { initGa4IfConsented, trackPageView } from '@/lib/analytics/ga4';
+import { syncAnalyticsConsentFromStorage, trackPageView } from '@/lib/analytics/ga4';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect } from 'react';
 
@@ -9,7 +9,7 @@ function Ga4PageViewsInner() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    initGa4IfConsented();
+    syncAnalyticsConsentFromStorage();
   }, []);
 
   useEffect(() => {

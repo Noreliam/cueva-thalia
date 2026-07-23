@@ -1,7 +1,7 @@
 'use client';
 
+import { denyAnalyticsConsent, grantAnalyticsConsent, trackPageView } from '@/lib/analytics/ga4';
 import { writeStoredConsent, readStoredConsent, type ConsentChoice } from '@/lib/analytics/consent';
-import { loadGa4Script } from '@/lib/analytics/ga4';
 import { Link } from '@/i18n/routing';
 import { useEffect, useState } from 'react';
 
@@ -28,16 +28,17 @@ export default function CookieBanner({ copy }: { copy: Copy }) {
     }
 
     setConsent(stored.choice);
-    if (stored.analytics) {
-      loadGa4Script();
-    }
   }, []);
 
   const persist = (choice: ConsentChoice, withAnalytics = false) => {
     writeStoredConsent(choice, withAnalytics);
     setConsent(choice);
+
     if (withAnalytics) {
-      loadGa4Script();
+      grantAnalyticsConsent();
+      trackPageView(window.location.pathname + window.location.search);
+    } else {
+      denyAnalyticsConsent();
     }
   };
 

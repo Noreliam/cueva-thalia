@@ -10,6 +10,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  NEXT_PUBLIC_GA4_ID = "G-6HW3QXRVR4"
   # Public-by-design values that also appear in static HTML / translations
   SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_TURNSTILE_SITE_KEY,NEXT_PUBLIC_GA4_ID,SMTP_USER,EMAIL_FROM"
 

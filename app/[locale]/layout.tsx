@@ -12,6 +12,7 @@ import SiteFooter from '@/components/layout/SiteFooter';
 import SiteWhatsApp from '@/components/layout/SiteWhatsApp';
 import CookieBanner from '@/components/layout/CookieBanner';
 import { Ga4PageViews } from '@/components/analytics/Ga4PageViews';
+import { Ga4Script } from '@/components/analytics/Ga4Script';
 import NewsletterPopups from '@/components/marketing/NewsletterPopups';
 import { SiteClientEffects } from '@/components/site/SiteClientEffects';
 
@@ -74,6 +75,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${cormorant.variable} ${inter.variable}`} style={{ scrollBehavior: 'smooth' }}>
       <body className={inter.className}>
+        <Ga4Script />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SiteClientEffects />
           <Ga4PageViews />
