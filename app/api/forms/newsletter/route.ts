@@ -18,14 +18,16 @@ export async function POST(request: Request) {
     formType: 'newsletter',
     schema: newsletterSchema,
     handler: async (data) => {
+      const email = data.email.trim().toLowerCase();
+
       try {
         const saved = await saveNewsletterSubscriber({
-          email: data.email,
+          email,
           locale: data.locale,
           source: data.source,
         });
         console.log('[FORM:newsletter] subscription', {
-          email: data.email,
+          email,
           locale: data.locale,
           source: data.source,
           persisted: saved,
@@ -34,7 +36,7 @@ export async function POST(request: Request) {
         console.error('[FORM:newsletter] db save failed — welcome email still sent');
       }
 
-      await sendNewsletterWelcomeEmail(data.email, data.locale);
+      await sendNewsletterWelcomeEmail(email, data.locale);
     },
   });
 }

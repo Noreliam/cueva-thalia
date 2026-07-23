@@ -82,7 +82,7 @@ function NewsletterForm({
   const [gdpr, setGdpr] = useState(false);
   const [success, setSuccess] = useState(false);
   const turnstileRef = useRef<TurnstileFieldHandle>(null);
-  const { status, submit, setTurnstileToken, hp, setHp } = useSecureFormSubmit({
+  const { status, submit, setStatus, setTurnstileToken, hp, setHp } = useSecureFormSubmit({
     endpoint: '/api/forms/newsletter',
     onSuccess: () => {
       markNewsletterSubscribed();
@@ -97,16 +97,26 @@ function NewsletterForm({
       return;
     }
 
+    let token = '';
     try {
-      const token = await turnstileRef.current?.getToken();
-      if (token) {
-        setTurnstileToken(token);
-      }
+      token = (await turnstileRef.current?.getToken()) ?? '';
     } catch {
+      setStatus('error');
       return;
     }
 
-    await submit({ email: email.trim(), locale, source, gdprAccepted: true });
+    if (!token && process.env.NODE_ENV === 'production') {
+      setStatus('error');
+      return;
+    }
+
+    await submit({
+      email: email.trim().toLowerCase(),
+      locale,
+      source,
+      gdprAccepted: true,
+      turnstileToken: token,
+    });
   };
 
   if (success) {
@@ -144,7 +154,7 @@ function NewsletterForm({
         {compact ? t('exit_cta') : t('welcome_cta')}
       </button>
       {!compact && <p className="newsletter-popup-disclaimer">{t('welcome_disclaimer')}</p>}
-      {status === 'error' && <p className="newsletter-popup-error">Error — please try again.</p>}
+      {status === 'error' && <p className="newsletter-popup-error">{t('error')}</p>}
     </form>
   );
 }
@@ -252,7 +262,7 @@ export default function NewsletterPopups() {
               <li>✓ {t('welcome_benefit_2')}</li>
               <li>✓ {t('welcome_benefit_3')}</li>
             </ul>
-            <NewsletterForm source="popup_welcome" onSuccess={() => setTimeout(closeWelcome, 100)} />
+            <NewsletterForm source="popup_welcome" onSuccess={() => {}} />
           </div>
         </PopupShell>
       )}

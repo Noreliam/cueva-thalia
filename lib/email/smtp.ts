@@ -22,6 +22,17 @@ export function getSmtpConfig(): SmtpConfig | null {
   };
 }
 
+function wrapHtmlBody(html: string): string {
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>${html}</body>
+</html>`;
+}
+
 export async function sendViaSmtp(options: {
   user: string;
   pass: string;
@@ -41,12 +52,16 @@ export async function sendViaSmtp(options: {
     },
   });
 
+  const to = options.to.trim().toLowerCase();
+
   await transporter.sendMail({
     from: options.from,
-    to: options.to,
+    to,
     replyTo: options.replyTo,
     subject: options.subject,
-    html: options.html,
+    html: wrapHtmlBody(options.html),
+    encoding: 'utf-8',
+    textEncoding: 'quoted-printable',
   });
 }
 

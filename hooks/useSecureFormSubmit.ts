@@ -24,14 +24,18 @@ export function useSecureFormSubmit({ endpoint, onSuccess }: UseSecureFormSubmit
 
       setStatus('loading');
 
+      const { turnstileToken: tokenOverride, ...payload } = data;
+      const resolvedToken =
+        typeof tokenOverride === 'string' && tokenOverride.length > 0 ? tokenOverride : turnstileToken;
+
       try {
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            ...data,
+            ...payload,
             _hp: hp,
-            turnstileToken,
+            turnstileToken: resolvedToken,
           }),
         });
 

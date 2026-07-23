@@ -1660,6 +1660,16 @@
       letter-spacing: 0.06em;
     }
 
+    .form-hint--success {
+      color: #027a48;
+      opacity: 1;
+    }
+
+    .form-hint--invalid {
+      color: var(--ct-roche);
+      opacity: 0.85;
+    }
+
     .form-alert {
       padding: 12px 16px;
       margin-bottom: 16px;
@@ -3990,6 +4000,27 @@
       border-bottom: none;
     }
 
+    .admin-commission-status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .admin-commission-status--pending {
+      background: #fff8f0;
+      color: var(--ct-brun-chaud);
+      border: 1px solid var(--ct-dune);
+    }
+
+    .admin-commission-status--paid {
+      background: #ecfdf3;
+      color: #027a48;
+      border: 1px solid #abefc6;
+    }
+
     /* Social links */
     .social-links {
       margin-top: 20px;
@@ -4087,19 +4118,34 @@
     .newsletter-popup-close {
       position: absolute;
       top: 12px;
-      right: 14px;
-      z-index: 2;
+      right: 12px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       border: none;
-      background: transparent;
-      color: inherit;
-      font-size: 1.75rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--ct-brun-chaud);
+      font-size: 1.6rem;
+      font-weight: 600;
       line-height: 1;
       cursor: pointer;
-      opacity: 0.7;
+      box-shadow: 0 2px 14px rgba(20, 14, 10, 0.28);
+      opacity: 1;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .newsletter-popup-close:hover {
-      opacity: 1;
+      transform: scale(1.06);
+      box-shadow: 0 4px 18px rgba(20, 14, 10, 0.32);
+    }
+
+    .newsletter-popup--exit .newsletter-popup-close {
+      background: var(--ct-brun-chaud);
+      color: var(--ct-blanc-casse);
     }
 
     .newsletter-popup-kicker {
@@ -4196,4 +4242,53 @@
       .newsletter-popup-content {
         padding: 28px 20px 24px;
       }
+    }
+
+    .booking-discount-banner {
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      background: rgba(2, 122, 72, 0.08);
+      border: 1px solid rgba(2, 122, 72, 0.2);
+      color: #027a48;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .influenceur-intro {
+      max-width: 42rem;
+      margin: 12px auto 0;
+    }
+
+    .influenceur-success {
+      text-align: center;
+      padding: 8px 0 16px;
+    }
+
+    .influenceur-success-kicker {
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+
+    .influenceur-link-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      margin: 24px 0 16px;
+      padding: 20px;
+      border: 1px solid var(--ct-dune);
+      border-radius: 4px;
+      background: #faf8f5;
+    }
+
+    .influenceur-link-url {
+      word-break: break-all;
+      font-size: 15px;
+      color: var(--ct-terracotta);
+      text-decoration: underline;
+    }
+
+    .influenceur-copy-btn {
+      min-width: 160px;
     }
