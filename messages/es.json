@@ -438,6 +438,9 @@
     "error_email_invalid": "Dirección de email no válida",
     "error_email_taken": "Esta dirección de email ya está inscrita en el programa.",
     "error_captcha": "La verificación anti-spam ha fallado. Recargue la página e inténtelo de nuevo.",
+    "error_unavailable": "La inscripción no está disponible temporalmente. Inténtelo de nuevo en unos minutos o contáctenos.",
+    "error_tables_missing": "La inscripción al programa de influencers aún no está disponible. Contáctenos para finalizar la configuración.",
+    "error_rate_limit": "Demasiados intentos. Espere unos minutos antes de volver a intentarlo.",
     "error_generic": "Se ha producido un error. Inténtelo de nuevo o contáctenos."
   }
 }

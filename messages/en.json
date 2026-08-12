@@ -438,6 +438,9 @@
     "error_email_invalid": "Invalid email address",
     "error_email_taken": "This email address is already registered in the programme.",
     "error_captcha": "Anti-spam verification failed. Reload the page and try again.",
+    "error_unavailable": "Sign-up is temporarily unavailable. Please try again in a few minutes or contact us.",
+    "error_tables_missing": "Influencer programme sign-up is not available yet. Please contact us to complete the setup.",
+    "error_rate_limit": "Too many attempts. Please wait a few minutes before trying again.",
     "error_generic": "An error occurred. Please try again or contact us."
   }
 }

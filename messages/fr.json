@@ -438,6 +438,9 @@
     "error_email_invalid": "Adresse email invalide",
     "error_email_taken": "Cette adresse email est déjà inscrite au programme.",
     "error_captcha": "La vérification anti-spam a échoué. Rechargez la page et réessayez.",
+    "error_unavailable": "L'inscription est temporairement indisponible. Réessayez dans quelques minutes ou contactez-nous.",
+    "error_tables_missing": "L'inscription au programme influenceur n'est pas encore disponible. Contactez-nous pour finaliser la mise en place.",
+    "error_rate_limit": "Trop de tentatives. Patientez quelques minutes avant de réessayer.",
     "error_generic": "Une erreur est survenue. Réessayez ou contactez-nous."
   }
 }

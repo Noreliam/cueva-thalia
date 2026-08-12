@@ -81,33 +81,46 @@ export default function InfluenceurSignupForm({ locale }: InfluenceurSignupFormP
 
       const result = (await response.json()) as {
         ok?: boolean;
-        code?: string;
+        referralCode?: string;
         trackingUrl?: string;
+        errorCode?: string;
       };
 
-      if (!response.ok || !result.ok || !result.code || !result.trackingUrl) {
-        if (result.code === 'email_taken') {
-          throw new Error('email_taken');
-        }
-        if (response.status === 403) {
-          throw new Error('captcha');
-        }
-        throw new Error('generic');
+      if (response.ok && result.ok && result.referralCode && result.trackingUrl) {
+        setSuccess({ code: result.referralCode, trackingUrl: result.trackingUrl });
+        setStatus('idle');
+        setErrorMessage(null);
+        return;
       }
 
-      setSuccess({ code: result.code, trackingUrl: result.trackingUrl });
-      setStatus('idle');
+      if (response.status === 403) {
+        throw new Error('captcha');
+      }
+      if (response.status === 429) {
+        throw new Error('rate_limit');
+      }
+      if (result.errorCode === 'unavailable' || result.errorCode === 'database_error') {
+        throw new Error('unavailable');
+      }
+      if (result.errorCode === 'tables_missing') {
+        throw new Error('tables_missing');
+      }
+      throw new Error('generic');
     } catch (err) {
       const code = err instanceof Error ? err.message : 'generic';
       setStatus('error');
       setErrorMessage(
-        code === 'email_taken'
-          ? t('error_email_taken')
-          : code === 'captcha'
-            ? t('error_captcha')
-            : t('error_generic'),
+        code === 'captcha'
+          ? t('error_captcha')
+          : code === 'rate_limit'
+            ? t('error_rate_limit')
+            : code === 'unavailable'
+              ? t('error_unavailable')
+              : code === 'tables_missing'
+                ? t('error_tables_missing')
+                : t('error_generic'),
       );
-      if (code === 'captcha') {
+      if (turnstileConfigured) {
         turnstileRef.current?.reset();
       }
     }

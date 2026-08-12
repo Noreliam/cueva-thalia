@@ -10,8 +10,8 @@ import { absoluteUrl } from '@/lib/seo';
 const MAX_BODY_BYTES = 16_384;
 
 const signupSchema = z.object({
-  nom: z.string().min(2).max(100),
-  email: z.string().email().max(254),
+  nom: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(254),
   instagram: z
     .union([z.string(), z.null()])
     .optional()
@@ -91,25 +91,34 @@ export async function POST(request: Request) {
   );
 
   if (!result.ok) {
-    const code =
-      result.error === 'email_taken'
-        ? 'email_taken'
-        : result.error === 'supabase_unconfigured'
-          ? 'unavailable'
-          : 'registration_failed';
-    const status = result.error === 'supabase_unconfigured' ? 503 : 400;
-    return NextResponse.json({ ok: false, code }, { status });
+    const errorCode =
+      result.error === 'supabase_unconfigured'
+        ? 'unavailable'
+        : result.error === 'tables_missing'
+          ? 'tables_missing'
+          : result.error === 'database_error'
+            ? 'database_error'
+            : 'registration_failed';
+    const status =
+      result.error === 'supabase_unconfigured' ||
+      result.error === 'database_error' ||
+      result.error === 'tables_missing'
+        ? 503
+        : 400;
+    return NextResponse.json({ ok: false, errorCode }, { status });
   }
 
-  try {
-    await sendInfluenceurWelcomeEmail(parsed.email, result.code, result.trackingUrl, parsed.locale);
-  } catch (error) {
-    console.error('[INFLUENCEUR:signup] welcome email failed', error);
+  if (!result.alreadyRegistered) {
+    try {
+      await sendInfluenceurWelcomeEmail(parsed.email, result.code, result.trackingUrl, parsed.locale);
+    } catch (error) {
+      console.error('[INFLUENCEUR:signup] welcome email failed', error);
+    }
   }
 
   return NextResponse.json({
     ok: true,
-    code: result.code,
+    referralCode: result.code,
     trackingUrl: result.trackingUrl,
   });
 }

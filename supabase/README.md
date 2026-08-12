@@ -1,13 +1,6 @@
-# Base de données newsletter — Supabase
+# Base de données — Supabase
 
-Les emails saisis dans les pop-ups promo (code **WELCOME10**) sont enregistrés dans la table `newsletter_subscribers`.
-
-## Mise en place (une fois)
-
-1. Créer un projet sur [supabase.com](https://supabase.com) — région **EU** (ex. Francfort).
-2. **SQL Editor** → coller et exécuter le fichier :
-   `supabase/migrations/20250629000000_newsletter_subscribers.sql`
-3. **Project Settings → API** → copier l’URL et les clés dans `.env.local` :
+## Variables d'environnement (déjà en place sur le site)
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
@@ -15,21 +8,34 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
 
-4. Redéployer le site (Netlify) avec les mêmes variables.
+Ces variables permettent au site de **se connecter** à Supabase. Elles ne créent pas automatiquement les tables : chaque fonctionnalité a sa propre migration SQL à exécuter une fois dans le **SQL Editor** Supabase.
 
-## Accès Manon
+---
 
-### Option A — Supabase (recommandé, immédiat)
+## Newsletter (pop-ups WELCOME10)
 
-1. **Project Settings → Team** → inviter Manon avec le rôle **Developer** ou **Owner**.
-2. Elle se connecte sur supabase.com → son projet → **Table Editor** → `newsletter_subscribers`.
-3. Elle peut consulter, filtrer et **exporter en CSV** depuis l’interface Supabase.
+Table : `newsletter_subscribers`
 
-### Option B — Dashboard site
+1. Exécuter : `supabase/migrations/20250629000000_newsletter_subscribers.sql`
+2. Accès Manon : **Table Editor** → `newsletter_subscribers`, ou `/dashboard/newsletter`
 
-Page **https://cueva-thalia.com/dashboard/newsletter** (liste + export CSV), une fois l’authentification dashboard branchée.
+---
 
-## Données enregistrées
+## Programme influenceur (page `/influenceur/rejoindre`)
+
+Tables : `influenceurs`, `commissions`
+
+**Si cette migration n'a pas été exécutée, le formulaire influenceur échoue** même avec les variables Supabase correctes (erreur générique côté visiteur).
+
+1. Exécuter dans l'ordre :
+   - `supabase/migrations/20250707100000_influenceurs_commissions.sql`
+   - `supabase/migrations/20250707110000_influenceurs_instagram.sql`
+2. Vérifier dans **Table Editor** que la table `influenceurs` existe.
+3. Suivi des commissions : `/admin/commissions`
+
+---
+
+## Données newsletter
 
 | Colonne | Description |
 |---------|-------------|
@@ -37,7 +43,7 @@ Page **https://cueva-thalia.com/dashboard/newsletter** (liste + export CSV), une
 | `locale` | Langue du site (fr / es / en) |
 | `source` | `popup_welcome` ou `popup_exit` |
 | `welcome_code` | Code promo envoyé (WELCOME10) |
-| `subscribed_at` | Date d’inscription |
-| `unsubscribed_at` | NULL tant que l’inscription est active |
+| `subscribed_at` | Date d'inscription |
+| `unsubscribed_at` | NULL tant que l'inscription est active |
 
-Les doublons d’email sont ignorés (mise à jour de la ligne existante).
+Les doublons d'email sont ignorés (mise à jour de la ligne existante).
