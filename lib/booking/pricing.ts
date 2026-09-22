@@ -8,6 +8,7 @@
  */
 
 import { getPricingOverrideRates } from '@/lib/booking/pricing-overrides';
+import { SECURITY_DEPOSIT_EUR } from '@/lib/booking/stay-info';
 
 /**
  * Configuration des tarifs (Cueva Thalía)
@@ -31,7 +32,7 @@ const BASE_RATES = {
 const MAX_GUESTS_ONLINE = 4;    // Réservation online possible
 const MAX_GUESTS_TOTAL = 16;    // Capacité max avec couchages supplémentaires
 const MIN_NIGHTS = 1;           // Minimum 1 nuit (à confirmer)
-const DEPOSIT = 15000;          // 150€ en centimes
+const DEPOSIT = SECURITY_DEPOSIT_EUR * 100;
 
 interface PricingResult {
   nights: number;

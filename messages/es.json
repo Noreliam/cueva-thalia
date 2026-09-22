@@ -135,7 +135,7 @@
     "included_tv": "TV conectada (Netflix, Prime Video…)",
     "capacity_title": "Capacidad",
     "rates_title": "Tarifas",
-    "checkin_checkout": "Check-in: 16:00 · Check-out: 13:00",
+    "checkin_checkout": "Check-in: 12:00 – 15:00 · Check-out: 13:00",
     "options_title": "Opciones bajo petición",
     "opt_romantic": "Decoración romántica",
     "opt_surprise": "Champán, flores o repostería a la llegada",
@@ -166,6 +166,12 @@
     "faq_a6": "Sí, aparcamiento gratuito en la calle frente a la propiedad.",
     "faq_q7": "¿Se puede fumar dentro de la cueva?",
     "faq_a7": "No, está prohibido fumar en el interior de la cueva.",
+    "faq_q8": "¿Hay fianza?",
+    "faq_a8": "Sí, 150 € a abonar a la llegada (Bizum, transferencia o efectivo). No está incluida en el pago online. Se devuelve tras la revisión, salvo daños o incumplimiento de las normas. Para grupos, el importe puede ser superior si se acordó en la reserva.",
+    "faq_q9": "¿Cuáles son los horarios de llegada y salida?",
+    "faq_a9": "Check-in entre las 12:00 y las 15:00. Check-out antes de las 13:00. Un late check-out o early check-in puede estudiarse según disponibilidad.",
+    "faq_q10": "¿Cuál es la política de cancelación?",
+    "faq_a10": "Más de 14 días antes de la llegada: reembolso íntegro. Entre 14 y 7 días: 50 % del importe total. Menos de 7 días, no show o salida anticipada: sin reembolso. El detalle está en la política de cancelación.",
     "avis_title": "Lo que dicen nuestros huéspedes",
     "gallery_cta": "Explorar los espacios en imágenes",
     "booking_guests": "Número de personas",
@@ -188,7 +194,9 @@
     "rate_per_night": "/ noche",
     "capacity_details_summary": "Grupos de 5 a 16 personas",
     "capacity_details_body": "Colchonetas adicionales disponibles (hasta 16 personas). Contáctenos para organizar la estancia y obtener un presupuesto — pueden aplicarse tasas adicionales.",
-    "rates_footnote": "Tarifas estándar hasta 4 personas. Tarifas progresivas posibles para varias noches."
+    "rates_footnote": "Tarifas estándar hasta 4 personas. Tarifas progresivas posibles para varias noches.",
+    "deposit_title": "Fianza 150 €",
+    "deposit_text": "Una fianza de 150 € se abona a la llegada (no incluida en el pago online). Se devuelve tras la revisión, salvo daños o incumplimiento de las normas."
   },
   "Evenements": {
     "title": "Eventos privados",
@@ -371,6 +379,19 @@
     "social_facebook": "Facebook",
     "social_tiktok": "TikTok"
   },
+  "BookingSuccess": {
+    "title": "Reserva confirmada",
+    "lead": "Su pago se ha registrado correctamente. Le hemos enviado un email de confirmación.",
+    "note": "Los códigos de acceso y el check-in obligatorio se enviarán unas 48 h antes de su llegada.",
+    "hours_title": "Horarios",
+    "hours_text": "Check-in: entre las 12:00 y las 15:00 · Check-out: antes de las 13:00",
+    "deposit_title": "Fianza de 150 €",
+    "deposit_text": "A la llegada deberá abonarse una fianza de 150 € (no incluida en el pago online). Se devolverá tras la revisión, siempre que no haya daños ni incumplimientos de las normas. Para grupos, el importe puede ser superior si se comunicó en el momento de la reserva.",
+    "deposit_pay": "Pago: Bizum +34 657 07 79 10 · IBAN ES89 1583 0001 1290 7076 0351 (Manon Christophe Massart) · o efectivo en el check-in.",
+    "policy_title": "Condiciones de cancelación",
+    "policy_intro": "Al confirmar el pago, acepta las siguientes condiciones:",
+    "back": "Volver a Alojarse"
+  },
   "Articles": {
     "journal": "Diario",
     "placeholder_slug": "Artículo para el slug: {slug}",
@@ -388,30 +409,6 @@
     "title": "Esta página no existe.",
     "text": "La página que busca no está aquí. Vuelva al inicio para descubrir Cueva Thalía.",
     "home": "Volver al inicio"
-  },
-  "Popup": {
-    "welcome_title": "Únase al Círculo Privado de Cueva Thalía",
-    "welcome_subtitle": "Su primera experiencia merece un privilegio.",
-    "welcome_offer": "Reciba un 10 % de descuento en su primera reserva realizada directamente en nuestro sitio.",
-    "welcome_benefit_1": "Ofertas exclusivas reservadas a nuestros miembros",
-    "welcome_benefit_2": "Nuevas disponibilidades y cancelaciones de última hora",
-    "welcome_benefit_3": "Novedades, retiros y eventos organizados en Cueva Thalía",
-    "email_placeholder": "Introduzca su dirección de correo",
-    "welcome_cta": "Recibir mi ventaja de bienvenida",
-    "welcome_disclaimer": "Su código es válido durante 30 días desde su recepción. Oferta reservada a nuevas inscripciones y no acumulable con otras promociones.",
-    "welcome_success_title": "¡Bienvenido/a al Círculo Privado!",
-    "welcome_success_code_label": "Su código de descuento es:",
-    "welcome_success_text": "Disfrute de un 10 % de descuento en su primera reserva directa.",
-    "welcome_success_validity": "Válido durante 30 días.",
-    "welcome_success_cta": "Reservar ahora",
-    "exit_title": "Antes de irse…",
-    "exit_subtitle": "No pierda su ventaja de bienvenida.",
-    "exit_offer": "Reciba un 10 % de descuento en su primera reserva directa en Cueva Thalía.",
-    "exit_cta": "Recibir mi código",
-    "gdpr_label": "Acepto recibir comunicaciones de Cueva Thalía (ofertas, novedades y eventos). Podré darme de baja en cualquier momento.",
-    "close": "Cerrar",
-    "error": "Se ha producido un error — inténtelo de nuevo.",
-    "social_follow": "Mientras tanto, encuéntrenos en"
   },
   "Influenceur": {
     "meta_title": "Programa de influencers — Cueva Thalía",

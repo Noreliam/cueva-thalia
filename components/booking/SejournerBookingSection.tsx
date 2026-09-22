@@ -13,6 +13,8 @@ type Copy = {
   ratePerNight: string;
   ratesFootnote: string;
   checkinCheckout: string;
+  depositTitle: string;
+  depositText: string;
   ctaWhatsappQuote: string;
   bookingGuests: string;
   bookingContinue: string;
@@ -90,6 +92,11 @@ export function SejournerBookingSection({
         </details>
 
         <p className="tarifs-aside-meta">{copy.checkinCheckout}</p>
+
+        <div className="tarifs-aside-deposit">
+          <h3>{copy.depositTitle}</h3>
+          <p>{copy.depositText}</p>
+        </div>
 
         <a
           href={copy.whatsappHref}

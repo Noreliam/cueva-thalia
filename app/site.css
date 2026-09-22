@@ -1397,6 +1397,26 @@
       color: var(--ct-roche);
     }
 
+    .tarifs-aside-deposit {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--ct-blanc-casse);
+      border: 1px solid rgba(184, 92, 56, 0.35);
+      border-radius: 6px;
+    }
+
+    .tarifs-aside-deposit h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .tarifs-aside-deposit p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--ct-brun-chaud);
+    }
+
     .tarifs-aside-link {
       display: inline-block;
       margin-top: 20px;
@@ -1632,6 +1652,70 @@
     .form-group--checkbox .checkbox-label span {
       flex: 1;
       padding-top: 1px;
+    }
+
+    .booking-stay-notice {
+      margin: 0 0 20px;
+      padding: 16px;
+      background: var(--ct-sable);
+      border: 1px solid rgba(184, 92, 56, 0.28);
+      border-radius: 6px;
+    }
+
+    .booking-stay-notice p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--ct-brun-chaud);
+    }
+
+    .booking-stay-notice p + p {
+      margin-top: 8px;
+    }
+
+    .booking-terms-link {
+      color: var(--ct-terracotta);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .booking-success-card {
+      margin-top: 28px;
+      padding: 20px;
+      background: var(--ct-sable);
+      border-radius: 8px;
+    }
+
+    .booking-success-card--deposit {
+      border: 1px solid rgba(184, 92, 56, 0.35);
+      background: var(--ct-blanc-casse);
+    }
+
+    .booking-success-card h2,
+    .booking-success-policy h2 {
+      margin: 0 0 10px;
+      font-size: clamp(20px, 2.2vw, 26px);
+    }
+
+    .booking-success-policy {
+      margin-top: 36px;
+    }
+
+    .cancellation-policy-section {
+      margin-top: 28px;
+    }
+
+    .cancellation-policy-section h2,
+    .cancellation-policy-section h3 {
+      margin: 0 0 10px;
+    }
+
+    .cancellation-policy-section ul {
+      padding-left: 1.2em;
+    }
+
+    .cancellation-policy-section li + li {
+      margin-top: 8px;
     }
     
     .form-group input[type="date"] {

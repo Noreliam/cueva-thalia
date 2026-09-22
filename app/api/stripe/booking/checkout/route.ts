@@ -166,7 +166,7 @@ export async function POST(request: Request) {
   // Generate booking ID
   const bookingId = generateBookingId();
   const productName = getBookingProductName(parsed.locale, pricing.nights, parsed.guestCount);
-  const successUrl = `${absoluteUrl('/sejourner', parsed.locale)}?booking_success=1&session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`;
+  const successUrl = `${absoluteUrl('/sejourner/merci', parsed.locale)}?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`;
   const cancelUrl = `${absoluteUrl('/sejourner', parsed.locale)}?booking_canceled=1`;
 
   try {

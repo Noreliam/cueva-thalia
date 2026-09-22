@@ -16,7 +16,7 @@ export const lodgingBusinessJsonLd = {
   telephone: '+34657077910',
   url: SITE_URL,
   priceRange: '€€',
-  checkinTime: '16:00',
+  checkinTime: '12:00',
   checkoutTime: '13:00',
   sameAs: [
     'https://www.google.com/maps/search/?api=1&query=Calle+Las+Morales+70,+38620+San+Miguel+de+Abona,+Tenerife',

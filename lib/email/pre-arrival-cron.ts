@@ -23,11 +23,6 @@ export async function runPreArrivalEmailCron(): Promise<PreArrivalCronResult> {
   for (const order of bookings) {
     result.processed += 1;
 
-    if (order.checkInDate <= now.toISOString().slice(0, 10)) {
-      result.skipped += 1;
-      continue;
-    }
-
     if (!isWithinPreArrivalWindow(order.checkInDate, now)) {
       result.skipped += 1;
       continue;
@@ -40,7 +35,11 @@ export async function runPreArrivalEmailCron(): Promise<PreArrivalCronResult> {
         continue;
       }
 
-      await sendPreArrivalEmail(order);
+      const sendResult = await sendPreArrivalEmail(order);
+      if (!sendResult.sent) {
+        result.skipped += 1;
+        continue;
+      }
 
       await stripe.checkout.sessions.update(order.stripeSessionId, {
         metadata: {

@@ -10,6 +10,7 @@ import { INFLUENCEUR_DISCOUNT_PERCENT, INFLUENCEUR_REF_STORAGE_KEY } from '@/lib
 import { WELCOME_DISCOUNT_CODE } from '@/lib/newsletter/constants';
 import { FormSecurityFields } from '@/components/forms/FormSecurityFields';
 import type { TurnstileFieldHandle } from '@/components/forms/TurnstileField';
+import { Link } from '@/i18n/routing';
 
 interface BookingFormProps {
   locale?: 'fr' | 'es' | 'en';
@@ -165,7 +166,12 @@ export default function BookingForm({
       email: 'Email',
       phone: 'Téléphone (optionnel)',
       requests: 'Demandes spéciales',
-      terms: 'J\'accepte les conditions générales',
+      terms: 'J\'ai lu et j\'accepte',
+      termsCancel: 'la politique d\'annulation',
+      termsAnd: ' et ',
+      termsCgv: 'les conditions générales',
+      depositNotice: 'Caution de 150 € à régler à l\'arrivée (non incluse dans ce paiement). Restituée après l\'état des lieux, sauf dommages.',
+      hoursNotice: 'Arrivée entre 12h00 et 15h00 · Départ avant 13h00.',
       submit: 'Procéder au paiement',
       processing: 'Traitement...',
       error: 'Le paiement n\'a pas pu être lancé. Réessayez ou contactez-nous.',
@@ -197,7 +203,12 @@ export default function BookingForm({
       email: 'Email',
       phone: 'Teléfono (opcional)',
       requests: 'Solicitudes especiales',
-      terms: 'Acepto los términos y condiciones',
+      terms: 'He leído y acepto',
+      termsCancel: 'la política de cancelación',
+      termsAnd: ' y ',
+      termsCgv: 'las condiciones generales',
+      depositNotice: 'Fianza de 150 € a abonar a la llegada (no incluida en este pago). Se devuelve tras la revisión, salvo daños.',
+      hoursNotice: 'Llegada entre las 12:00 y las 15:00 · Salida antes de las 13:00.',
       submit: 'Proceder al pago',
       processing: 'Procesando...',
       error: 'No se pudo iniciar el pago. Inténtelo de nuevo o contáctenos.',
@@ -229,7 +240,12 @@ export default function BookingForm({
       email: 'Email',
       phone: 'Phone (optional)',
       requests: 'Special requests',
-      terms: 'I accept the terms and conditions',
+      terms: 'I have read and accept the',
+      termsCancel: 'cancellation policy',
+      termsAnd: ' and the ',
+      termsCgv: 'terms and conditions',
+      depositNotice: '€150 security deposit due on arrival (not included in this payment). Refunded after inspection, unless there is damage.',
+      hoursNotice: 'Arrival between 12:00 and 15:00 · Departure before 13:00.',
       submit: 'Proceed to payment',
       processing: 'Processing...',
       error: 'Payment could not be started. Please try again or contact us.',
@@ -558,6 +574,13 @@ export default function BookingForm({
         onTokenChange={setTurnstileToken}
       />
 
+      <div className="booking-stay-notice" role="note">
+        <p>
+          <strong>{t.hoursNotice}</strong>
+        </p>
+        <p>{t.depositNotice}</p>
+      </div>
+
       <div className="form-group form-group--checkbox">
         <label htmlFor="booking-terms" className="checkbox-label">
           <input
@@ -567,7 +590,17 @@ export default function BookingForm({
             disabled={isLoading}
             aria-describedby={errors.termsAccepted ? 'booking-terms-error' : undefined}
           />
-          <span>{t.terms}</span>
+          <span>
+            {t.terms}{' '}
+            <Link href="/politique-annulation" target="_blank" rel="noopener noreferrer" className="booking-terms-link">
+              {t.termsCancel}
+            </Link>
+            {t.termsAnd}
+            <Link href="/conditions-generales" target="_blank" rel="noopener noreferrer" className="booking-terms-link">
+              {t.termsCgv}
+            </Link>
+            .
+          </span>
         </label>
         {errors.termsAccepted && (
           <span id="booking-terms-error" className="form-error">

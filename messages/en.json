@@ -135,7 +135,7 @@
     "included_tv": "Smart TV (Netflix, Prime Video…)",
     "capacity_title": "Capacity",
     "rates_title": "Rates",
-    "checkin_checkout": "Check-in: 16:00 · Check-out: 13:00",
+    "checkin_checkout": "Check-in: 12:00 – 15:00 · Check-out: 13:00",
     "options_title": "Optional extras",
     "opt_romantic": "Romantic decoration",
     "opt_surprise": "Champagne, flowers or pastry on arrival",
@@ -166,6 +166,12 @@
     "faq_a6": "Yes, free parking on the street in front of the property.",
     "faq_q7": "Can you smoke inside the cave?",
     "faq_a7": "No, smoking is not allowed inside the cave.",
+    "faq_q8": "Is there a security deposit?",
+    "faq_a8": "Yes, €150 is due on arrival (Bizum, bank transfer or cash). It is not included in the online payment. It is refunded after inspection, unless there is damage or a breach of house rules. For groups, the amount may be higher if agreed at booking.",
+    "faq_q9": "What are the check-in and check-out times?",
+    "faq_a9": "Check-in between 12:00 and 15:00. Check-out before 13:00. Late check-out or early check-in may be possible, subject to availability.",
+    "faq_q10": "What is the cancellation policy?",
+    "faq_a10": "More than 14 days before arrival: full refund. Between 14 and 7 days: 50% of the total. Less than 7 days, no-show or early departure: no refund. Full details are in the cancellation policy.",
     "avis_title": "What our guests say",
     "gallery_cta": "Explore the spaces in photos",
     "booking_guests": "Number of guests",
@@ -188,7 +194,9 @@
     "rate_per_night": "/ night",
     "capacity_details_summary": "Groups of 5 to 16 guests",
     "capacity_details_body": "Extra floor mattresses available (up to 16 guests). Contact us to arrange bedding and get a quote — additional fees may apply.",
-    "rates_footnote": "Standard rates for up to 4 guests. Progressive rates available for multiple nights."
+    "rates_footnote": "Standard rates for up to 4 guests. Progressive rates available for multiple nights.",
+    "deposit_title": "€150 security deposit",
+    "deposit_text": "A €150 deposit is due on arrival (not included in the online payment). It is refunded after inspection, unless there is damage or a breach of house rules."
   },
   "Evenements": {
     "title": "Private Events",
@@ -371,6 +379,19 @@
     "social_facebook": "Facebook",
     "social_tiktok": "TikTok"
   },
+  "BookingSuccess": {
+    "title": "Booking confirmed",
+    "lead": "Your payment has been received. A confirmation email has been sent to you.",
+    "note": "Access codes and mandatory check-in details will be sent about 48 hours before arrival.",
+    "hours_title": "Hours",
+    "hours_text": "Check-in: between 12:00 and 15:00 · Check-out: before 13:00",
+    "deposit_title": "€150 security deposit",
+    "deposit_text": "A €150 deposit is due on arrival (not included in the online payment). It is refunded after inspection, provided there is no damage or breach of house rules. For groups, the amount may be higher if agreed at booking.",
+    "deposit_pay": "Payment: Bizum +34 657 07 79 10 · IBAN ES89 1583 0001 1290 7076 0351 (Manon Christophe Massart) · or cash at check-in.",
+    "policy_title": "Cancellation terms",
+    "policy_intro": "By confirming payment, you accept the following conditions:",
+    "back": "Back to Stay"
+  },
   "Articles": {
     "journal": "Journal",
     "placeholder_slug": "Article for slug: {slug}",
@@ -388,30 +409,6 @@
     "title": "Page not found.",
     "text": "The page you're looking for isn't here. Head back home to discover Cueva Thalía.",
     "home": "Back to home"
-  },
-  "Popup": {
-    "welcome_title": "Join the Cueva Thalía Private Circle",
-    "welcome_subtitle": "Your first experience deserves a privilege.",
-    "welcome_offer": "Receive 10% off your first booking made directly on our website.",
-    "welcome_benefit_1": "Exclusive offers reserved for our members",
-    "welcome_benefit_2": "New availability and last-minute cancellations",
-    "welcome_benefit_3": "News, retreats and events at Cueva Thalía",
-    "email_placeholder": "Enter your email address",
-    "welcome_cta": "Get my welcome offer",
-    "welcome_disclaimer": "Your code is valid for 30 days from receipt. Offer reserved for new sign-ups and cannot be combined with other promotions.",
-    "welcome_success_title": "Welcome to the Private Circle!",
-    "welcome_success_code_label": "Your discount code is:",
-    "welcome_success_text": "Enjoy 10% off your first direct booking.",
-    "welcome_success_validity": "Valid for 30 days.",
-    "welcome_success_cta": "Book now",
-    "exit_title": "Before you go…",
-    "exit_subtitle": "Don't miss your welcome offer.",
-    "exit_offer": "Receive 10% off your first direct booking at Cueva Thalía.",
-    "exit_cta": "Get my code",
-    "gdpr_label": "I agree to receive communications from Cueva Thalía (offers, news and events). I can unsubscribe at any time.",
-    "close": "Close",
-    "error": "Something went wrong — please try again.",
-    "social_follow": "In the meantime, find us on"
   },
   "Influenceur": {
     "meta_title": "Influencer programme — Cueva Thalía",

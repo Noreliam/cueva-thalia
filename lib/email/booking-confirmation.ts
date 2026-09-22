@@ -1,19 +1,21 @@
+import { getCancellationPolicyHtml } from '@/lib/booking/cancellation-policy';
 import type { BookingOrder } from '@/lib/booking/fulfill';
+import {
+  CHECK_IN_FROM,
+  CHECK_IN_UNTIL,
+  CHECK_OUT_TIME,
+  DEPOSIT_ACCOUNT_HOLDER,
+  DEPOSIT_BIZUM,
+  DEPOSIT_IBAN,
+  SECURITY_DEPOSIT_EUR,
+} from '@/lib/booking/stay-info';
+import { normalizeBookingLocale, type BookingLocale } from '@/lib/email/booking-locale';
 import { getSmtpConfig, sendViaSmtp, shouldSendEmailInProduction } from '@/lib/email/smtp';
-
-type BookingLocale = 'fr' | 'en' | 'es';
 
 type EmailTemplate = {
   subject: string;
   html: string;
 };
-
-function normalizeLocale(locale: string): BookingLocale {
-  if (locale === 'fr' || locale === 'en' || locale === 'es') {
-    return locale;
-  }
-  return 'es';
-}
 
 function formatBookingDate(isoDate: string, locale: BookingLocale): string {
   const [year, month, day] = isoDate.split('-').map(Number);
@@ -38,6 +40,7 @@ function buildTemplate(order: BookingOrder, locale: BookingLocale): EmailTemplat
   const amount = formatAmount(order.amountCents);
   const guestName = order.guestName || 'Guest';
   const checkInUrl = order.onlineCheckInUrl?.trim();
+  const cancellationHtml = getCancellationPolicyHtml(locale);
 
   const onlineCheckInFr = checkInUrl
     ? `<p><strong>Check-in en ligne (obligatoire)</strong></p>
@@ -89,13 +92,18 @@ Le silence. La lumière douce. L'impression d'être ailleurs, enfin.
 <p><strong>Informations pratiques</strong></p>
 <p>
 Adresse&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;: à partir de 16h00<br>
+Check-in&nbsp;&nbsp;: entre 12h00 et 15h00<br>
 Check-out : avant 13h00<br>
 Parking&nbsp;&nbsp;&nbsp;: disponible sur place
 </p>
 <p>
+<strong>Caution de ${SECURITY_DEPOSIT_EUR}&nbsp;€</strong> — à régler à l'arrivée (non incluse dans ce paiement). Elle sera restituée après l'état des lieux, sous réserve qu'aucun dégât ou manquement au règlement n'ait été constaté.<br>
+Bizum : ${DEPOSIT_BIZUM} · IBAN : ${DEPOSIT_IBAN} (${DEPOSIT_ACCOUNT_HOLDER}) · ou espèces au check-in.
+</p>
+<p>
 Les codes d'accès et consignes d'arrivée vous seront envoyés séparément, environ 48&nbsp;h avant votre arrivée (email ou WhatsApp).
 </p>
+${cancellationHtml}
 <p>
 Une question, une demande particulière ?<br>
 Manon est disponible par WhatsApp : +34 657 077 910<br>
@@ -134,13 +142,18 @@ Silence. Warm light. The rare feeling of being somewhere truly different.
 <p><strong>Practical information</strong></p>
 <p>
 Address&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;: from 4:00 PM<br>
-Check-out : before 1:00 PM<br>
+Check-in&nbsp;&nbsp;: between ${CHECK_IN_FROM} and ${CHECK_IN_UNTIL}<br>
+Check-out : before ${CHECK_OUT_TIME}<br>
 Parking&nbsp;&nbsp;&nbsp;: available on site
+</p>
+<p>
+<strong>€${SECURITY_DEPOSIT_EUR} security deposit</strong> — due on arrival (not included in this payment). It will be refunded after inspection, provided there is no damage or breach of house rules.<br>
+Bizum: ${DEPOSIT_BIZUM} · IBAN: ${DEPOSIT_IBAN} (${DEPOSIT_ACCOUNT_HOLDER}) · or cash at check-in.
 </p>
 <p>
 Access codes and arrival instructions will be sent separately, about 48&nbsp;hours before check-in (email or WhatsApp).
 </p>
+${cancellationHtml}
 <p>
 Any questions or special requests?<br>
 Manon is available on WhatsApp: +34 657 077 910<br>
@@ -179,13 +192,18 @@ Silencio. Luz cálida. La sensación de haber encontrado un lugar único.
 <p><strong>Información práctica</strong></p>
 <p>
 Dirección&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;&nbsp;&nbsp;: a partir de las 16:00 h<br>
-Check-out&nbsp;&nbsp;&nbsp;: antes de las 13:00 h<br>
+Check-in&nbsp;&nbsp;&nbsp;&nbsp;: entre las ${CHECK_IN_FROM} y las ${CHECK_IN_UNTIL} h<br>
+Check-out&nbsp;&nbsp;&nbsp;: antes de las ${CHECK_OUT_TIME} h<br>
 Aparcamiento : disponible en el lugar
+</p>
+<p>
+<strong>Fianza de ${SECURITY_DEPOSIT_EUR}&nbsp;€</strong> — a abonar a la llegada (no incluida en este pago). Se devolverá tras la revisión, siempre que no haya daños ni incumplimientos de las normas.<br>
+Bizum: ${DEPOSIT_BIZUM} · IBAN: ${DEPOSIT_IBAN} (${DEPOSIT_ACCOUNT_HOLDER}) · o efectivo en el check-in.
 </p>
 <p>
 Los códigos de acceso y las instrucciones de llegada se enviarán por separado, unos 48&nbsp;h antes de su llegada (email o WhatsApp).
 </p>
+${cancellationHtml}
 <p>
 ¿Alguna pregunta o solicitud especial?<br>
 Manon está disponible por WhatsApp: +34 657 077 910<br>
@@ -217,7 +235,7 @@ export async function sendBookingConfirmation(order: BookingOrder): Promise<void
     return;
   }
 
-  const locale = normalizeLocale(order.locale);
+  const locale = normalizeBookingLocale(order.locale);
   const { subject, html } = buildTemplate(order, locale);
 
   if (!shouldSendEmailInProduction()) {

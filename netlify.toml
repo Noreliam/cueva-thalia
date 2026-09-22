@@ -8,6 +8,9 @@
 [functions]
   directory = "netlify/functions"
 
+[functions."pre-arrival-emails"]
+  schedule = "@hourly"
+
 [build.environment]
   NODE_VERSION = "20"
   NEXT_PUBLIC_GA4_ID = "G-6HW3QXRVR4"

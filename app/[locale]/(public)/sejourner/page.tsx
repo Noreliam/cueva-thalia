@@ -19,7 +19,7 @@ const includedKeys = [
   'included_tv',
 ] as const;
 const optionKeys = ['opt_romantic', 'opt_surprise', 'opt_massage', 'opt_late_checkout'] as const;
-const faqKeys = ['1', '2', '3', '4', '5', '6', '7'] as const;
+const faqKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] as const;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -120,6 +120,8 @@ export default async function SejournerPage({ params }: { params: Promise<{ loca
               ratePerNight: t('rate_per_night'),
               ratesFootnote: t('rates_footnote'),
               checkinCheckout: t('checkin_checkout'),
+              depositTitle: t('deposit_title'),
+              depositText: t('deposit_text'),
               ctaWhatsappQuote: t('cta_whatsapp_quote'),
               bookingGuests: t('booking_guests'),
               bookingContinue: t('booking_continue'),

@@ -233,6 +233,23 @@ export function getCancellationPolicyContent(locale: 'fr' | 'es' | 'en' = 'es'):
   return content[locale] || content.es;
 }
 
+export function getCancellationPolicyHtml(locale: 'fr' | 'es' | 'en' = 'es'): string {
+  const policy = getCancellationPolicyContent(locale);
+  const sections = policy.sections
+    .map(
+      (section) =>
+        `<h4>${section.title}</h4>
+<ul>
+${section.items.map((item) => `  <li>${item}</li>`).join('\n')}
+</ul>`,
+    )
+    .join('\n');
+
+  return `<h3>${policy.title}</h3>
+<p>${policy.intro}</p>
+${sections}`;
+}
+
 /** @deprecated Use getCancellationPolicyContent instead */
 export function getCancellationMessage(locale: 'fr' | 'es' | 'en' = 'es'): string {
   const policy = getCancellationPolicyContent(locale);
