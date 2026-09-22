@@ -1,8 +1,7 @@
 /** Horaires et caution affichés sur le site, après paiement et dans les emails. */
 
-export const CHECK_IN_FROM = '12:00';
-export const CHECK_IN_UNTIL = '15:00';
-export const CHECK_OUT_TIME = '13:00';
+export const CHECK_IN_TIME = '15:00';
+export const CHECK_OUT_TIME = '12:00';
 export const SECURITY_DEPOSIT_EUR = 150;
 
 /** Envoyer le mail check-in dès ~48 h avant, avec rattrapage jusqu'à 6 h avant. */

@@ -1,8 +1,7 @@
 import { getCancellationPolicyHtml } from '@/lib/booking/cancellation-policy';
 import type { BookingOrder } from '@/lib/booking/fulfill';
 import {
-  CHECK_IN_FROM,
-  CHECK_IN_UNTIL,
+  CHECK_IN_TIME,
   CHECK_OUT_TIME,
   DEPOSIT_ACCOUNT_HOLDER,
   DEPOSIT_BIZUM,
@@ -92,8 +91,8 @@ Le silence. La lumière douce. L'impression d'être ailleurs, enfin.
 <p><strong>Informations pratiques</strong></p>
 <p>
 Adresse&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;: entre 12h00 et 15h00<br>
-Check-out : avant 13h00<br>
+Check-in&nbsp;&nbsp;: à partir de 15h00<br>
+Check-out : avant 12h00<br>
 Parking&nbsp;&nbsp;&nbsp;: disponible sur place
 </p>
 <p>
@@ -142,7 +141,7 @@ Silence. Warm light. The rare feeling of being somewhere truly different.
 <p><strong>Practical information</strong></p>
 <p>
 Address&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;: between ${CHECK_IN_FROM} and ${CHECK_IN_UNTIL}<br>
+Check-in&nbsp;&nbsp;: from ${CHECK_IN_TIME}<br>
 Check-out : before ${CHECK_OUT_TIME}<br>
 Parking&nbsp;&nbsp;&nbsp;: available on site
 </p>
@@ -192,7 +191,7 @@ Silencio. Luz cálida. La sensación de haber encontrado un lugar único.
 <p><strong>Información práctica</strong></p>
 <p>
 Dirección&nbsp;&nbsp;&nbsp;: San Miguel de Abona, Tenerife<br>
-Check-in&nbsp;&nbsp;&nbsp;&nbsp;: entre las ${CHECK_IN_FROM} y las ${CHECK_IN_UNTIL} h<br>
+Check-in&nbsp;&nbsp;&nbsp;&nbsp;: a partir de las ${CHECK_IN_TIME} h<br>
 Check-out&nbsp;&nbsp;&nbsp;: antes de las ${CHECK_OUT_TIME} h<br>
 Aparcamiento : disponible en el lugar
 </p>

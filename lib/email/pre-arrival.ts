@@ -1,5 +1,5 @@
 import type { BookingOrder } from '@/lib/booking/fulfill';
-import { PRE_ARRIVAL_MAX_HOURS, PRE_ARRIVAL_MIN_HOURS } from '@/lib/booking/stay-info';
+import { CHECK_IN_TIME, PRE_ARRIVAL_MAX_HOURS, PRE_ARRIVAL_MIN_HOURS } from '@/lib/booking/stay-info';
 import { normalizeBookingLocale } from '@/lib/email/booking-locale';
 import { buildPreArrivalTemplate } from '@/lib/email/pre-arrival-content';
 import { getSmtpConfig, sendViaSmtp, shouldSendEmailInProduction } from '@/lib/email/smtp';
@@ -74,7 +74,7 @@ export function hoursUntilCheckInStart(checkInDate: string, now = new Date()): n
     return null;
   }
 
-  const checkIn = Date.parse(`${checkInDate}T12:00:00+00:00`);
+  const checkIn = Date.parse(`${checkInDate}T${CHECK_IN_TIME}:00+00:00`);
   if (Number.isNaN(checkIn)) {
     return null;
   }

@@ -1,8 +1,7 @@
 import type { BookingLocale } from '@/lib/email/booking-locale';
 import { getCancellationPolicyHtml } from '@/lib/booking/cancellation-policy';
 import {
-  CHECK_IN_FROM,
-  CHECK_IN_UNTIL,
+  CHECK_IN_TIME,
   CHECK_OUT_TIME,
   DEPOSIT_ACCOUNT_HOLDER,
   DEPOSIT_BIZUM,
@@ -93,7 +92,7 @@ export function buildPreArrivalTemplate(locale: BookingLocale): EmailTemplate {
 <p>De acuerdo con la normativa vigente en Canarias, todos los huéspedes deberán completar el registro online antes de su llegada.</p>
 <p>Puede realizar el check-in a través del siguiente enlace:<br>
 <a href="${checkInUrl}">${checkInUrl}</a></p>
-<p>Horario de llegada: entre las ${CHECK_IN_FROM} y las ${CHECK_IN_UNTIL} h. Salida: antes de las ${CHECK_OUT_TIME} h.</p>
+<p>Horario de llegada: a partir de las ${CHECK_IN_TIME} h. Salida: antes de las ${CHECK_OUT_TIME} h.</p>
 <p>Le agradecemos que complete el formulario antes de su llegada para agilizar el proceso de entrada.</p>
 <h3>💳 Fianza</h3>
 <p>A la llegada deberá abonarse una fianza de ${SECURITY_DEPOSIT_EUR} €, que será devuelta una vez finalizada la estancia, tras la revisión y limpieza de la propiedad, siempre que no se hayan producido daños o incumplimientos de las normas de la vivienda.</p>
@@ -138,7 +137,7 @@ ${social}
 <p>Conformément à la réglementation en vigueur aux Canaries, tous les voyageurs doivent compléter l'enregistrement en ligne avant leur arrivée.</p>
 <p>Vous pouvez effectuer le check-in via le lien suivant :<br>
 <a href="${checkInUrl}">${checkInUrl}</a></p>
-<p>Horaires d'arrivée : entre ${CHECK_IN_FROM.replace(':', 'h')} et ${CHECK_IN_UNTIL.replace(':', 'h')}. Départ : avant ${CHECK_OUT_TIME.replace(':', 'h')}.</p>
+<p>Horaires d'arrivée : à partir de ${CHECK_IN_TIME.replace(':', 'h')}. Départ : avant ${CHECK_OUT_TIME.replace(':', 'h')}.</p>
 <p>Merci de compléter le formulaire avant votre arrivée pour faciliter l'entrée.</p>
 <h3>💳 Caution</h3>
 <p>À l'arrivée, une caution de ${SECURITY_DEPOSIT_EUR} € sera demandée. Elle sera restituée une fois le séjour terminé, après l'état des lieux et le ménage, sous réserve qu'aucun dommage ou manquement au règlement n'ait été constaté.</p>
@@ -182,7 +181,7 @@ ${social}
 <p>Under current regulations in the Canary Islands, all guests must complete online registration before arrival.</p>
 <p>You can check in via the following link:<br>
 <a href="${checkInUrl}">${checkInUrl}</a></p>
-<p>Arrival time: between ${CHECK_IN_FROM} and ${CHECK_IN_UNTIL}. Departure: before ${CHECK_OUT_TIME}.</p>
+<p>Arrival time: from ${CHECK_IN_TIME}. Departure: before ${CHECK_OUT_TIME}.</p>
 <p>Please complete the form before arrival to speed up entry.</p>
 <h3>💳 Security deposit</h3>
 <p>A €${SECURITY_DEPOSIT_EUR} deposit is required on arrival. It will be refunded at the end of the stay, after inspection and cleaning, provided there is no damage or breach of house rules.</p>
